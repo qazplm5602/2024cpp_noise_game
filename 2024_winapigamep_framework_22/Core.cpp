@@ -6,6 +6,8 @@
 #include "ResourceManager.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
+#include "MicrophoneManager.h"
+
 bool Core::Init(HWND _hwnd)
 {
 	// 변수 초기화
@@ -51,6 +53,7 @@ void Core::CleanUp()
 	}
 
 	GET_SINGLE(ResourceManager)->Release();
+	GET_SINGLE(MicrophoneManager)->Release();
 }
 
 void Core::GameLoop()

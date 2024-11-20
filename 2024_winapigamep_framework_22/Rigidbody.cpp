@@ -2,7 +2,7 @@
 #include "Rigidbody.h"
 #include "Object.h"
 
-Rigidbody::Rigidbody() : m_fGravity(9.81f), m_fMass(1.0f), m_fDrag(0.0f),
+Rigidbody::Rigidbody() : m_fGravity(0.001f), m_fMass(1.0f), m_fDrag(0.0f),
 m_vVelocity(Vec2(0, 0)), m_bUseGravity(true), m_bIsKinematic(false)
 {
 }
@@ -15,29 +15,28 @@ void Rigidbody::LateUpdate()
 {
     if (m_bIsKinematic) return;
 
-    // 1. 힘을 속도로 변환 (F = m * a, a = F / m)
-    ApplyForce();
 
-    // 2. 중력 적용
     if (m_bUseGravity)
     {
-        m_vForce.y -= m_fGravity * m_fMass;
+        m_vForce.y += m_fGravity * m_fMass;
     }
 
-    // 3. 감속 적용 (Drag)
+    ApplyForce();
+
     m_vVelocity.x *= (1 - m_fDrag);
     m_vVelocity.y *= (1 - m_fDrag);
 
-    // 4. 속도 업데이트
-    //m_vVelocity = m_vVelocity + (m_vForce / m_fMass);
-
-    // 5. 위치 업데이트
     Object* Owner = GetOwner();
     Vec2 currPos = Owner->GetPos();
     Owner->SetPos(currPos + m_vVelocity);
 
-    // 6. 힘 초기화 (한 프레임에 한 번만 적용)
+    //std::cout << m_vVelocity.x << m_vVelocity.y << endl;
+
     m_vForce = Vec2(0, 0);
+}
+
+void Rigidbody::Render(HDC _hdc)
+{
 }
 
 void Rigidbody::ApplyForce()

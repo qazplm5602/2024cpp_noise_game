@@ -1,13 +1,13 @@
 #pragma once
 #include "Component.h"
-class Rigidbody :
-    public Component
+class Rigidbody : public Component
 {
 public:
     Rigidbody();
     ~Rigidbody();
 public:
     void LateUpdate() override;
+    void Render(HDC _hdc) override;
 public:
     // Gravity ฐüทร
     void SetGravityScale(float fGravity) { m_fGravity = fGravity; }

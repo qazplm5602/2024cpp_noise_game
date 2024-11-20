@@ -4,8 +4,8 @@ class IMMDevice;
 class IAudioMeterInformation;
 
 struct MicDeviceData {
-	LPWSTR id;
-	LPWSTR name;
+	wstring id;
+	wstring name;
 };
 
 class MicrophoneManager
@@ -16,7 +16,7 @@ public:
 	void Init();
 	void Release();
 	vector<MicDeviceData> GetDevices();
-	bool SelectDevice(const LPWSTR id);
+	bool SelectDevice(const wstring id);
 	void ClearDevice();
 	void GetMicPeek(float* value);
 private:

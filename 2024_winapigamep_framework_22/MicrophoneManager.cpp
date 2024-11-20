@@ -15,6 +15,7 @@ void MicrophoneManager::Init()
 
 void MicrophoneManager::Release()
 {
+    ClearDevice();
     CoUninitialize();
 }
 
@@ -46,20 +47,44 @@ vector<MicDeviceData> MicrophoneManager::GetDevices()
 
         pProps->GetValue(PKEY_Device_FriendlyName, &varName);
 
-        //LPWSTR copiedID = _wcsdup(deviceID);
-        //LPWSTR copiedName = _wcsdup(varName.pwszVal);
+        LPWSTR copiedID = _wcsdup(deviceID);
+        LPWSTR copiedName = _wcsdup(varName.pwszVal);
 
-        MicDeviceData data{ deviceID, varName.pwszVal };
+        MicDeviceData data{ copiedID, copiedName };
         result.push_back(data);
-        std::wcout << varName.pwszVal << endl;
+        //std::wcout << varName.pwszVal << endl;
         result222.push_back(deviceID);
 
         PropVariantClear(&varName);
-        CoTaskMemFree(deviceID);
+        //CoTaskMemFree(deviceID);
         pProps->Release();
         pDevice->Release();
     }
 
     return result;
+}
+
+bool MicrophoneManager::SelectDevice(const LPWSTR id)
+{
+    HRESULT hr = pEnumerator->GetDevice(id, &pCurrentDevice);
+    if (!SUCCEEDED(hr)) {
+        return false;
+    }
+
+    pCurrentDevice->Activate(__uuidof(IAudioMeterInformation), CLSCTX_ALL, NULL, (void**)&pMeterInfo);
+    return true;
+}
+
+void MicrophoneManager::ClearDevice()
+{
+    if (pCurrentDevice == nullptr) return;
+
+    pMeterInfo->Release();
+    pCurrentDevice->Release();
+}
+
+void MicrophoneManager::GetMicPeek(float* value)
+{
+    pMeterInfo->GetPeakValue(value);
 }
 

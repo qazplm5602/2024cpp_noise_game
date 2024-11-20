@@ -1,6 +1,7 @@
 #pragma once
 class IMMDeviceEnumerator;
 class IMMDevice;
+class IAudioMeterInformation;
 
 struct MicDeviceData {
 	LPWSTR id;
@@ -15,8 +16,12 @@ public:
 	void Init();
 	void Release();
 	vector<MicDeviceData> GetDevices();
+	bool SelectDevice(const LPWSTR id);
+	void ClearDevice();
+	void GetMicPeek(float* value);
 private:
 	IMMDeviceEnumerator* pEnumerator = nullptr;
 	IMMDevice* pCurrentDevice = nullptr;
+	IAudioMeterInformation* pMeterInfo = nullptr;
 };
 

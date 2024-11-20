@@ -4,7 +4,7 @@ class IMMDevice;
 
 struct MicDeviceData {
 	LPWSTR id;
-	PROPVARIANT name;
+	LPWSTR name;
 };
 
 class MicrophoneManager
@@ -14,7 +14,7 @@ class MicrophoneManager
 public:
 	void Init();
 	void Release();
-	vector<MicDeviceData>& GetDevices();
+	vector<MicDeviceData> GetDevices();
 private:
 	IMMDeviceEnumerator* pEnumerator = nullptr;
 	IMMDevice* pCurrentDevice = nullptr;

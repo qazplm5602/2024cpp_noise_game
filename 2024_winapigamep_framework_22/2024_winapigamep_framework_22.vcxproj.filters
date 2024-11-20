@@ -127,6 +127,9 @@
     <ClInclude Include="Animation.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
+    <ClInclude Include="MicrophoneManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -210,6 +213,9 @@
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="MicrophoneManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

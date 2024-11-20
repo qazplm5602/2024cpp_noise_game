@@ -18,7 +18,7 @@ void MicrophoneManager::Release()
     CoUninitialize();
 }
 
-vector<MicDeviceData>& MicrophoneManager::GetDevices()
+vector<MicDeviceData> MicrophoneManager::GetDevices()
 {
     vector<MicDeviceData> result;
     IMMDeviceCollection* pCollection = nullptr;
@@ -28,6 +28,8 @@ vector<MicDeviceData>& MicrophoneManager::GetDevices()
     pEnumerator->EnumAudioEndpoints(eCapture, DEVICE_STATE_ACTIVE, &pCollection);
 
     UINT count;
+    vector<LPWSTR> result222;
+
     pCollection->GetCount(&count); // 마이크 장치 갯수 불러오기
 
     for (UINT i = 0; i < count; i++)
@@ -43,7 +45,21 @@ vector<MicDeviceData>& MicrophoneManager::GetDevices()
         PropVariantInit(&varName);
 
         pProps->GetValue(PKEY_Device_FriendlyName, &varName);
+
+        //LPWSTR copiedID = _wcsdup(deviceID);
+        //LPWSTR copiedName = _wcsdup(varName.pwszVal);
+
+        MicDeviceData data{ deviceID, varName.pwszVal };
+        result.push_back(data);
+        std::wcout << varName.pwszVal << endl;
+        result222.push_back(deviceID);
+
+        PropVariantClear(&varName);
+        CoTaskMemFree(deviceID);
+        pProps->Release();
+        pDevice->Release();
     }
 
     return result;
 }
+

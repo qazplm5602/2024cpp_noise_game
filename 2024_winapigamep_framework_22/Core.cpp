@@ -115,4 +115,8 @@ void Core::CreateGDI()
 	m_colorPens[(UINT)PEN_TYPE::BLUE] = CreatePen(PS_SOLID, 1, RGB(0, 0, 255));
 	m_colorPens[(UINT)PEN_TYPE::YELLOW] = CreatePen(PS_SOLID, 1, RGB(255, 255, 0));
 	m_colorPens[(UINT)PEN_TYPE::HOLLOW] = CreatePen(PS_NULL, 0, RGB(0, 0, 0));
+
+	// Æùºv
+	AddFontResource(TEXT("Spoqa Han Sans Neo"));
+	m_fontNames[(UINT)FONT_TYPE::SPOQA] = TEXT("Spoqa Han Sans Neo");
 }

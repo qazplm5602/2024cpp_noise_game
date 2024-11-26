@@ -30,3 +30,8 @@ enum class EVENT_TYPE
 	SCENE_CHANGE,
 	END,
 };
+
+enum class FONT_TYPE {
+	SPOQA,
+	END
+};

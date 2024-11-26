@@ -130,6 +130,14 @@
     <ClInclude Include="MicrophoneManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
+    <ClInclude Include="bbqScene.h" />
+    <ClInclude Include="DomiScene.h" />
+    <ClInclude Include="RalScene.h" />
+    <ClInclude Include="RectObject.h" />
+    <ClInclude Include="ImageRenderer.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -223,5 +231,13 @@
     <ClCompile Include="Rigidbody.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
+    <ClCompile Include="bbqScene.cpp" />
+    <ClCompile Include="DomiScene.cpp" />
+    <ClCompile Include="RalScene.cpp" />
+    <ClCompile Include="RectObject.cpp" />
+    <ClCompile Include="ImageRenderer.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRenderer.cpp" />
   </ItemGroup>
 </Project>

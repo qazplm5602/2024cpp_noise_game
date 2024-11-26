@@ -6,7 +6,7 @@ class ImageRenderer : public Component
 {
 public:
 	ImageRenderer();
-	~ImageRenderer();
+	virtual ~ImageRenderer();
 
 public:
 	virtual void LateUpdate() override;

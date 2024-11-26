@@ -10,8 +10,9 @@ ImageRenderer::ImageRenderer()
 
 ImageRenderer::~ImageRenderer()
 {
-	if (m_pTex != nullptr)
-		delete m_pTex;
+	// 이거 REsourceManager 가 이미 지우는듯 ㅅㄱ
+	//if (m_pTex != nullptr)
+	//	delete m_pTex;
 }
 
 void ImageRenderer::LateUpdate()

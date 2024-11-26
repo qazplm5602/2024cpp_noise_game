@@ -22,9 +22,9 @@ private:
 private:
 	virtual void Update() override;
 	virtual void Render(HDC _hdc) override;
-	void GetRect(RECT* pRect);
 
 public:
+	void GetRect(RECT* pRect);
 	void SetAnchor(RectAnchor anchor) {
 		m_anchor = anchor;
 	}

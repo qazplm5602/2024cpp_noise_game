@@ -8,11 +8,11 @@ void DomiScene::Init()
 	RectObject* testRect = new RectObject();
 
 	testRect->SetPos({20, 20});
-	testRect->SetSize({ 100, 100 });
+	testRect->SetSize({ 500, 100 });
 	testRect->SetAnchor(RectAnchor::Center);
 
 	testRect->AddComponent<ImageRenderer>();
-	testRect->GetComponent<ImageRenderer>()->SetTexture(L"Jiwoo", L"Texture\\jiwoo.bmp");
+	testRect->GetComponent<ImageRenderer>()->SetTexture(L"planem", L"Texture\\planem.bmp");
 
 	AddObject(testRect, LAYER::UI);
 }

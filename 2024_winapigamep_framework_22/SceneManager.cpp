@@ -19,7 +19,8 @@ void SceneManager::Init()
 	RegisterScene(L"RalScene",std::make_shared<RalScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"bbqScene");
+	//LoadScene(L"bbqScene");
+	LoadScene(L"DomiScene");
 }
 
 void SceneManager::Update()

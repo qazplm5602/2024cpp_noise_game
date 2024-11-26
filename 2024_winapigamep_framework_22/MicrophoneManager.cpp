@@ -75,10 +75,17 @@ void MicrophoneManager::ClearDevice()
 
     pMeterInfo->Release();
     pCurrentDevice->Release();
+    pCurrentDevice = nullptr;
+    pMeterInfo = nullptr;
 }
 
 void MicrophoneManager::GetMicPeek(float* value)
 {
     pMeterInfo->GetPeakValue(value);
+}
+
+bool MicrophoneManager::IsConnected()
+{
+    return pCurrentDevice != nullptr;
 }
 

@@ -19,6 +19,7 @@ public:
 	bool SelectDevice(const wstring id);
 	void ClearDevice();
 	void GetMicPeek(float* value);
+	bool IsConnected();
 private:
 	IMMDeviceEnumerator* pEnumerator = nullptr;
 	IMMDevice* pCurrentDevice = nullptr;

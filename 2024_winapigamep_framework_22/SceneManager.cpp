@@ -2,6 +2,10 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include "TitleScene.h"
+#include "DomiScene.h"
+#include "bbqScene.h"
+#include "RalScene.h"
+#include "bbqScene.h"
 #include "GameScene.h"
 void SceneManager::Init()
 {
@@ -10,9 +14,12 @@ void SceneManager::Init()
 	// ¾À µî·Ï
 	RegisterScene(L"TitleScene",std::make_shared<TitleScene>());
 	RegisterScene(L"GameScene",std::make_shared<GameScene>());
+	RegisterScene(L"DomiScene",std::make_shared<DomiScene>());
+	RegisterScene(L"bbqScene",std::make_shared<bbqScene>());
+	RegisterScene(L"RalScene",std::make_shared<RalScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"TitleScene");
+	LoadScene(L"bbqScene");
 }
 
 void SceneManager::Update()

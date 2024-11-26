@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "TitleScene.h"
+#include "bbqScene.h"
 #include "Object.h"
 #include "Player.h"
 #include "InputManager.h"
@@ -8,7 +8,7 @@
 #include "CollisionManager.h"
 #include "ResourceManager.h"
 #include "Rigidbody.h"
-void TitleScene::Init()
+void bbqScene::Init()
 {
 	Object* pObj = new Enemy;
 	pObj->SetPos({ SCREEN_WIDTH / 2.f,150.f });
@@ -27,7 +27,7 @@ void TitleScene::Init()
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 }
 
-void TitleScene::Update()
+void bbqScene::Update()
 {
 	Scene::Update();
 	if (GET_KEYDOWN(KEY_TYPE::ENTER))

@@ -129,6 +129,8 @@
     </ClInclude>
     <ClInclude Include="MicrophoneManager.h">
       <Filter>Engine\02. Manager</Filter>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>Engine\06. Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +218,8 @@
     </ClCompile>
     <ClCompile Include="MicrophoneManager.cpp">
       <Filter>Engine\02. Manager</Filter>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>Engine\06. Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

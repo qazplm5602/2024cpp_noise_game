@@ -127,6 +127,8 @@
     <ClInclude Include="Animation.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
+    <ClInclude Include="MicrophoneManager.h">
+      <Filter>Engine\02. Manager</Filter>
     <ClInclude Include="Rigidbody.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
@@ -214,6 +216,8 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
+    <ClCompile Include="MicrophoneManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
     <ClCompile Include="Rigidbody.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>

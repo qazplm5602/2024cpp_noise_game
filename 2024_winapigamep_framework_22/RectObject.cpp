@@ -8,9 +8,9 @@ void RectObject::Update()
 void RectObject::Render(HDC _hdc)
 {
 	// µð¹ö±×
-    RECT rect;
-    GetRect(&rect);
-	Rectangle(_hdc, rect.left, rect.top, rect.right, rect.bottom);
+ //   RECT rect;
+ //   GetRect(&rect);
+	//Rectangle(_hdc, rect.left, rect.top, rect.right, rect.bottom);
 
 	ComponentRender(_hdc);
 }
@@ -65,8 +65,8 @@ void RectObject::GetRect(RECT* pRect)
         pRect->bottom = (SCREEN_HEIGHT / 2) + (size.y / 2);
         break;
     case RectAnchor::CenterBottom:
-        pRect->left = (SCREEN_WIDTH / 2) - (size.x / 2);
-        pRect->right = (SCREEN_WIDTH / 2) + (size.x / 2);
+        pRect->left = (SCREEN_WIDTH / 2) - (size.x / 2) - (pos.x / 2);
+        pRect->right = (SCREEN_WIDTH / 2) + (size.x / 2) - (pos.x / 2);
         pRect->top = SCREEN_HEIGHT - pos.y - size.y;
         pRect->bottom = SCREEN_HEIGHT - pos.y;
         break;

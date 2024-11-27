@@ -138,6 +138,10 @@
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
     <ClInclude Include="TextRenderer.h" />
+    <ClInclude Include="DeviceSettingScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressBar.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -239,5 +243,9 @@
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
     <ClCompile Include="TextRenderer.cpp" />
+    <ClCompile Include="DeviceSettingScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressBar.cpp" />
   </ItemGroup>
 </Project>

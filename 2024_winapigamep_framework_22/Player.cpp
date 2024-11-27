@@ -10,6 +10,8 @@
 #include "Collider.h"
 #include "Animator.h"
 #include "Animation.h"
+#include "Rigidbody.h"
+
 Player::Player()
 	: m_pTex(nullptr)
 {
@@ -40,7 +42,16 @@ void Player::Update()
 	if (GET_KEY(KEY_TYPE::D))
 		vPos.x += 100.f * fDT;
 	if (GET_KEYDOWN(KEY_TYPE::SPACE))
-		CreateProjectile();
+	{
+		//CreateProjectile();
+		Rigidbody* rb = GetComponent<Rigidbody>();
+		cout << rb->IsGrounded() << endl;
+		if (rb != nullptr && rb->IsGrounded())
+		{
+			cout << rb->GetVelocity().y << endl;
+			rb->AddImpulse(Vec2(0.f, -1000.f));
+		}
+	}
 	SetPos(vPos);
 }
 

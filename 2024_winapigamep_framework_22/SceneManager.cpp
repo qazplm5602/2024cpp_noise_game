@@ -26,6 +26,7 @@ void SceneManager::Update()
 {
 	if (m_pCurrentScene == nullptr)
 		return;
+	m_pCurrentScene->SimulatePhysics();
 	m_pCurrentScene->Update();
 	m_pCurrentScene->LateUpdate();
 }

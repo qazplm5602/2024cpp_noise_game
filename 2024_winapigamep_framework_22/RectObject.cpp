@@ -8,9 +8,9 @@ void RectObject::Update()
 void RectObject::Render(HDC _hdc)
 {
 	// µð¹ö±×
- //   RECT rect;
- //   GetRect(&rect);
-	//Rectangle(_hdc, rect.left, rect.top, rect.right, rect.bottom);
+    RECT rect;
+    GetRect(&rect);
+	Rectangle(_hdc, rect.left, rect.top, rect.right, rect.bottom);
 
 	ComponentRender(_hdc);
 }

@@ -14,23 +14,23 @@ void DomiScene::Init()
 
 	testRect->AddComponent<ImageRenderer>();
 	testRect->GetComponent<ImageRenderer>()->SetTexture(L"planem", L"Texture\\planem.bmp");
+	AddObject(testRect, LAYER::UI);
+
 
 	RectObject* testRect2 = new RectObject();
 
 	testRect2->SetPos({ 20, 20 });
 	testRect2->SetSize({ 500, 100 });
-	testRect2->SetAnchor(RectAnchor::TopRight);
-
+	testRect2->SetAnchor(RectAnchor::BottomRight);
 	testRect2->AddComponent<TextRenderer>();
 
 	TextRenderer* textRender = testRect2->GetComponent<TextRenderer>();
-	textRender->SetFont(FONT_TYPE::SPOQA);
+	textRender->SetFont(FONT_TYPE::SPOQA_MEDIUM);
 	textRender->SetSize(100);
 	textRender->SetText(L"Å×½ºÆ® ¤±¤¤¤·¤©");
 	textRender->SetColor(RGB(0,0,0));
+	textRender->SetAlign(TA_BOTTOM);
 
-
-	AddObject(testRect, LAYER::UI);
 	AddObject(testRect2, LAYER::UI);
 }
 

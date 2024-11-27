@@ -5,10 +5,11 @@
 #include "RectObject.h"
 
 TextRenderer::TextRenderer()
-	: m_font(FONT_TYPE::SPOQA)
+	: m_font(FONT_TYPE::SPOQA_REGULAR)
 	, m_text(L"")
 	, m_size(28)
 	, m_color(0)
+	, m_align(TA_LEFT)
 {
 
 }
@@ -34,8 +35,24 @@ void TextRenderer::Render(HDC _hdc)
 
 	GDISelector gdi(_hdc, hFont);
 
-	//SetTextAlign(_hdc, TA_RIGHT);
-	TextOut(_hdc, rect.left, rect.top, m_text.c_str(), wcslen(m_text.c_str()));
+	int x = rect.left, y = rect.top;
+
+	if (m_align & TA_CENTER) {
+		x = (rect.left + rect.right) / 2.0f;
+	}
+	if (m_align & TA_RIGHT) {
+		x = rect.right;
+	}
+	if (m_align & TA_BOTTOM) {
+		y = rect.bottom;
+	}
+	if (m_align & TA_LEFT) {
+		x = rect.left;
+	}
+
+
+	SetTextAlign(_hdc, m_align);
+	TextOut(_hdc, x, y, m_text.c_str(), wcslen(m_text.c_str()));
 
 	DeleteObject(hFont);
 }

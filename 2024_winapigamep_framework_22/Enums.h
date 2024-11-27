@@ -32,6 +32,10 @@ enum class EVENT_TYPE
 };
 
 enum class FONT_TYPE {
-	SPOQA,
+	SPOQA_THIN,
+	SPOQA_LIGHT,
+	SPOQA_MEDIUM,
+	SPOQA_REGULAR,
+	SPOQA_BOLD,
 	END
 };

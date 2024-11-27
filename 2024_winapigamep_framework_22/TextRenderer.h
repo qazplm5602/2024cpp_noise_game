@@ -22,11 +22,15 @@ public:
 	void SetColor(COLORREF value) {
 		m_color = value;
 	}
+	void SetAlign(const UINT& value) {
+		m_align = value;
+	}
 
 private:
 	wstring m_text;
 	FONT_TYPE m_font;
 	int m_size;
 	COLORREF m_color;
+	UINT m_align;
 };
 

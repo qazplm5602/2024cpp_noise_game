@@ -5,6 +5,8 @@
 #include "TextRenderer.h"
 #include "ProgressBar.h"
 #include "MicrophoneManager.h"
+#include "GameMath.h"
+#include "TimeManager.h"
 
 void DomiScene::Init()
 {
@@ -79,5 +81,6 @@ void DomiScene::Render(HDC _hdc)
 	GET_SINGLE(MicrophoneManager)->GetMicPeek(&micPeek);
 	//std::cout << micPeek << std::endl;
 
-	m_progreeBar->SetValue(micPeek);
+	m_nowPeek = GameMath::Lerp<float>(m_nowPeek, micPeek, 10 * fDT);
+	m_progreeBar->SetValue(m_nowPeek);
 }

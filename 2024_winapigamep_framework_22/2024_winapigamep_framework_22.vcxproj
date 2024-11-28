@@ -179,6 +179,7 @@
     <ClInclude Include="Enums.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="GameMath.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GDISelector.h" />
     <ClInclude Include="ImageRenderer.h" />

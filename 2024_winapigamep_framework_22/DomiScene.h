@@ -14,5 +14,6 @@ class DomiScene :
 
 private:
 	ProgressBar* m_progreeBar;
+	float m_nowPeek;
 };
 

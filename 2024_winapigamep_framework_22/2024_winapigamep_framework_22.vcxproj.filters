@@ -142,6 +142,9 @@
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
     <ClInclude Include="ProgressBar.h" />
+    <ClInclude Include="GameMath.h">
+      <Filter>Engine\07. Module</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">

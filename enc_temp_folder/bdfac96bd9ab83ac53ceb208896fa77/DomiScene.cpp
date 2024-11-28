@@ -77,7 +77,7 @@ void DomiScene::Render(HDC _hdc)
 
 	float micPeek;
 	GET_SINGLE(MicrophoneManager)->GetMicPeek(&micPeek);
-	//std::cout << micPeek << std::endl;
+	std::cout << micPeek << std::endl;
 
 	m_progreeBar->SetValue(micPeek);
 }

@@ -89,3 +89,14 @@ bool MicrophoneManager::IsConnected()
     return pCurrentDevice != nullptr;
 }
 
+wstring MicrophoneManager::GetDefaultDeviceId()
+{
+    IMMDevice* pDevice;
+    pEnumerator->GetDefaultAudioEndpoint(eCapture, eConsole, &pDevice);
+
+    LPWSTR deviceID = NULL;
+    pDevice->GetId(&deviceID);
+
+    return wstring(deviceID);
+}
+

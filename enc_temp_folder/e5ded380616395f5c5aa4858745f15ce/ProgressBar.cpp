@@ -19,7 +19,15 @@ void ProgressBar::Render(HDC _hdc)
 	ComponentRender(_hdc);
 	
 	GDISelector selector(_hdc, BRUSH_TYPE::GRAY);
-	GDISelector selector2(_hdc, PEN_TYPE::HOLLOW);
+	//GDISelector selector2(_hdc, PEN_TYPE::HOLLOW);
 
-	Rectangle(_hdc, rect.left + ((rect.right - rect.left) * ( m_value)), rect.top, rect.right + 1, rect.bottom + 1); // 테두리 채우려고 1 더함
+	HPEN hPen = (HPEN)GetStockObject(NULL_PEN);
+	HPEN oldPen = (HPEN)SelectObject(_hdc, hPen);
+
+	Rectangle(_hdc, rect.left + ((rect.right - rect.left) * ( m_value)), rect.top, rect.right, rect.bottom);
+
+	SelectObject(_hdc, oldPen);
+
+	// 생성된 GDI 오브젝트 삭제
+	DeleteObject(hPen);
 }

@@ -51,8 +51,12 @@ void TextRenderer::Render(HDC _hdc)
 	}
 
 
-	SetTextAlign(_hdc, m_align);
+	UINT lastAlign = SetTextAlign(_hdc, m_align);
+	COLORREF lastColor = SetTextColor(_hdc, m_color);
 	TextOut(_hdc, x, y, m_text.c_str(), wcslen(m_text.c_str()));
+
+	SetTextAlign(_hdc, lastAlign);
+	SetTextColor(_hdc, lastColor);
 
 	DeleteObject(hFont);
 }

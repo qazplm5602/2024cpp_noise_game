@@ -152,7 +152,7 @@ void DeviceSettingScene::Update()
 		// 그냥 다른 씬으로 이동
 	}
 
-	if (GET_KEYDOWN(KEY_TYPE::ENTER) && GET_SINGLE(MicrophoneManager)->IsConnected()) {
+	if (GET_KEYDOWN(KEY_TYPE::ENTER)) {
 		// 그냥 다른 씬으로 이동
 	}
 }

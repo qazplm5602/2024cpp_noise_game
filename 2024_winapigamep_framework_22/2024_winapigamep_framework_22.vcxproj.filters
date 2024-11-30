@@ -35,6 +35,9 @@
     <Filter Include="Engine\07. Module">
       <UniqueIdentifier>{ec499769-3097-4d06-8abb-b25ff4a1a933}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\UI">
+      <UniqueIdentifier>{f197e7a7-8be2-41af-8a9b-6a7835d0718a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2024_winapigamep_framework_22.h">
@@ -133,7 +136,6 @@
     <ClInclude Include="bbqScene.h" />
     <ClInclude Include="DomiScene.h" />
     <ClInclude Include="RalScene.h" />
-    <ClInclude Include="RectObject.h" />
     <ClInclude Include="ImageRenderer.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
@@ -141,9 +143,14 @@
     <ClInclude Include="DeviceSettingScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="GameMath.h">
       <Filter>Engine\07. Module</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressBar.h">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="RectObject.h">
+      <Filter>Engine\03. Object\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -241,14 +248,20 @@
     <ClCompile Include="bbqScene.cpp" />
     <ClCompile Include="DomiScene.cpp" />
     <ClCompile Include="RalScene.cpp" />
-    <ClCompile Include="RectObject.cpp" />
     <ClCompile Include="ImageRenderer.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
-    <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="DeviceSettingScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
-    <ClCompile Include="ProgressBar.cpp" />
+    <ClCompile Include="ProgressBar.cpp">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="RectObject.cpp">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRenderer.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

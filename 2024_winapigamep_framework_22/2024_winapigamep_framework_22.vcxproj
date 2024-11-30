@@ -184,7 +184,9 @@
     <ClInclude Include="GDISelector.h" />
     <ClInclude Include="ImageRect.h" />
     <ClInclude Include="ImageRenderer.h" />
+    <ClInclude Include="IMicJumpHandler.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="MicJumpObserver.h" />
     <ClInclude Include="MicrophoneManager.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
@@ -226,6 +228,7 @@
     <ClCompile Include="ImageRenderer.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MicJumpObserver.cpp" />
     <ClCompile Include="MicrophoneManager.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />

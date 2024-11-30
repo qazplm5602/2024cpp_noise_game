@@ -7,6 +7,11 @@
 #include "MicrophoneManager.h"
 #include "GameMath.h"
 #include "TimeManager.h"
+#include "Object.h"
+#include "Player.h"
+#include "Rigidbody.h"
+#include "Collider.h"
+#include "Enemy.h"
 
 void DomiScene::Init()
 {
@@ -36,6 +41,19 @@ void DomiScene::Init()
 	//textRender->SetAlign(TA_BOTTOM);
 
 	//AddObject(testRect2, LAYER::UI);
+
+	Object* pPlayer = new Player;
+	pPlayer->SetPos({ SCREEN_WIDTH / 2.f,500.f });
+	pPlayer->SetSize({ 100.f,100.f });
+	pPlayer->AddComponent<Rigidbody>();
+	pPlayer->GetComponent<Collider>()->SetOffSetPos(Vec2(0, 2));
+	AddObject(pPlayer, LAYER::PLAYER);
+
+	Object* pGround = new Enemy;
+	pGround->SetPos({ SCREEN_WIDTH / 2.f,700.f });
+	pGround->SetSize({ (float)SCREEN_WIDTH, 100.f });
+	AddObject(pGround, LAYER::GROUND);
+	pGround->GetComponent<Collider>()->SetSize(pGround->GetSize());
 
 	CreateMicGuage();
 }
@@ -71,6 +89,7 @@ void DomiScene::CreateMicGuage()
 
 void DomiScene::Update()
 {
+	Scene::Update();
 }
 
 void DomiScene::Render(HDC _hdc)

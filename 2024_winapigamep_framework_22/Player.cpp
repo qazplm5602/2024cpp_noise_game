@@ -11,6 +11,7 @@
 #include "Animator.h"
 #include "Animation.h"
 #include "Rigidbody.h"
+#include "MicJumpObserver.h"
 
 Player::Player()
 	: m_pTex(nullptr)
@@ -26,7 +27,7 @@ Player::Player()
 	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f),
 		Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
 	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
-
+	AddComponent<MicJumpObserver>();
 }
 Player::~Player()
 {
@@ -53,6 +54,7 @@ void Player::Update()
 		}
 	}
 	SetPos(vPos);
+	GetComponent<MicJumpObserver>()->Update();
 }
 
 void Player::Render(HDC _hdc)
@@ -80,6 +82,16 @@ void Player::Render(HDC _hdc)
 	//::StretchBlt();
 	//::AlphaBlend();
 	//::PlgBlt();
+}
+
+void Player::OnMicJump(const float& power)
+{
+	cout << power << endl;
+	Rigidbody* rb = GetComponent<Rigidbody>();
+	if (rb != nullptr && rb->IsGrounded())
+	{
+		rb->AddImpulse(Vec2(0.f, power * -500.0f));
+	}
 }
 
 void Player::CreateProjectile()

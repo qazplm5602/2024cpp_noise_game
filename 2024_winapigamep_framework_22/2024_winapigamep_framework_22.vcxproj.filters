@@ -153,6 +153,13 @@
       <Filter>Engine\03. Object\UI</Filter>
     </ClInclude>
     <ClInclude Include="ImageRect.h" />
+    <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="MicJumpObserver.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="IMicJumpHandler.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -265,5 +272,9 @@
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
     <ClCompile Include="ImageRect.cpp" />
+    <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="MicJumpObserver.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

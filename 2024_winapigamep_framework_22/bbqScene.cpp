@@ -11,7 +11,6 @@
 #include "Collider.h"
 void bbqScene::Init()
 {
-	cout << "Gg";
 	Object* pObj = new Enemy;
 	pObj->SetPos({ SCREEN_WIDTH / 2.f,150.f });
 	pObj->SetSize({ 100.f,100.f });

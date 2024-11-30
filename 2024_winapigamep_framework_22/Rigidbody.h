@@ -39,6 +39,7 @@ public:
     void PreventOverlapMove(Object* obj, const vector<Object*>& objects, Vec2& velocity, float deltaTime);
 
     void AddForce(Vec2 force);
+    void AddImpulse(Vec2 force);
 
 private:
     void ApplyForce();
@@ -50,6 +51,7 @@ private:
     float m_fDrag;
 
     Vec2 m_vForce;
+    Vec2 m_vImpulse;
     Vec2 m_vVelocity;
     
     bool m_bUseGravity;

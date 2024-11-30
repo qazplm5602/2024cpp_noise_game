@@ -8,8 +8,10 @@
 #include "CollisionManager.h"
 #include "ResourceManager.h"
 #include "Rigidbody.h"
+#include "Collider.h"
 void bbqScene::Init()
 {
+	cout << "Gg";
 	Object* pObj = new Enemy;
 	pObj->SetPos({ SCREEN_WIDTH / 2.f,150.f });
 	pObj->SetSize({ 100.f,100.f });
@@ -20,10 +22,18 @@ void bbqScene::Init()
 	pPlayer->SetPos({ SCREEN_WIDTH / 2.f,500.f });
 	pPlayer->SetSize({ 100.f,100.f });
 	pPlayer->AddComponent<Rigidbody>();
+	pPlayer->GetComponent<Collider>()->SetOffSetPos(Vec2(0,2));
 	AddObject(pPlayer, LAYER::PLAYER);
+
+	Object* pGround = new Enemy;
+	pGround->SetPos({ SCREEN_WIDTH / 2.f,700.f });
+	pGround->SetSize({ (float)SCREEN_WIDTH, 100.f });
+	AddObject(pGround, LAYER::GROUND);
+	pGround->GetComponent<Collider>()->SetSize(pGround->GetSize());
+
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
 	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
-	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
+	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\Retro_brgm.wav", true);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 }
 

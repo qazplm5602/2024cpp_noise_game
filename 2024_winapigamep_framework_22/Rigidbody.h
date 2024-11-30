@@ -33,6 +33,13 @@ public:
     void SetUseGravity(bool bUseGravity) { m_bUseGravity = bUseGravity; }
     const bool& GetUseGravity() const { return m_bUseGravity; }
 
+    void SetIsGrounded(bool bIsGround) { m_bIsGrounded = bIsGround; }
+    const bool& IsGrounded() const { return m_bIsGrounded; }
+
+    void PreventOverlapMove(Object* obj, const vector<Object*>& objects, Vec2& velocity, float deltaTime);
+
+    void AddForce(Vec2 force);
+
 private:
     void ApplyForce();
 
@@ -47,5 +54,6 @@ private:
     
     bool m_bUseGravity;
     bool m_bIsKinematic;
+    bool m_bIsGrounded;
 };
 

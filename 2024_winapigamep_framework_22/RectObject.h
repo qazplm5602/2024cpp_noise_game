@@ -9,7 +9,8 @@ enum class RectAnchor {
 	Center,
 	CenterLeft,
 	CenterRight,
-	CenterBottom
+	CenterBottom,
+	CenterTop
 };
 
 class RectObject : public Object

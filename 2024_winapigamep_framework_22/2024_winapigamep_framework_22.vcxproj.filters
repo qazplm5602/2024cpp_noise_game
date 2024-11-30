@@ -152,6 +152,7 @@
     <ClInclude Include="RectObject.h">
       <Filter>Engine\03. Object\UI</Filter>
     </ClInclude>
+    <ClInclude Include="ImageRect.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -263,5 +264,6 @@
     <ClCompile Include="TextRenderer.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
+    <ClCompile Include="ImageRect.cpp" />
   </ItemGroup>
 </Project>

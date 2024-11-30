@@ -47,10 +47,16 @@ void RectObject::GetRect(RECT* pRect)
         pRect->bottom = SCREEN_HEIGHT - pos.y;
         break;
     case RectAnchor::Center:
+        pRect->left = (SCREEN_WIDTH / 2) - (size.x / 2) + pos.x;
+        pRect->right = (SCREEN_WIDTH / 2) + (size.x / 2) + pos.x;
+        pRect->top = (SCREEN_HEIGHT / 2) - (size.y / 2) + pos.y;
+        pRect->bottom = (SCREEN_HEIGHT / 2) + (size.y / 2) + pos.y;
+        break;
+    case RectAnchor::CenterTop:
         pRect->left = (SCREEN_WIDTH / 2) - (size.x / 2);
         pRect->right = (SCREEN_WIDTH / 2) + (size.x / 2);
-        pRect->top = (SCREEN_HEIGHT / 2) - (size.y / 2);
-        pRect->bottom = (SCREEN_HEIGHT / 2) + (size.y / 2);
+        pRect->top = pos.y;
+        pRect->bottom = size.y + pos.y;
         break;
     case RectAnchor::CenterLeft:
         pRect->left = pos.x;

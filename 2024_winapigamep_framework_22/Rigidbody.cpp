@@ -31,7 +31,7 @@ void Rigidbody::LateUpdate()
 
     if (m_bUseGravity && !IsGrounded())
     {
-        AddForce(Vec2(0.f, 10 * m_fGravity * m_fMass));
+        AddForce(Vec2(0.f, 100 * m_fGravity * m_fMass));
     }
 
     if (IsGrounded())

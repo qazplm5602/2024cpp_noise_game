@@ -90,7 +90,7 @@ void Player::OnMicJump(const float& power)
 	Rigidbody* rb = GetComponent<Rigidbody>();
 	if (rb != nullptr && rb->IsGrounded())
 	{
-		rb->AddImpulse(Vec2(0.f, power * -500.0f));
+		rb->AddImpulse(Vec2(0.f, power * -700.0f));
 	}
 }
 

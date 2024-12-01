@@ -13,10 +13,10 @@ class PhysicsManager
 {
 public:
     static BoxCastHit BoxCast(const Object* pOriginObj, const Vec2& size, const Vec2& direction, float distance, const vector<Object*>& objects);
+    static bool IsBoxIntersecting(const Vec2& origin, const Vec2& size, const Vec2& direction, float distance, Object* other);
+    static bool IsBoxIntersecting(const Collider* owner, const Collider* other);
 
 private:
-    static bool IsBoxIntersecting(const Vec2& origin, const Vec2& size, const Vec2& direction, float distance, Object* other);
-
     static bool CalculateIntersection(const Vec2& origin, const Vec2& size, const Vec2& direction, float distance, Object* other, Vec2& hitPoint, float& hitDistance);
 };
 

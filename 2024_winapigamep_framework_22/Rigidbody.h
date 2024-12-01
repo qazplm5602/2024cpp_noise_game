@@ -36,7 +36,7 @@ public:
     void SetIsGrounded(bool bIsGround) { m_bIsGrounded = bIsGround; }
     const bool& IsGrounded() const { return m_bIsGrounded; }
 
-    void PreventOverlapMove(Object* obj, const vector<Object*>& objects, Vec2& velocity, float deltaTime);
+    void PreventOverlapMove(Object* obj, LAYER layerMask);
 
     void AddForce(Vec2 force);
     void AddImpulse(Vec2 force);

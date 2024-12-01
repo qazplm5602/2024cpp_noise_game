@@ -28,10 +28,14 @@ public:
 	{
 		return m_colorPens[(UINT)_eType];
 	}
+	const wstring& GetFont(FONT_TYPE _eType) {
+		return m_fontNames[(UINT)_eType];
+	}
 
 private:
 	HBRUSH m_colorBrushs[(UINT)BRUSH_TYPE::END] = {};
 	HPEN m_colorPens[(UINT)PEN_TYPE::END] = {};
+	wstring m_fontNames[(UINT)FONT_TYPE::END] = {};
 
 	HWND m_hWnd;
 	HDC  m_hDC; // Main DC

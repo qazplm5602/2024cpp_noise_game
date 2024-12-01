@@ -11,6 +11,17 @@ Scene::~Scene()
 	Release();
 }
 
+void Scene::SimulatePhysics()
+{
+	for (size_t i = 0; i < (UINT)LAYER::END; i++)
+	{
+		for (UINT j = 0; j < m_vecObj[i].size(); ++j)
+		{
+			m_vecObj[i][j]->LateUpdate();
+		}
+	}
+}
+
 void Scene::Update()
 {
 	//for (UINT i = 0; i < (UINT)LAYER::END; ++i)

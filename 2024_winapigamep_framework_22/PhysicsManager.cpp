@@ -49,6 +49,19 @@ bool PhysicsManager::IsBoxIntersecting(const Vec2& origin, const Vec2& size, con
         boxMax.y < otherMin.y || boxMin.y > otherMax.y);
 }
 
+bool PhysicsManager::IsBoxIntersecting(const Collider* owner, const Collider* other)
+{
+    Vec2 vLeftPos = owner->GetLatedUpatedPos();
+    Vec2 vRightPos = other->GetLatedUpatedPos();
+    Vec2 vLeftSize = owner->GetSize();
+    Vec2 vRightSize = other->GetSize();
+
+    RECT leftRt = RECT_MAKE(vLeftPos.x, vLeftPos.y, vLeftSize.x, vLeftSize.y);
+    RECT rightRt = RECT_MAKE(vRightPos.x, vRightPos.y, vRightSize.x, vRightSize.y);
+    RECT rt;
+    return ::IntersectRect(&rt, &leftRt, &rightRt);
+}
+
 bool PhysicsManager::CalculateIntersection(const Vec2& origin, const Vec2& size, const Vec2& direction, float distance, Object* other, Vec2& hitPoint, float& hitDistance)
 {
     Collider* collider = other->GetComponent<Collider>();

@@ -7,8 +7,11 @@
 #include "Scene.h"
 #include "Collider.h"
 
-Rigidbody::Rigidbody() : m_fGravity(9.81f), m_fMass(1.0f), m_fDrag(0.0f),
-m_vVelocity(Vec2(0, 0)), m_bUseGravity(true), m_bIsKinematic(false), m_bIsGrounded(false)
+// TODO: Make X axis move with boxCast, bug heppens when dt is way to high
+
+Rigidbody::Rigidbody()
+    : m_fGravity(9.81f), m_fMass(1.0f), m_fDrag(0.0f),
+    m_vVelocity(Vec2(0, 0)), m_bUseGravity(true), m_bIsKinematic(false), m_bIsGrounded(false)
 {
 }
 
@@ -23,60 +26,96 @@ void Rigidbody::LateUpdate()
     Object* Owner = GetOwner();
     Vec2 currPos = Owner->GetPos();
 
-    if (m_bUseGravity)
+    BoxCastHit hit = PhysicsManager::BoxCast(Owner, Owner->GetSize(), Vec2(0.f, 1.f), Owner->GetComponent<Collider>()->GetSize().y / 2 + 0.12f, GET_SINGLE(SceneManager)->GetCurrentScene()->GetLayerObjects(LAYER::GROUND));
+    SetIsGrounded(hit.hitObject != nullptr);
+
+    if (m_bUseGravity && !IsGrounded())
     {
-        m_vForce.y += m_fGravity * m_fMass;
+        AddForce(Vec2(0.f, 10 * m_fGravity * m_fMass));
+    }
+
+    if (IsGrounded())
+    {
+        m_vVelocity.y = min(m_vVelocity.y, 0);
+        Owner->SetPos(currPos + Vec2(0.f, 0.f) * (hit.distance - Owner->GetComponent<Collider>()->GetSize().y / 2));
     }
 
     ApplyForce();
+    Owner->SetPos(currPos + m_vVelocity * fDT);
 
-    m_vVelocity.x *= (1 - m_fDrag);
-    m_vVelocity.y *= (1 - m_fDrag);
-
-    BoxCastHit hit = PhysicsManager::BoxCast(Owner, Owner->GetSize(), Vec2(0.f, 1.f), Owner->GetComponent<Collider>()->GetSize().y / 2 + 0.1f, GET_SINGLE(SceneManager)->GetCurrentScene()->GetLayerObjects(LAYER::GROUND));
-    SetIsGrounded(hit.hitObject != nullptr);
-
-    if (m_bIsGrounded)
-    {
-        Owner->SetPos(currPos + Vec2(0.f, -1.f) * (hit.distance - Owner->GetComponent<Collider>()->GetSize().x / 2));
-        m_vVelocity.y = max(m_vVelocity.y, 0);
-    }
-    cout << m_bIsGrounded << endl;
-
-
-    
-    PreventOverlapMove(Owner, GET_SINGLE(SceneManager)->GetCurrentScene()->GetLayerObjects(LAYER::GROUND), m_vVelocity, fDT);
-    //Owner->SetPos(currPos + m_vVelocity * fDT);
-
-    //std::cout << m_vVelocity.x << m_vVelocity.y << endl;
-
-
-    m_vForce = Vec2(0, 0);
+    PreventOverlapMove(Owner, LAYER::GROUND);
 }
 
 void Rigidbody::Render(HDC _hdc)
 {
 }
 
-void Rigidbody::PreventOverlapMove(Object* obj, const vector<Object*>& objects, Vec2& velocity, float deltaTime)
+//void Rigidbody::PreventOverlapMove(Object* obj, const vector<Object*>& objects, Vec2& velocity, float deltaTime)
+//{
+//    Vec2 direction = velocity.GetNormalized();
+//    float distance = velocity.Length() * deltaTime;
+//
+//    BoxCastHit hit = PhysicsManager::BoxCast(obj, obj->GetSize(), direction, distance, objects);
+//
+//    if (IsGrounded())
+//    {
+//        if (abs(direction.x) > 0.0f) velocity.x = 0;
+//        if (abs(direction.y) > 0.0f) velocity.y = 0;
+//    }
+//    else
+//    {
+//        obj->SetPos(obj->GetPos() + velocity * deltaTime);
+//    }
+//}
+
+void Rigidbody::PreventOverlapMove(Object* owner, LAYER layerMask)
 {
-    Vec2 direction = velocity.GetNormalized();
-    float distance = velocity.Length() * deltaTime;
-
-    BoxCastHit hit = PhysicsManager::BoxCast(obj, obj->GetSize(), direction, distance, objects);
-
-    if (IsGrounded())
+    vector<Object*> objects = GET_SINGLE(SceneManager)->GetCurrentScene()->GetLayerObjects(layerMask);
+    Collider* cOwner = owner->GetComponent<Collider>();
+    for (Object* obj : objects)
     {
-        // if collide, it moves to hit point
+        if (obj->GetIsDead() || obj->GetComponent<Collider>() == nullptr) continue;
 
-        // 속도 수정 (벽/바닥 기준으로 멈춤)
-        if (abs(direction.x) > 0.0f) velocity.x = 0;
-        if (abs(direction.y) > 0.0f) velocity.y = 0;
-    }
-    else
-    {
-        // 충돌하지 않는 경우 자유 이동
-        obj->SetPos(obj->GetPos() + velocity * deltaTime);
+        if (PhysicsManager::IsBoxIntersecting(cOwner, obj->GetComponent<Collider>()))
+        {
+            // Get centers and half sizes
+            Vec2 ownerPos = owner->GetPos();
+            Vec2 objPos = obj->GetPos();
+            Vec2 ownerHalfSize = cOwner->GetSize() / 2.f;
+            Vec2 objHalfSize = obj->GetComponent<Collider>()->GetSize() / 2.f;
+
+            float deltaX = ownerPos.x - objPos.x;
+            float deltaY = ownerPos.y - objPos.y;
+
+            float combinedHalfWidth = ownerHalfSize.x + objHalfSize.x;
+            float combinedHalfHeight = ownerHalfSize.y + objHalfSize.y;
+
+            float overlapX = combinedHalfWidth - abs(deltaX);
+            float overlapY = combinedHalfHeight - abs(deltaY);
+
+            if (overlapX > 0 && overlapY > 0)
+            {
+                if (overlapX < overlapY)
+                {
+                    overlapX = (deltaX > 0) ? overlapX : -overlapX;
+                    owner->SetPos({ ownerPos.x + overlapX, ownerPos.y });
+                }
+                else
+                {
+                    if (deltaY > 0)
+                    {
+                        overlapY * 1;
+                        m_vVelocity.y = max(m_vVelocity.y, 0);
+                        owner->SetPos({ ownerPos.x, ownerPos.y + overlapY });
+                    }
+                    else
+                    {
+                        overlapY * -1;
+                        // when overlapY is negative, idk but jsutbug heppens so blocked it
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -85,10 +124,18 @@ void Rigidbody::AddForce(Vec2 force)
     m_vForce += force;
 }
 
+void Rigidbody::AddImpulse(Vec2 force)
+{
+    m_vImpulse += force;
+}
 
 void Rigidbody::ApplyForce()
 {
-	if (m_fMass <= 0) return; // 질량이 0 이하인 경우 계산 불가
-	Vec2 acceleration = Vec2(m_vForce.x / m_fMass, m_vForce.y / m_fMass); // a = F / m
-	m_vVelocity = m_vVelocity + acceleration; // v = v + a
+    if (m_fMass <= 0) return;
+
+    m_vVelocity += m_vForce * fDT / m_fMass;
+    m_vForce = Vec2(0, 0);
+
+    m_vVelocity += m_vImpulse / m_fMass;
+    m_vImpulse = Vec2(0, 0);
 }

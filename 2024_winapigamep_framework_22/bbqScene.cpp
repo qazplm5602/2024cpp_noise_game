@@ -11,7 +11,6 @@
 #include "Collider.h"
 void bbqScene::Init()
 {
-	cout << "Gg";
 	Object* pObj = new Enemy;
 	pObj->SetPos({ SCREEN_WIDTH / 2.f,150.f });
 	pObj->SetSize({ 100.f,100.f });
@@ -26,10 +25,16 @@ void bbqScene::Init()
 	AddObject(pPlayer, LAYER::PLAYER);
 
 	Object* pGround = new Enemy;
-	pGround->SetPos({ SCREEN_WIDTH / 2.f,700.f });
+	pGround->SetPos({ SCREEN_WIDTH / 2.f - 100.f,700.f });
 	pGround->SetSize({ (float)SCREEN_WIDTH, 100.f });
 	AddObject(pGround, LAYER::GROUND);
 	pGround->GetComponent<Collider>()->SetSize(pGround->GetSize());
+
+	Object* guk = new Enemy;
+	guk->SetPos({ SCREEN_WIDTH*1.f, 500.f });
+	guk->SetSize({ (float)SCREEN_WIDTH, 100.f });
+	AddObject(guk, LAYER::GROUND);
+	guk->GetComponent<Collider>()->SetSize(guk->GetSize());
 
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
 	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);

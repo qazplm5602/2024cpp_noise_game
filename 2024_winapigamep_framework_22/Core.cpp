@@ -108,6 +108,7 @@ void Core::CreateGDI()
 	m_colorBrushs[(UINT)BRUSH_TYPE::GREEN] = (HBRUSH)CreateSolidBrush(RGB(134, 229, 134));
 	m_colorBrushs[(UINT)BRUSH_TYPE::BLUE] = (HBRUSH)CreateSolidBrush(RGB(103, 153, 255));
 	m_colorBrushs[(UINT)BRUSH_TYPE::YELLOW] = (HBRUSH)CreateSolidBrush(RGB(255, 187, 0));
+	m_colorBrushs[(UINT)BRUSH_TYPE::GRAY] = (HBRUSH)CreateSolidBrush(RGB(100, 100, 100));
 
 	//RED GREEN BLUE PEN
 	m_colorPens[(UINT)PEN_TYPE::RED] = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
@@ -115,4 +116,17 @@ void Core::CreateGDI()
 	m_colorPens[(UINT)PEN_TYPE::BLUE] = CreatePen(PS_SOLID, 1, RGB(0, 0, 255));
 	m_colorPens[(UINT)PEN_TYPE::YELLOW] = CreatePen(PS_SOLID, 1, RGB(255, 255, 0));
 	m_colorPens[(UINT)PEN_TYPE::HOLLOW] = CreatePen(PS_NULL, 0, RGB(0, 0, 0));
+
+	// Æùºv
+	//AddFontResource(TEXT("Spoqa Han Sans Neo"));
+	AddFontResource(TEXT("Spoqa Han Sans Neo Thin"));
+	AddFontResource(TEXT("Spoqa Han Sans Neo Light"));
+	AddFontResource(TEXT("Spoqa Han Sans Neo Medium"));
+	AddFontResource(TEXT("Spoqa Han Sans Neo Regular"));
+	AddFontResource(TEXT("Spoqa Han Sans Neo Bold"));
+	m_fontNames[(UINT)FONT_TYPE::SPOQA_THIN] = TEXT("Spoqa Han Sans Neo Thin");
+	m_fontNames[(UINT)FONT_TYPE::SPOQA_LIGHT] = TEXT("Spoqa Han Sans Neo Light");
+	m_fontNames[(UINT)FONT_TYPE::SPOQA_MEDIUM] = TEXT("Spoqa Han Sans Neo Medium");
+	m_fontNames[(UINT)FONT_TYPE::SPOQA_REGULAR] = TEXT("Spoqa Han Sans Neo Regular");
+	m_fontNames[(UINT)FONT_TYPE::SPOQA_BOLD] = TEXT("Spoqa Han Sans Neo Bold");
 }

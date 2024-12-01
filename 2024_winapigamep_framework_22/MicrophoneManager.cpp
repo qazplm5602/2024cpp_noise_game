@@ -89,3 +89,24 @@ bool MicrophoneManager::IsConnected()
     return pCurrentDevice != nullptr;
 }
 
+wstring MicrophoneManager::GetCurrentDeviceId()
+{
+    assert(MicrophoneManager::IsConnected()); // 연결 안되어있는데 왜 호출함
+    
+    LPWSTR deviceID = NULL;
+    pCurrentDevice->GetId(&deviceID);
+
+    return wstring(deviceID);
+}
+
+wstring MicrophoneManager::GetDefaultDeviceId()
+{
+    IMMDevice* pDevice;
+    pEnumerator->GetDefaultAudioEndpoint(eCapture, eConsole, &pDevice);
+
+    LPWSTR deviceID = NULL;
+    pDevice->GetId(&deviceID);
+
+    return wstring(deviceID);
+}
+

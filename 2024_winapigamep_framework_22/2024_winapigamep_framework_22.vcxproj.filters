@@ -35,6 +35,9 @@
     <Filter Include="Engine\07. Module">
       <UniqueIdentifier>{ec499769-3097-4d06-8abb-b25ff4a1a933}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\UI">
+      <UniqueIdentifier>{f197e7a7-8be2-41af-8a9b-6a7835d0718a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2024_winapigamep_framework_22.h">
@@ -130,6 +133,33 @@
     <ClInclude Include="MicrophoneManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
+    <ClInclude Include="bbqScene.h" />
+    <ClInclude Include="DomiScene.h" />
+    <ClInclude Include="RalScene.h" />
+    <ClInclude Include="ImageRenderer.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRenderer.h" />
+    <ClInclude Include="DeviceSettingScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMath.h">
+      <Filter>Engine\07. Module</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressBar.h">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="RectObject.h">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageRect.h" />
+    <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="MicJumpObserver.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="IMicJumpHandler.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -221,6 +251,29 @@
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
     <ClCompile Include="Rigidbody.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="bbqScene.cpp" />
+    <ClCompile Include="DomiScene.cpp" />
+    <ClCompile Include="RalScene.cpp" />
+    <ClCompile Include="ImageRenderer.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceSettingScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressBar.cpp">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="RectObject.cpp">
+      <Filter>Engine\03. Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRenderer.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageRect.cpp" />
+    <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="MicJumpObserver.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
   </ItemGroup>

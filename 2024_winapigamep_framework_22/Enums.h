@@ -7,7 +7,7 @@ enum class LAYER
 	PLAYER,
 	PROJECTILE,
 	ENEMY,
-	// UI
+	UI,
 	END = 30
 };
 
@@ -20,7 +20,7 @@ enum class PEN_TYPE
 enum class BRUSH_TYPE
 {
 	HOLLOW, RED, GREEN,
-	BLUE, YELLOW, END
+	BLUE, YELLOW, GRAY, END
 };
 
 
@@ -30,4 +30,13 @@ enum class EVENT_TYPE
 	DELETE_OBJECT,
 	SCENE_CHANGE,
 	END,
+};
+
+enum class FONT_TYPE {
+	SPOQA_THIN,
+	SPOQA_LIGHT,
+	SPOQA_MEDIUM,
+	SPOQA_REGULAR,
+	SPOQA_BOLD,
+	END
 };

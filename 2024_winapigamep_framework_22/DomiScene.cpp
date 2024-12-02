@@ -14,6 +14,7 @@
 #include "Enemy.h"
 #include "BoxObject.h"
 #include "CameraManager.h"
+#include "Tilemap.h"
 
 void DomiScene::Init()
 {
@@ -61,6 +62,10 @@ void DomiScene::Init()
 	pBox->SetPos({ SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f });
 	pBox->SetSize({ 80.f, 80.f });
 	AddObject(pBox, LAYER::DEFAULT);
+
+	Tilemap* testTilemap = new Tilemap;
+	testTilemap->AddComponent<Collider>();
+	AddObject(testTilemap, LAYER::GROUND);
 
 	CreateMicGuage();
 }

@@ -18,7 +18,3 @@ void Tilemap::Render(HDC _hdc)
 void Tilemap::SetTile(Vec2 pos, UCHAR tileType)
 {
 }
-
-void Tilemap::SetPalette(TilePalette* palette)
-{
-}

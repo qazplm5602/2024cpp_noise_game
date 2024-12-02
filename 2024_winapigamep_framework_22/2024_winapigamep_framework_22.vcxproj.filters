@@ -160,6 +160,7 @@
     <ClInclude Include="IMicJumpHandler.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
+    <ClInclude Include="kScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -276,5 +277,6 @@
     <ClCompile Include="MicJumpObserver.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
+    <ClCompile Include="kScene.cpp" />
   </ItemGroup>
 </Project>

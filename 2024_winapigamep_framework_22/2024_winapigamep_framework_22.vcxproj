@@ -186,6 +186,7 @@
     <ClInclude Include="ImageRenderer.h" />
     <ClInclude Include="IMicJumpHandler.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="kScene.h" />
     <ClInclude Include="MicJumpObserver.h" />
     <ClInclude Include="MicrophoneManager.h" />
     <ClInclude Include="Object.h" />
@@ -227,6 +228,7 @@
     <ClCompile Include="ImageRect.cpp" />
     <ClCompile Include="ImageRenderer.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="kScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MicJumpObserver.cpp" />
     <ClCompile Include="MicrophoneManager.cpp" />

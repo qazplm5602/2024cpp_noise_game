@@ -10,7 +10,7 @@
 // TODO: Make X axis move with boxCast, bug heppens when dt is way to high
 
 Rigidbody::Rigidbody()
-    : m_fGravity(9.81f), m_fMass(1.0f), m_fDrag(0.0f),
+    : m_fGravity(9.81f), m_fMass(1.5f), m_fDrag(0.0f),
     m_vVelocity(Vec2(0, 0)), m_bUseGravity(true), m_bIsKinematic(false), m_bIsGrounded(false)
 {
 }
@@ -104,13 +104,13 @@ void Rigidbody::PreventOverlapMove(Object* owner, LAYER layerMask)
                 {
                     if (deltaY > 0)
                     {
-                        overlapY * 1;
                         m_vVelocity.y = max(m_vVelocity.y, 0);
                         owner->SetPos({ ownerPos.x, ownerPos.y + overlapY });
                     }
                     else
                     {
-                        overlapY * -1;
+                        overlapY *= -1;
+                        owner->SetPos({ ownerPos.x, ownerPos.y + overlapY });
                         // when overlapY is negative, idk but jsutbug heppens so blocked it
                     }
                 }

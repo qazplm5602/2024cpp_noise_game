@@ -4,6 +4,11 @@
 #include "CameraManager.h"
 #include "TilePalette.h"
 #include "Texture.h"
+#include "ResourceManager.h"
+#include "ResourceManager.h"
+#include <fstream>
+#include <istream>
+#include <sstream>
 
 Tilemap::Tilemap()
 	: m_palette(nullptr)
@@ -76,4 +81,49 @@ void Tilemap::SetTile(Vec2 pos, UCHAR tileType)
 Vec2 Tilemap::GetScreenBottomPos(const Vec2& plus)
 {
 	return Vec2(-(plus.x * m_tileSize), -((m_tiles.size() * m_tileSize) - SCREEN_HEIGHT) + (plus.y * m_tileSize));
+}
+
+void Tilemap::LoadMapLevel(const wstring& fileName, const UCHAR& includeFlag)
+{
+	std::ifstream fin;
+
+	wstring path = GET_SINGLE(ResourceManager)->GetResPath();
+	path += L"Map\\" + fileName + L".domi";
+
+	fin.open(path);
+	assert(!fin.fail()); // 파일 못불러옴
+
+	std::string line;
+	vector<vector<std::string>> list;
+	while (!fin.eof())
+	{
+		std::getline(fin, line);
+		list.push_back(Split(line, ' '));
+	}
+
+	SetMapSize({ (int)list[0].size(),  (int)list.size() });
+
+	for (int y = 0; y < list.size(); y++)
+	{
+		for (int x = 0; x < list[y].size(); x++)
+		{
+			UCHAR tileType = stoi(list[y][x]);
+
+			if ((includeFlag & tileType) > 0)
+				SetTile({ x, y }, tileType);
+		}
+	}
+}
+
+vector<std::string> Tilemap::Split(std::string str, char Delimiter) {
+	std::istringstream iss(str);
+	std::string buffer;
+
+	vector<std::string> result;
+
+	while (std::getline(iss, buffer, Delimiter)) {
+		result.push_back(buffer);
+	}
+
+	return result;
 }

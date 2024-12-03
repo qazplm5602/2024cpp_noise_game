@@ -8,6 +8,7 @@ class Tilemap : public Object
 {
 public:
 	Tilemap();
+	virtual ~Tilemap();
 
 	virtual void Update() override;
 	virtual void Render(HDC _hdc) override;
@@ -20,6 +21,9 @@ public:
 	void SetTile(Vec2 pos, UCHAR tileType);
 	void SetPalette(TilePalette* palette) {
 		m_palette = palette;
+	}
+	void SetTileSize(const float& size) {
+		m_tileSize = size;
 	}
 	
 protected:

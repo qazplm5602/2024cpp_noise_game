@@ -1,8 +1,14 @@
 #include "pch.h"
 #include "TilePalette.h"
 #include "ResourceManager.h"
+#include "Texture.h"
 
-void TilePalette::RegisterTile(const UCHAR type, const wstring& key, const wstring& path)
+TilePalette::TilePalette(Texture* pTex, const Vec2& size)
 {
-	m_textures[type] = GET_SINGLE(ResourceManager)->TextureLoad(key, path);
+	m_tilesTex = pTex;
+	m_texSize.x = pTex->GetWidth();
+	m_texSize.y = pTex->GetHeight();
+
+	m_tileSize.x = size.x;
+	m_tileSize.y = size.y;
 }

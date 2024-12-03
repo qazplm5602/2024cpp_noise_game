@@ -160,7 +160,6 @@
     <ClInclude Include="IMicJumpHandler.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="Tilemap.h" />
     <ClInclude Include="TilePalette.h" />
     <ClInclude Include="CameraManager.h">
       <Filter>Engine\02. Manager</Filter>
@@ -168,6 +167,10 @@
     <ClInclude Include="BoxObject.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
+    <ClInclude Include="Tilemap.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TestTilemap.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -284,7 +287,6 @@
     <ClCompile Include="MicJumpObserver.cpp">
       <Filter>Engine\06. Component</Filter>
     </ClCompile>
-    <ClCompile Include="Tilemap.cpp" />
     <ClCompile Include="TilePalette.cpp" />
     <ClCompile Include="CameraManager.cpp">
       <Filter>Engine\02. Manager</Filter>
@@ -292,5 +294,9 @@
     <ClCompile Include="BoxObject.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
+    <ClCompile Include="Tilemap.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TestTilemap.cpp" />
   </ItemGroup>
 </Project>

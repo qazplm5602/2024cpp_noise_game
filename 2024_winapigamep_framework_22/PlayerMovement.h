@@ -14,7 +14,7 @@ public:
     void Render(HDC _hdc) override;
 private:
     float fJumpTime = 0;
-    float BASEJUMPDURATION = .3f;
+    float BASEJUMPDURATION = .25f;
     Rigidbody* rb;
 };
 

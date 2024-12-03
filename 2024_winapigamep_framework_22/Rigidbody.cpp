@@ -50,24 +50,11 @@ void Rigidbody::Render(HDC _hdc)
 {
 }
 
-//void Rigidbody::PreventOverlapMove(Object* obj, const vector<Object*>& objects, Vec2& velocity, float deltaTime)
-//{
-//    Vec2 direction = velocity.GetNormalized();
-//    float distance = velocity.Length() * deltaTime;
-//
-//    BoxCastHit hit = PhysicsManager::BoxCast(obj, obj->GetSize(), direction, distance, objects);
-//
-//    if (IsGrounded())
-//    {
-//        if (abs(direction.x) > 0.0f) velocity.x = 0;
-//        if (abs(direction.y) > 0.0f) velocity.y = 0;
-//    }
-//    else
-//    {
-//        obj->SetPos(obj->GetPos() + velocity * deltaTime);
-//    }
-//}
-
+/// <summary>
+/// 벽과 플레이어가 겹치면 밖으러 빠져나오는 코드. 가까운 벽으로.
+/// </summary>
+/// <param name="owner">비교대상 1</param>
+/// <param name="layerMask">검사할 오브젝트들 (레이어로 가져옴)</param>
 void Rigidbody::PreventOverlapMove(Object* owner, LAYER layerMask)
 {
     vector<Object*> objects = GET_SINGLE(SceneManager)->GetCurrentScene()->GetLayerObjects(layerMask);
@@ -78,18 +65,21 @@ void Rigidbody::PreventOverlapMove(Object* owner, LAYER layerMask)
 
         if (PhysicsManager::IsBoxIntersecting(cOwner, obj->GetComponent<Collider>()))
         {
-            // Get centers and half sizes
             Vec2 ownerPos = owner->GetPos();
             Vec2 objPos = obj->GetPos();
             Vec2 ownerHalfSize = cOwner->GetSize() / 2.f;
             Vec2 objHalfSize = obj->GetComponent<Collider>()->GetSize() / 2.f;
 
+            // Delta값
             float deltaX = ownerPos.x - objPos.x;
             float deltaY = ownerPos.y - objPos.y;
 
+            // 이름을 못외워서 그런데 적어놓자면 그냥 두게 더한 값임. 밖으로 꺼낼때 이걸 연산해야함.
             float combinedHalfWidth = ownerHalfSize.x + objHalfSize.x;
             float combinedHalfHeight = ownerHalfSize.y + objHalfSize.y;
 
+            // 둘의 반의 크기 만큼 빼면 기본적으로 밖으로 나가지만, 정중앙에 겹친 기준으로 밖으로 나가고, 또 옮겨야함
+            // 그래서 델타만큼 빼주면 정확한 위치 가능. 근데 이거 말로 설명 못해서 그림까지 그려야함
             float overlapX = combinedHalfWidth - abs(deltaX);
             float overlapY = combinedHalfHeight - abs(deltaY);
 
@@ -102,6 +92,7 @@ void Rigidbody::PreventOverlapMove(Object* owner, LAYER layerMask)
                 }
                 else
                 {
+                    // y축 이동은 보정이 있어서 max min처리가 있음. x도 해야함. TODO에 써있음
                     if (deltaY > 0)
                     {
                         m_vVelocity.y = max(m_vVelocity.y, 0);
@@ -110,8 +101,10 @@ void Rigidbody::PreventOverlapMove(Object* owner, LAYER layerMask)
                     else
                     {
                         overlapY *= -1;
+                        m_vVelocity.y = min(m_vVelocity.y, 0);
                         owner->SetPos({ ownerPos.x, ownerPos.y + overlapY });
                         // when overlapY is negative, idk but jsutbug heppens so blocked it
+                        // ㄴ fixed did * instead of *=
                     }
                 }
             }

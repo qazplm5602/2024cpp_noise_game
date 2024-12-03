@@ -21,7 +21,7 @@ void SceneManager::Init()
 	RegisterScene(L"DeviceSettingScene",std::make_shared<DeviceSettingScene>());
 
 	// ¾À ·Îµå
-	LoadScene(L"bbqScene");
+	LoadScene(L"TitleScene");
 	//LoadScene(L"DomiScene");
 }
 

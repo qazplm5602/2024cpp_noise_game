@@ -18,52 +18,53 @@
 #include "GameMath.h"
 #include "TimeManager.h"
 #include "ImageRect.h"
+#include "Core.h"
 
 void bbqScene::Init()
 {
 	m_nowPeek = 0.0f;
 
-	Object* pObj = new Enemy;
-	pObj->SetPos({ SCREEN_WIDTH / 2.f,150.f });
-	pObj->SetSize({ 100.f,100.f });
-	pObj->SetName(L"Enemy");
-	AddObject(pObj, LAYER::ENEMY);
+	b_isHolding = false;
+	f_lastT = 0;
 
 	Object* pPlayer = new Player;
 	pPlayer->SetPos({ SCREEN_WIDTH / 2.f - 600.f,600.f });
 	pPlayer->SetSize({ 100.f,100.f });
-	//pPlayer->AddComponent<Rigidbody>();
 	pPlayer->GetComponent<Collider>()->SetOffSetPos(Vec2(0,2));
 	AddObject(pPlayer, LAYER::PLAYER);
 
-	{
-		Object* pGround = new Enemy;
-		pGround->SetPos({ SCREEN_WIDTH / 2.f - 600.f,700.f });
-		pGround->SetSize({ (float)SCREEN_WIDTH / 8.f, 100.f });
-		AddObject(pGround, LAYER::GROUND);
-		pGround->GetComponent<Collider>()->SetSize(pGround->GetSize());
-	}
-	{
-		Object* pGround = new Enemy;
-		pGround->SetPos({ SCREEN_WIDTH / 2.f - 300.f,700.f });
-		pGround->SetSize({ (float)SCREEN_WIDTH / 8.f, 100.f });
-		AddObject(pGround, LAYER::GROUND);
-		pGround->GetComponent<Collider>()->SetSize(pGround->GetSize());
-	}
-	{
-		Object* pGround = new Enemy;
-		pGround->SetPos({ SCREEN_WIDTH / 2.f,700.f });
-		pGround->SetSize({ (float)SCREEN_WIDTH / 8.f, 100.f });
-		AddObject(pGround, LAYER::GROUND);
-		pGround->GetComponent<Collider>()->SetSize(pGround->GetSize());
-	}
+	// 테스트맵
+	{ 
+		{
+			Object* pGround = new Enemy;
+			pGround->SetPos({ SCREEN_WIDTH / 2.f - 600.f,700.f });
+			pGround->SetSize({ (float)SCREEN_WIDTH / 8.f, 100.f });
+			AddObject(pGround, LAYER::GROUND);
+			pGround->GetComponent<Collider>()->SetSize(pGround->GetSize());
+		}
+		{
+			Object* pGround = new Enemy;
+			pGround->SetPos({ SCREEN_WIDTH / 2.f - 300.f,700.f });
+			pGround->SetSize({ (float)SCREEN_WIDTH / 8.f, 100.f });
+			AddObject(pGround, LAYER::GROUND);
+			pGround->GetComponent<Collider>()->SetSize(pGround->GetSize());
+		}
+		{
+			Object* pGround = new Enemy;
+			pGround->SetPos({ SCREEN_WIDTH / 2.f,700.f });
+			pGround->SetSize({ (float)SCREEN_WIDTH / 8.f, 100.f });
+			AddObject(pGround, LAYER::GROUND);
+			pGround->GetComponent<Collider>()->SetSize(pGround->GetSize());
+		}
+		{
+			Object* guk = new Enemy;
 
-	Object* guk = new Enemy;
-
-	guk->SetPos({ SCREEN_WIDTH*1.f, 600.f });
-	guk->SetSize({ (float)SCREEN_WIDTH/1.4f, 100.f });
-	AddObject(guk, LAYER::GROUND);
-	guk->GetComponent<Collider>()->SetSize(guk->GetSize());
+			guk->SetPos({ SCREEN_WIDTH * 1.f, 600.f });
+			guk->SetSize({ (float)SCREEN_WIDTH / 1.4f, 100.f });
+			AddObject(guk, LAYER::GROUND);
+			guk->GetComponent<Collider>()->SetSize(guk->GetSize());
+		}
+	}
 
 	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PROJECTILE, LAYER::ENEMY);
 	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
@@ -83,19 +84,16 @@ void bbqScene::Init()
 	imageRender->SetTexture(L"mic-icon", L"Texture\\mic-icon.bmp");
 
 	// 바
-	m_progreeBar = new ProgressBar();
-	AddObject(m_progreeBar, LAYER::UI);
+	{
+		m_progreeBar = new ProgressBar();
+		AddObject(m_progreeBar, LAYER::UI);
 
-	m_progreeBar->SetPos(Vec2(-300.0f + (300 / 2.0f) + (64.0f / 2) + 30.0f, (64.0f / 2)));
-	m_progreeBar->SetSize(Vec2(300, 20));
-	m_progreeBar->SetAnchor(RectAnchor::CenterBottom);
-	m_progreeBar->SetValue(0.0f);
+		m_progreeBar->SetPos(Vec2(-300.0f + (300 / 2.0f) + (64.0f / 2) + 30.0f, (64.0f / 2)));
+		m_progreeBar->SetSize(Vec2(300, 20));
+		m_progreeBar->SetAnchor(RectAnchor::CenterBottom);
+		m_progreeBar->SetValue(0.0f);
+	}
 
-	ImageRect* rObj = new ImageRect(L"logo", L"Texture\\LOGO.bmp");
-	rObj->SetAnchor(RectAnchor::Center);
-	rObj->SetPos({ 0.f, -100.f });
-	rObj->SetSize(Vec2(450, 450));
-	AddObject(rObj, LAYER::UI);
 
 	// 마이크 설정
 	wstring micDeviceId = GET_SINGLE(MicrophoneManager)->GetDefaultDeviceId();
@@ -105,17 +103,56 @@ void bbqScene::Init()
 void bbqScene::Update()
 {
 	Scene::Update();
-	if (GET_KEYDOWN(KEY_TYPE::ENTER))
-		GET_SINGLE(SceneManager)->LoadScene(L"GameScene");
+	/*if (GET_KEYDOWN(KEY_TYPE::ENTER))
+		GET_SINGLE(SceneManager)->LoadScene(L"GameScene");*/
+
+	if (peakVolume_clamped < 30)
+	{
+		b_isHolding = true;
+		if (f_lastT >  1.f)
+		{
+			//GET_SINGLE(SceneManager)->LoadScene(L"DomiScene");
+
+		}
+		f_lastT += fDT;
+		cout << f_lastT << " " << (f_lastT > 1.f);
+	}
+	else
+	{
+		f_lastT = 0;
+		b_isHolding = false;
+	}
+	
 }
 
 void bbqScene::Render(HDC _hdc)
 {
+	//Scene::Render();
 	Scene::Render(_hdc);
 
-	float micPeek;
-	GET_SINGLE(MicrophoneManager)->GetMicPeek(&micPeek);
-
-	m_nowPeek = GameMath::Lerp<float>(m_nowPeek, micPeek, 10 * fDT);
+	/*m_nowPeek = GameMath::Lerp<float>(m_nowPeek, micPeek, 10 * fDT);
 	m_progreeBar->SetValue(m_nowPeek);
+
+	peakVolume_clamped = max((255 - static_cast<int>(GameMath::Lerp<float>(m_nowPeek, micPeek, 10 * fDT) * 500)), 0);
+
+	Core* core = GET_SINGLE(Core);
+	::SelectObject(m_hAlphaDC, m_hAlphaBit);
+	::PatBlt(m_hAlphaDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, WHITENESS);
+
+	::BitBlt(m_hAlphaDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,
+		core->GetBackDC(), 0, 0, SRCCOPY);
+	::PatBlt(core->GetBackDC(), 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, WHITENESS);
+	::AlphaBlend(core->GetBackDC(), 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, m_hAlphaDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT,
+		{
+			AC_SRC_OVER,
+			0,
+			(unsigned char)peakVolume_clamped,
+			AC_SRC_OVER
+		});
+	::BitBlt(core->GetMainDC(), 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, core->GetBackDC(), 0, 0, SRCCOPY);*/
+}
+
+void bbqScene::Release()
+{
+
 }

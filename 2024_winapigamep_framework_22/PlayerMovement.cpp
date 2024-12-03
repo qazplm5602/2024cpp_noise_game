@@ -20,7 +20,6 @@ void PlayerMovement::HandleJump()
 	{
 		rb = GetOwner()->GetComponent<Rigidbody>();
 	}
-	cout << rb->IsGrounded() << endl;
 	if (rb != nullptr && rb->IsGrounded())
 	{
 		//cout << rb->GetVelocity().y << endl;
@@ -46,8 +45,7 @@ void PlayerMovement::LateUpdate()
 		{
 			GET_SINGLE(MicrophoneManager)->GetMicPeek(&volume);
 		}
-		cout << volume;
-		rb->AddForce({0.f, volume * -5000.f });
+		rb->AddForce({0.f, volume * -4500.f });
 	}
 }
 

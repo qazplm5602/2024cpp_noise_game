@@ -20,6 +20,7 @@ public:
 	const HWND& GetHwnd() const { return m_hWnd; }
 	// 이름 바꾸기
 	const HDC& GetMainDC() const { return m_hDC; }
+	const HDC& GetBackDC() const { return m_hBackDC; }
 	const HBRUSH& GetBrush(BRUSH_TYPE _eType)
 	{
 		return m_colorBrushs[(UINT)_eType];

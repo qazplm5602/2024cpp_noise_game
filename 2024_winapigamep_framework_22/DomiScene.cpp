@@ -12,6 +12,9 @@
 #include "Rigidbody.h"
 #include "Collider.h"
 #include "Enemy.h"
+#include "BoxObject.h"
+#include "CameraManager.h"
+#include "Tilemap.h"
 
 void DomiScene::Init()
 {
@@ -42,7 +45,7 @@ void DomiScene::Init()
 
 	//AddObject(testRect2, LAYER::UI);
 
-	Object* pPlayer = new Player;
+	pPlayer = new Player;
 	pPlayer->SetPos({ SCREEN_WIDTH / 2.f,500.f });
 	pPlayer->SetSize({ 100.f,100.f });
 	pPlayer->AddComponent<Rigidbody>();
@@ -54,6 +57,15 @@ void DomiScene::Init()
 	pGround->SetSize({ (float)SCREEN_WIDTH, 100.f });
 	AddObject(pGround, LAYER::GROUND);
 	pGround->GetComponent<Collider>()->SetSize(pGround->GetSize());
+
+	Object* pBox = new BoxObject;
+	pBox->SetPos({ SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f });
+	pBox->SetSize({ 80.f, 80.f });
+	AddObject(pBox, LAYER::DEFAULT);
+
+	Tilemap* testTilemap = new Tilemap;
+	testTilemap->AddComponent<Collider>();
+	AddObject(testTilemap, LAYER::GROUND);
 
 	CreateMicGuage();
 }
@@ -90,6 +102,7 @@ void DomiScene::CreateMicGuage()
 void DomiScene::Update()
 {
 	Scene::Update();
+	GET_SINGLE(CameraManager)->SetPos({ pPlayer->GetPos().x - (SCREEN_WIDTH / 2.f), 0.0f});
 }
 
 void DomiScene::Render(HDC _hdc)

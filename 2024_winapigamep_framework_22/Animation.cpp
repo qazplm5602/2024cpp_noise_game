@@ -4,6 +4,7 @@
 #include "Object.h"
 #include "Texture.h"
 #include "TimeManager.h"
+#include "CameraManager.h"
 Animation::Animation()
 	: m_pAnimator(nullptr)
 	, m_CurFrame(0)
@@ -44,7 +45,8 @@ void Animation::Update()
 void Animation::Render(HDC _hdc)
 {
 	Object* pObj = m_pAnimator->GetOwner();
-	Vec2 vPos = pObj->GetPos();
+	const Vec2& camPos = GET_CAM;
+	Vec2 vPos = pObj->GetPos() - camPos;
 
 	// 오프셋 적용
 	vPos = vPos + m_vecAnimFrame[m_CurFrame].vOffset;

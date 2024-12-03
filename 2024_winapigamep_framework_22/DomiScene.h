@@ -2,6 +2,7 @@
 #include "Scene.h"
 
 class ProgressBar;
+class Player;
 class DomiScene :
 	public Scene
 {
@@ -15,5 +16,7 @@ class DomiScene :
 private:
 	ProgressBar* m_progreeBar;
 	float m_nowPeek;
+
+	Player* pPlayer;
 };
 

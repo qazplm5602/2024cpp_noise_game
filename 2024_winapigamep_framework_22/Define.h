@@ -13,6 +13,7 @@ public:							\
 
 #define GET_SINGLE(type) type::GetInst()
 #define fDT GET_SINGLE(TimeManager)->GetDT()
+#define GET_CAM GET_SINGLE(CameraManager)->GetPos();
 
 #define KEY_CHECK(key, state) InputManager::GetInst()->GetKey(key) == state
 #define GET_KEYNONE(key) KEY_CHECK(key, KEY_STATE::NONE)

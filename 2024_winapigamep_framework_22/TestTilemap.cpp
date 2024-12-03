@@ -13,4 +13,5 @@ TestTilemap::TestTilemap() {
 	LoadMapLevel(L"Stage1", -1);
 
 	SetPos(GetScreenBottomPos({ 0.0f, 0.5f }));
+	CalculateCollider();
 }

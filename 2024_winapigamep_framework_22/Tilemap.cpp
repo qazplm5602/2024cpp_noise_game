@@ -6,6 +6,8 @@
 #include "Texture.h"
 #include "ResourceManager.h"
 #include "ResourceManager.h"
+#include "Collider.h"
+#include "EventManager.h"
 #include <fstream>
 #include <istream>
 #include <sstream>
@@ -126,4 +128,114 @@ vector<std::string> Tilemap::Split(std::string str, char Delimiter) {
 	}
 
 	return result;
+}
+
+void Tilemap::CalculateCollider()
+{
+	vector<vector<UCHAR>> tiles = m_tiles; // 복사임
+
+	int tileCount = 0;
+
+	// 타일 갯수 세기
+	for (vector<UCHAR>& xTiles : tiles)
+		for (UCHAR& tile : xTiles)
+			if (tile > 0)
+				tileCount++;
+
+
+	Vec2 startPos;
+	Vec2 endPos;
+	bool isDown = false;
+	bool fail = false;
+
+	while (tileCount > 0) {
+		if (tiles[startPos.y][startPos.x] == 0) { // 뭐야 타일이 없노
+			if (FindFirstTilePos(tiles, startPos)) {
+				endPos = startPos;
+				isDown = false;
+			}
+			else break; // 타일이 없는듯ㄱ/???
+		}
+
+		fail = false;
+
+		if (isDown) {
+			endPos.y++;
+		}
+		else {
+			endPos.x++;
+		}
+
+		if (tiles.size() <= endPos.y || tiles[endPos.y].size() <= endPos.x) {
+			// 다시 복귀 ㄱㄱㄱ (넘음 넘음)
+			fail = true;
+		}
+
+		// 0 스파이가 있는지 쳌
+		if (!fail)
+			for (size_t y = startPos.y; y <= endPos.y; y++)
+			{
+				for (size_t x = startPos.x; x <= endPos.x; x++)
+				{
+					if (tiles[y][x] != 0) {
+						fail = true;
+						break;
+					}
+				}
+
+				if (fail) break;
+			}
+
+		// 더 확장~~~
+		if (!fail) {
+			continue;
+		}
+
+		////////////// 여기서 부터는 실패한거임
+		if (!isDown) {
+			isDown = true; // 아직 기회 있음 ㅋㅋ
+			continue;
+		}
+		//else {
+		//	isDown = false;
+		//}
+
+		// 확정 ㄱㄱㄱㄱ
+		
+
+
+		// 된거는 0으로 다 바꿈
+		for (size_t y = startPos.y; y <= endPos.y; y++)
+			for (size_t x = startPos.x; x <= endPos.x; x++)
+				tiles[y][x] = 0;
+
+		tileCount -= (endPos.y - startPos.y) * (endPos.x - startPos.x);
+	}
+
+
+}
+
+void Tilemap::ClearCollder()
+{
+	for (Collider* pCollider : m_pColliders)
+		GET_SINGLE(EventManager)->DeleteObject(pCollider->GetOwner());
+
+	m_pColliders.clear();
+}
+
+bool Tilemap::FindFirstTilePos(vector<vector<UCHAR>>& tiles, Vec2& pos)
+{
+	for (size_t y = 0; y < tiles.size(); y++)
+	{
+		for (size_t x = 0; x < tiles[y].size(); x++)
+		{
+			if (tiles[y][x] > 0) {
+				pos.x = x;
+				pos.y = y;
+				return true;
+			}
+		}
+	}
+
+	return false;
 }

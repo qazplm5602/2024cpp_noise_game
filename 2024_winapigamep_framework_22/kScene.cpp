@@ -40,6 +40,18 @@ void kScene::Init()
 	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
 	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\Retro_brgm.wav", true);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
+
+	Object* pPlayer = new Player;
+	pPlayer->SetPos({ SCREEN_WIDTH / 2.f, 500.f });
+	pPlayer->SetSize({ 100.f, 100.f });
+	pPlayer->AddComponent<Rigidbody>();
+	pPlayer->GetComponent<Collider>()->SetOffSetPos(Vec2(0, 2));
+	AddObject(pPlayer, LAYER::PLAYER);
+
+	// FollowCamera 생성 및 타겟 설정
+	FollowCamera* camera = new FollowCamera();
+	camera->SetTarget(pPlayer);  // 카메라가 플레이어를 타겟으로 설정
+	AddComponent(camera);        // 씬에 카메라 컴포넌트 추가
 }
 
 void kScene::Update()
@@ -48,3 +60,4 @@ void kScene::Update()
 	if (GET_KEYDOWN(KEY_TYPE::ENTER))
 		GET_SINGLE(SceneManager)->LoadScene(L"GameScene");
 }
+

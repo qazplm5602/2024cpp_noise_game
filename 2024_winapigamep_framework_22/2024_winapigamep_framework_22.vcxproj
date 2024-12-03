@@ -178,6 +178,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="EventManager.h" />
+    <ClInclude Include="FollowCamera.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameMath.h" />
     <ClInclude Include="GameScene.h" />
@@ -223,6 +224,7 @@
     <ClCompile Include="DomiScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="FollowCamera.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="ImageRect.cpp" />

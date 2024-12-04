@@ -14,6 +14,7 @@
 #include "Core.h"
 #include "ImageRect.h"
 #include "TextRenderer.h"
+#include "Button.h"
 
 void TitleScene::Init()
 {
@@ -38,17 +39,34 @@ void TitleScene::Init()
 		rLogo->SetSize(Vec2(450, 450));
 		AddObject(rLogo, LAYER::UI);
 
-		RectObject* rStart = new RectObject();
-		rStart->SetAnchor(RectAnchor::Center);
-		rStart->SetPos({ 0.f, 140.f });
-		rStart->SetSize(Vec2(0, 0));
-		TextRenderer* text = rStart->GetOrAddComponent<TextRenderer>();
-		text->SetText(L"Shout to Start!");
-		text->SetAlign(TA_CENTER);
-		text->SetFont(FONT_TYPE::SPOQA_THIN);
-		AddObject(rStart, LAYER::UI);
+		{
+			RectObject* rStart = new RectObject();
+			rStart->SetAnchor(RectAnchor::Center);
+			rStart->SetPos({ 0.f, 140.f });
+			rStart->SetSize(Vec2(0, 0));
+			TextRenderer* text = rStart->GetOrAddComponent<TextRenderer>();
+			text->SetText(L"Shout to Start!");
+			text->SetAlign(TA_CENTER);
+			text->SetFont(FONT_TYPE::SPOQA_THIN);
+			AddObject(rStart, LAYER::UI);
+		}
+
+		{
+			Button* rButton = new Button();
+			rButton->SetAnchor(RectAnchor::Center);
+			rButton->SetPos({ 0.f, 240.f });
+			rButton->SetSize(Vec2(1000.f, 100.f));
+			rButton->Refresh();
+			TextRenderer* text = rButton->GetOrAddComponent<TextRenderer>();
+			text->SetText(L"Setting");
+			text->SetAlign(TA_CENTER);
+			text->SetFont(FONT_TYPE::SPOQA_THIN);
+			AddObject(rButton, LAYER::UI);
+		}
 	}
-	// ============= TitleScene SetUp =============
+	// ============= TitleScene SetUp ============='
+
+
 }
 
 void TitleScene::Update()

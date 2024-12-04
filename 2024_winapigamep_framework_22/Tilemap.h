@@ -24,6 +24,10 @@ public:
 	void SetTileSize(const float& size) {
 		m_tileSize = size;
 	}
+	void SetScreenBottomPos(const Vec2& plus) {
+		SetPos(GetScreenBottomPos(plus));
+	}
+	void LoadMapLevel(const wstring& fileName, const std::unordered_set<UCHAR>* includes = nullptr, const std::unordered_set<UCHAR>* excludes = nullptr);
 
 
 	// 콜라이더 관련
@@ -37,7 +41,6 @@ private:
 protected:
 	// 블럭이 왼쪽 위에서 되기 때무네 왼쪽 아래로 할 수 있는 포지션 구함 ㅅㄱ
 	Vec2 GetScreenBottomPos(const Vec2& plus);
-	void LoadMapLevel(const wstring& fileName, const UCHAR& includeFlag);
 
 private:
 	static vector<std::string> Split(std::string str, char Delimiter);

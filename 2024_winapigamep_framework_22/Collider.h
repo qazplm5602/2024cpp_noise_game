@@ -10,7 +10,7 @@ public:
     void LateUpdate() override;
     void Render(HDC _hdc) override;
 public:
-    void EnterCollision(Collider* _other); // 충돌진입
+    void EnterCollision(Collider* _other); //충돌진입
     void StayCollision(Collider* _other); // 충돌중
     void ExitCollision(Collider* _other); // 충돌해제
     const UINT& GetID() const { return m_ID; }

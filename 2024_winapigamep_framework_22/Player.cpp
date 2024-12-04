@@ -48,7 +48,7 @@ void Player::Update()
 	if (GET_KEYDOWN(KEY_TYPE::SPACE))
 	{
 		//CreateProjectile();
-		//GetComponent<playermoveme
+		GetComponent<Rigidbody>()->AddImpulse({ 0, -1500 });
 	}
 	SetPos(vPos);
 	GetComponent<MicJumpObserver>()->Update();

@@ -20,7 +20,7 @@ Tilemap::Tilemap()
 	: m_palette(nullptr)
 	, m_tileSize(50.0f)
 {
-
+	AddComponent<Collider>();
 	//SetMapSize({40, 10});
 	//for (auto i = 0; i < 10; i++)
 	//{
@@ -55,6 +55,12 @@ void Tilemap::Render(HDC _hdc)
 			pos.x = x + globalPos.x + padding.x;
 			pos.y = y + globalPos.y + padding.y;
 
+			if (pos.x + m_tileSize / 2 < 0 || pos.x - m_tileSize / 2 > SCREEN_WIDTH
+				|| pos.y + m_tileSize / 2 < 0 || pos.y - m_tileSize / 2 > SCREEN_HEIGHT
+			) {
+				continue; // 화면 범위 넘어서 안그려도 됨 ㅅㄱ
+			}
+
 			if (m_tiles[y][x] != 0) { // 타일맵이 있음
 				TileTexData texData = m_palette->GetTileTexutre(m_tiles[y][x]);
 
@@ -87,7 +93,7 @@ Vec2 Tilemap::GetScreenBottomPos(const Vec2& plus)
 	return Vec2(-(plus.x * m_tileSize), -((m_tiles.size() * m_tileSize) - SCREEN_HEIGHT) + (plus.y * m_tileSize));
 }
 
-void Tilemap::LoadMapLevel(const wstring& fileName, const UCHAR& includeFlag)
+void Tilemap::LoadMapLevel(const wstring& fileName, const std::unordered_set<UCHAR>* includes, const std::unordered_set<UCHAR>* excludes)
 {
 	std::ifstream fin;
 
@@ -99,6 +105,8 @@ void Tilemap::LoadMapLevel(const wstring& fileName, const UCHAR& includeFlag)
 
 	std::string line;
 	vector<vector<std::string>> list;
+	bool hasInclude, hasExclude;
+
 	while (!fin.eof())
 	{
 		std::getline(fin, line);
@@ -113,7 +121,10 @@ void Tilemap::LoadMapLevel(const wstring& fileName, const UCHAR& includeFlag)
 		{
 			UCHAR tileType = stoi(list[y][x]);
 
-			if ((includeFlag & tileType) > 0)
+			hasInclude = includes != nullptr && includes->contains(tileType);
+			hasExclude = excludes != nullptr && excludes->contains(tileType);
+
+			if ((includes == nullptr && excludes == nullptr) || (hasInclude) || (includes == nullptr && !hasExclude))
 				SetTile({ x, y }, tileType);
 		}
 	}

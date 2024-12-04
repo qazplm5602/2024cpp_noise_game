@@ -169,6 +169,7 @@
     <ClInclude Include="BaseWindow.h" />
     <ClInclude Include="bbqScene.h" />
     <ClInclude Include="BoxObject.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="ColliderEventObserver.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="Delegate.h" />
     <ClInclude Include="DeviceSettingScene.h" />
     <ClInclude Include="DomiScene.h" />
     <ClInclude Include="Enemy.h" />
@@ -195,6 +197,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerMovement.h" />
     <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="RalScene.h" />
@@ -221,12 +224,14 @@
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="bbqScene.cpp" />
     <ClCompile Include="BoxObject.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="ColliderEventObserver.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Delegate.cpp" />
     <ClCompile Include="DeviceSettingScene.cpp" />
     <ClCompile Include="DomiScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -242,6 +247,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerMovement.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="RalScene.cpp" />

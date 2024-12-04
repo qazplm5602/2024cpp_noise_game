@@ -93,7 +93,7 @@ Vec2 Tilemap::GetScreenBottomPos(const Vec2& plus)
 	return Vec2(-(plus.x * m_tileSize), -((m_tiles.size() * m_tileSize) - SCREEN_HEIGHT) + (plus.y * m_tileSize));
 }
 
-void Tilemap::LoadMapLevel(const wstring& fileName, const UCHAR& includeFlag)
+void Tilemap::LoadMapLevel(const wstring& fileName, const std::unordered_set<UCHAR>* includes, const std::unordered_set<UCHAR>* excludes)
 {
 	std::ifstream fin;
 
@@ -105,6 +105,8 @@ void Tilemap::LoadMapLevel(const wstring& fileName, const UCHAR& includeFlag)
 
 	std::string line;
 	vector<vector<std::string>> list;
+	bool hasInclude, hasExclude;
+
 	while (!fin.eof())
 	{
 		std::getline(fin, line);
@@ -119,7 +121,10 @@ void Tilemap::LoadMapLevel(const wstring& fileName, const UCHAR& includeFlag)
 		{
 			UCHAR tileType = stoi(list[y][x]);
 
-			if ((includeFlag & tileType) > 0)
+			hasInclude = includes != nullptr && includes->contains(tileType);
+			hasExclude = excludes != nullptr && excludes->contains(tileType);
+
+			if ((includes == nullptr && excludes == nullptr) || (hasInclude) || (includes == nullptr && !hasExclude))
 				SetTile({ x, y }, tileType);
 		}
 	}

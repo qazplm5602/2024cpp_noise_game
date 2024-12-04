@@ -71,18 +71,34 @@ void DomiScene::Init()
 	//AddObject(testTilemap, LAYER::GROUND);
 	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::GROUND);
 
+	// ±î½Ã ¸®½ºÆ®
+	UCHAR thornList[] = { 27, 28, 29, 30, 31, 32, 37, 38, 39, 40, 41, 42, 46, 47, 48, 49, 50, 51, 64, 65, 66, 67, 68, 69, 73, 74, 75, 76, 77, 78, 82, 83, 84, 85, 86, 87};
+	for (UCHAR id : thornList)
+		m_thornIds.insert(id);
+
+	// ¹Ù´Ú Å¸ÀÏ¸Ê
 	groundTilemap = new Tilemap;
 	AddObject(groundTilemap, LAYER::GROUND);
 
 	groundTilemap->SetTileSize(42);
-	groundTilemap->LoadMapLevel(L"Stage1", -1);
+	groundTilemap->LoadMapLevel(L"Stage1", nullptr, &m_thornIds);
 	groundTilemap->SetScreenBottomPos({ 0, 2 });
 	groundTilemap->CalculateCollider(LAYER::GROUND);
+
+	// °¡½Ã Å¸ÀÏ¸Ê
+	thornTilemap = new Tilemap;
+	AddObject(thornTilemap, LAYER::GROUND);
+
+	thornTilemap->SetTileSize(42);
+	thornTilemap->LoadMapLevel(L"Stage1", &m_thornIds, nullptr);
+	thornTilemap->SetScreenBottomPos({ 0, 2 });
+	thornTilemap->CalculateCollider(LAYER::GROUND);
 
 	// ÆÈ·¹Æ®
 	Texture* groundTex = GET_SINGLE(ResourceManager)->TextureLoad(L"groundTile", L"Texture\\groundTile.bmp");
 	TilePalette* groundPalette = new TilePalette(groundTex, Vec2{ 64, 64 } / 3.0f);
 	groundTilemap->SetPalette(groundPalette);
+	thornTilemap->SetPalette(groundPalette);
 
 	CreateMicGuage();
 }
@@ -126,9 +142,18 @@ void DomiScene::Update()
 		groundTilemap->SetMapSize({ 0,0 }); // ÀÏ´Ü ´Ù ¾ø¾Þ
 		groundTilemap->ClearCollder(); // ÀÏ´Ü ´Ù ¾ø¾Þ
 
-		groundTilemap->LoadMapLevel(L"Stage1", -1);
+		groundTilemap->LoadMapLevel(L"Stage1", nullptr, &m_thornIds);
 		groundTilemap->SetScreenBottomPos({ 150, 2 });
 		groundTilemap->CalculateCollider(LAYER::GROUND);
+
+
+		///////////////////
+		thornTilemap->SetMapSize({ 0,0 }); // ÀÏ´Ü ´Ù ¾ø¾Þ
+		thornTilemap->ClearCollder(); // ÀÏ´Ü ´Ù ¾ø¾Þ
+
+		thornTilemap->LoadMapLevel(L"Stage1", &m_thornIds, nullptr);
+		thornTilemap->SetScreenBottomPos({ 150, 2 });
+		thornTilemap->CalculateCollider(LAYER::GROUND);
 	}
 }
 

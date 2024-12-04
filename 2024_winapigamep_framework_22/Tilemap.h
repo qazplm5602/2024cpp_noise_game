@@ -27,7 +27,7 @@ public:
 	void SetScreenBottomPos(const Vec2& plus) {
 		SetPos(GetScreenBottomPos(plus));
 	}
-	void LoadMapLevel(const wstring& fileName, const UCHAR& includeFlag);
+	void LoadMapLevel(const wstring& fileName, const std::unordered_set<UCHAR>* includes = nullptr, const std::unordered_set<UCHAR>* excludes = nullptr);
 
 
 	// 콜라이더 관련

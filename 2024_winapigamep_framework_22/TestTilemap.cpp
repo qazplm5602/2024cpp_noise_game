@@ -10,7 +10,7 @@ TestTilemap::TestTilemap() {
 	TilePalette* palette = new TilePalette(GET_SINGLE(ResourceManager)->TextureLoad(L"test-tilemap", L"Texture\\test-tilemap.bmp"), { 64, 64 });
 	SetPalette(palette);
 
-	LoadMapLevel(L"Stage1", -1);
+	LoadMapLevel(L"Stage1", nullptr, nullptr);
 
 	SetPos(GetScreenBottomPos({ 0.0f, 0.5f }));
 	CalculateCollider(LAYER::GROUND);

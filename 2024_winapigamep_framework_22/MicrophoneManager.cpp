@@ -66,12 +66,29 @@ bool MicrophoneManager::SelectDevice(const wstring id)
     }
 
     pCurrentDevice->Activate(__uuidof(IAudioMeterInformation), CLSCTX_ALL, NULL, (void**)&pMeterInfo);
+
+    IAudioClient* pAudioClient;
+    WAVEFORMATEX* pwfx = NULL;
+    pCurrentDevice->Activate(__uuidof(IAudioClient), CLSCTX_ALL, NULL, (void**)&pAudioClient);
+
+    pAudioClient->GetMixFormat(&pwfx);
+    pAudioClient->Initialize(AUDCLNT_SHAREMODE_SHARED, 0, 0, 0, pwfx, NULL);
+
+    pAudioClient->Start();
+
     return true;
 }
 
 void MicrophoneManager::ClearDevice()
 {
     if (pCurrentDevice == nullptr) return;
+
+    IAudioClient* pAudioClient;
+    HRESULT hr = pCurrentDevice->Activate(__uuidof(IAudioClient), CLSCTX_ALL, NULL, (void**)&pAudioClient);
+    if (SUCCEEDED(hr)) { // audio client ºÒ·¯¿ÓÁö·Õ
+        pAudioClient->Stop();
+        pAudioClient->Release();
+    }
 
     pMeterInfo->Release();
     pCurrentDevice->Release();

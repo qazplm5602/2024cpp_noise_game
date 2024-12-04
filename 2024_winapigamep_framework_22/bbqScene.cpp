@@ -115,7 +115,7 @@ void bbqScene::Update()
 
 		}
 		f_lastT += fDT;
-		cout << f_lastT << " " << (f_lastT > 1.f);
+		//cout << f_lastT << " " << (f_lastT > 1.f);
 	}
 	else
 	{
@@ -130,10 +130,14 @@ void bbqScene::Render(HDC _hdc)
 	//Scene::Render();
 	Scene::Render(_hdc);
 
-	/*m_nowPeek = GameMath::Lerp<float>(m_nowPeek, micPeek, 10 * fDT);
+
+	float micPeek;
+	GET_SINGLE(MicrophoneManager)->GetMicPeek(&micPeek);
+
+	m_nowPeek = GameMath::Lerp<float>(m_nowPeek, micPeek, 10 * fDT);
 	m_progreeBar->SetValue(m_nowPeek);
 
-	peakVolume_clamped = max((255 - static_cast<int>(GameMath::Lerp<float>(m_nowPeek, micPeek, 10 * fDT) * 500)), 0);
+	/* peakVolume_clamped = max((255 - static_cast<int>(GameMath::Lerp<float>(m_nowPeek, micPeek, 10 * fDT) * 500)), 0);
 
 	Core* core = GET_SINGLE(Core);
 	::SelectObject(m_hAlphaDC, m_hAlphaBit);

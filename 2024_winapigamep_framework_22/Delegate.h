@@ -16,9 +16,9 @@ public:
 
     // callable은 ()를 붙여 호출할 수 있는 모든 것.
 
-    // std::std::function을 이용해서 구현 됨.
-    // std::std::function은 일반화 된 함수 포인터라고 볼 수 있음
-    // std::std::function는 멤버함수를 받기 힘듬. -> this를 알지 못 함.
+    // std::function을 이용해서 구현 됨.
+    // std::function은 일반화 된 함수 포인터라고 볼 수 있음
+    // std::function는 멤버함수를 받기 힘듬. -> this를 알지 못 함.
 
 
     // Push_back은 만들어져 있는 객체를 넣지만

@@ -212,6 +212,7 @@
     <ClInclude Include="TestTilemap.h" />
     <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="ThornTileMap.h" />
     <ClInclude Include="Tilemap.h" />
     <ClInclude Include="TilePalette.h" />
     <ClInclude Include="TimeManager.h" />
@@ -260,6 +261,7 @@
     <ClCompile Include="TestTilemap.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="ThornTileMap.cpp" />
     <ClCompile Include="Tilemap.cpp" />
     <ClCompile Include="TilePalette.cpp" />
     <ClCompile Include="TimeManager.cpp" />

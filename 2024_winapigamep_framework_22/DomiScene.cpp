@@ -76,7 +76,7 @@ void DomiScene::Init()
 
 	groundTilemap->SetTileSize(42);
 	groundTilemap->LoadMapLevel(L"Stage1", -1);
-	groundTilemap->SetScreenBottomPos({ 0, 0 });
+	groundTilemap->SetScreenBottomPos({ 0, 2 });
 	groundTilemap->CalculateCollider(LAYER::GROUND);
 
 	// ÆÈ·¹Æ®
@@ -127,7 +127,7 @@ void DomiScene::Update()
 		groundTilemap->ClearCollder(); // ÀÏ´Ü ´Ù ¾ø¾Þ
 
 		groundTilemap->LoadMapLevel(L"Stage1", -1);
-		groundTilemap->SetScreenBottomPos({ 0, 0 });
+		groundTilemap->SetScreenBottomPos({ 150, 2 });
 		groundTilemap->CalculateCollider(LAYER::GROUND);
 	}
 }

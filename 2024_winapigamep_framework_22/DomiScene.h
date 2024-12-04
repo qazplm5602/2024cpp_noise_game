@@ -3,6 +3,7 @@
 
 class ProgressBar;
 class Player;
+class Tilemap;
 class DomiScene :
 	public Scene
 {
@@ -18,5 +19,6 @@ private:
 	float m_nowPeek;
 
 	Player* pPlayer;
+	Tilemap* groundTilemap;
 };
 

@@ -16,6 +16,8 @@
 #include "CameraManager.h"
 #include "TestTilemap.h"
 #include "CollisionManager.h"
+#include "ResourceManager.h"
+#include "InputManager.h"
 
 void DomiScene::Init()
 {
@@ -64,10 +66,23 @@ void DomiScene::Init()
 	pBox->SetSize({ 80.f, 80.f });
 	AddObject(pBox, LAYER::DEFAULT);
 
-	Tilemap* testTilemap = new TestTilemap;
-	testTilemap->AddComponent<Collider>();
-	AddObject(testTilemap, LAYER::GROUND);
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::GROUND);
+	//Tilemap* testTilemap = new TestTilemap;
+	//testTilemap->AddComponent<Collider>();
+	//AddObject(testTilemap, LAYER::GROUND);
+	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::GROUND);
+
+	groundTilemap = new Tilemap;
+	AddObject(groundTilemap, LAYER::GROUND);
+
+	groundTilemap->SetTileSize(42);
+	groundTilemap->LoadMapLevel(L"Stage1", -1);
+	groundTilemap->SetScreenBottomPos({ 0, 0 });
+	groundTilemap->CalculateCollider(LAYER::GROUND);
+
+	// 팔레트
+	Texture* groundTex = GET_SINGLE(ResourceManager)->TextureLoad(L"groundTile", L"Texture\\groundTile.bmp");
+	TilePalette* groundPalette = new TilePalette(groundTex, Vec2{ 64, 64 } / 3.0f);
+	groundTilemap->SetPalette(groundPalette);
 
 	CreateMicGuage();
 }
@@ -105,6 +120,16 @@ void DomiScene::Update()
 {
 	Scene::Update();
 	GET_SINGLE(CameraManager)->SetPos({ pPlayer->GetPos().x - (SCREEN_WIDTH / 2.f), 0.0f});
+
+	// 테스트임
+	if (GET_KEYDOWN(KEY_TYPE::R)) {
+		groundTilemap->SetMapSize({ 0,0 }); // 일단 다 없앵
+		groundTilemap->ClearCollder(); // 일단 다 없앵
+
+		groundTilemap->LoadMapLevel(L"Stage1", -1);
+		groundTilemap->SetScreenBottomPos({ 0, 0 });
+		groundTilemap->CalculateCollider(LAYER::GROUND);
+	}
 }
 
 void DomiScene::Render(HDC _hdc)

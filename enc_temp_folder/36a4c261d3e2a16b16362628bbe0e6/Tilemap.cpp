@@ -152,7 +152,7 @@ void Tilemap::CalculateCollider(LAYER layer)
 	bool fail = false;
 
 	while (tileCount > 0) {
-		if (tiles[startPos.y][startPos.x] == 0) { // 뭐야 타일이 없노
+		if (tiles[startPos.y][startPos.x] <= 0) { // 뭐야 타일이 없노
 			if (FindFirstTilePos(tiles, startPos)) {
 				endPos = startPos;
 				isDown = false;
@@ -180,7 +180,7 @@ void Tilemap::CalculateCollider(LAYER layer)
 			{
 				for (size_t x = startPos.x; x <= endPos.x; x++)
 				{
-					if (tiles[y][x] == 0) {
+					if (tiles[y][x] <= 0) {
 						fail = true;
 						break;
 					}

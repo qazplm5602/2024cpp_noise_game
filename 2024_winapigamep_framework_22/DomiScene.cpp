@@ -15,6 +15,7 @@
 #include "BoxObject.h"
 #include "CameraManager.h"
 #include "TestTilemap.h"
+#include "CollisionManager.h"
 
 void DomiScene::Init()
 {
@@ -66,6 +67,7 @@ void DomiScene::Init()
 	Tilemap* testTilemap = new TestTilemap;
 	testTilemap->AddComponent<Collider>();
 	AddObject(testTilemap, LAYER::GROUND);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::GROUND);
 
 	CreateMicGuage();
 }

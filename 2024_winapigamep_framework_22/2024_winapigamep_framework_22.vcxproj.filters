@@ -171,6 +171,7 @@
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="TestTilemap.h" />
+    <ClInclude Include="ColliderEventObserver.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -298,5 +299,6 @@
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="TestTilemap.cpp" />
+    <ClCompile Include="ColliderEventObserver.cpp" />
   </ItemGroup>
 </Project>

@@ -8,6 +8,10 @@
 #include "ResourceManager.h"
 #include "Collider.h"
 #include "EventManager.h"
+#include "ColliderEventObserver.h"
+#include "Collider.h"
+#include "SceneManager.h"
+#include "Scene.h"
 #include <fstream>
 #include <istream>
 #include <sstream>
@@ -66,11 +70,9 @@ void Tilemap::Render(HDC _hdc)
 				);
 			}
 
-
-
-			wstring text = std::to_wstring(x) + L", " + std::to_wstring(y);
-			SetTextAlign(_hdc, TA_CENTER);
-			TextOut(_hdc, x + globalPos.x + padding.x, y + globalPos.y + padding.y, text.c_str(), text.size());
+			//wstring text = std::to_wstring(x) + L", " + std::to_wstring(y);
+			//SetTextAlign(_hdc, TA_CENTER);
+			//TextOut(_hdc, x + globalPos.x + padding.x, y + globalPos.y + padding.y, text.c_str(), text.size());
 		}
 	}
 }
@@ -130,7 +132,7 @@ vector<std::string> Tilemap::Split(std::string str, char Delimiter) {
 	return result;
 }
 
-void Tilemap::CalculateCollider()
+void Tilemap::CalculateCollider(LAYER layer)
 {
 	vector<vector<UCHAR>> tiles = m_tiles; // 복사임
 
@@ -142,6 +144,7 @@ void Tilemap::CalculateCollider()
 			if (tile > 0)
 				tileCount++;
 
+	Vec2 tileMapPos = GetPos();
 
 	Vec2 startPos;
 	Vec2 endPos;
@@ -177,7 +180,7 @@ void Tilemap::CalculateCollider()
 			{
 				for (size_t x = startPos.x; x <= endPos.x; x++)
 				{
-					if (tiles[y][x] != 0) {
+					if (tiles[y][x] == 0) {
 						fail = true;
 						break;
 					}
@@ -193,32 +196,39 @@ void Tilemap::CalculateCollider()
 
 		////////////// 여기서 부터는 실패한거임
 		if (!isDown) {
+			endPos.x--;
 			isDown = true; // 아직 기회 있음 ㅋㅋ
 			continue;
 		}
+		else endPos.y--;
 		//else {
 		//	isDown = false;
 		//}
 
 		// 확정 ㄱㄱㄱㄱ
-		
+		ColliderEventObserver* observer = new ColliderEventObserver(this);
+		observer->GetComponent<Collider>()->SetSize({ (endPos.x - startPos.x + 1) * m_tileSize , (endPos.y - startPos.y + 1) * m_tileSize });
+		observer->SetPos((((startPos * m_tileSize) + (endPos * m_tileSize)) / 2.0f) + tileMapPos);
+		//observer->GetComponent<Collider>()->SetSize({ 10, 10 });
+		//observer->SetSize({ 10, 10 });
+		//observer->SetPos(startPos * m_tileSize);
+		GET_SINGLE(SceneManager)->GetCurrentScene()->AddObject(observer, layer);
 
+		m_pColliders.push_back(observer);
 
 		// 된거는 0으로 다 바꿈
 		for (size_t y = startPos.y; y <= endPos.y; y++)
 			for (size_t x = startPos.x; x <= endPos.x; x++)
 				tiles[y][x] = 0;
 
-		tileCount -= (endPos.y - startPos.y) * (endPos.x - startPos.x);
+		tileCount -= (endPos.y - startPos.y + 1) * (endPos.x - startPos.x + 1);
 	}
-
-
 }
 
 void Tilemap::ClearCollder()
 {
-	for (Collider* pCollider : m_pColliders)
-		GET_SINGLE(EventManager)->DeleteObject(pCollider->GetOwner());
+	for (ColliderEventObserver* pObserver : m_pColliders)
+		GET_SINGLE(EventManager)->DeleteObject(pObserver);
 
 	m_pColliders.clear();
 }

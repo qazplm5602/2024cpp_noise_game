@@ -171,6 +171,7 @@
     <ClInclude Include="BoxObject.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="ColliderEventObserver.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
@@ -222,6 +223,7 @@
     <ClCompile Include="BoxObject.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="ColliderEventObserver.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />

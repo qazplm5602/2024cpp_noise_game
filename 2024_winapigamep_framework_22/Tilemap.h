@@ -2,7 +2,7 @@
 #include "Object.h"
 #include "TilePalette.h"
 
-class Collider;
+class ColliderEventObserver;
 class Tilemap : public Object
 {
 public:
@@ -28,7 +28,7 @@ public:
 
 	// 콜라이더 관련
 public:
-	void CalculateCollider();
+	void CalculateCollider(LAYER layer);
 	void ClearCollder();
 private:
 	bool FindFirstTilePos(vector<vector<UCHAR>>& tiles, Vec2& pos);
@@ -45,7 +45,7 @@ private:
 private:
 	TilePalette* m_palette;
 	vector<vector<UCHAR>> m_tiles;
-	vector<Collider*> m_pColliders;
+	vector<ColliderEventObserver*> m_pColliders;
 	
 	float m_tileSize; // 타일 하나 사이즈임
 };

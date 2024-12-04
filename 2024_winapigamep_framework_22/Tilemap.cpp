@@ -55,6 +55,12 @@ void Tilemap::Render(HDC _hdc)
 			pos.x = x + globalPos.x + padding.x;
 			pos.y = y + globalPos.y + padding.y;
 
+			if (pos.x + m_tileSize / 2 < 0 || pos.x - m_tileSize / 2 > SCREEN_WIDTH
+				|| pos.y + m_tileSize / 2 < 0 || pos.y - m_tileSize / 2 > SCREEN_HEIGHT
+			) {
+				continue; // 화면 범위 넘어서 안그려도 됨 ㅅㄱ
+			}
+
 			if (m_tiles[y][x] != 0) { // 타일맵이 있음
 				TileTexData texData = m_palette->GetTileTexutre(m_tiles[y][x]);
 

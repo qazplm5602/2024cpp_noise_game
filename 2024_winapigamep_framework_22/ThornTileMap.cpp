@@ -24,6 +24,7 @@ void ThornTileMap::EnterCollision(Collider* _other) {
         Vec2 incidentVec = playerPos - tileCenterPos;
 
         // 벡터 정규화
+            std::cout << "벡터 정규화";
         float magnitude = std::sqrt(incidentVec.x * incidentVec.x + incidentVec.y * incidentVec.y);
         if (magnitude != 0) {
             incidentVec.x /= magnitude;
@@ -31,17 +32,18 @@ void ThornTileMap::EnterCollision(Collider* _other) {
         }
 
         // 표면 법선 벡터 설정 (여기서는 예시로 위쪽 타일 면)
-        Vec2 normalVec = { 0.0f, -1.0f }; // 표면 방향에 따라 조정 가능
+        Vec2 normalVec = { 0.0f, 1.0f }; // 표면 방향에 따라 조정 가능
 
         // 반사 벡터 계산
         float dotProduct = incidentVec.x * normalVec.x + incidentVec.y * normalVec.y;
         Vec2 reflectionVec = {
-            incidentVec.x - 2 * dotProduct * normalVec.x,
-            incidentVec.y - 2 * dotProduct * normalVec.y
+            -(incidentVec.x - 2 * dotProduct * normalVec.x),
+            -(incidentVec.y - 2 * dotProduct * normalVec.y)
+            
         };
 
         // 반사 방향으로 플레이어를 날리기 위한 거리
-        float knockbackDistance = 50.0f; // 반사 후 이동할 거리
+        float knockbackDistance = 200.0f; // 반사 후 이동할 거리
         Vec2 knockbackPos = playerPos + reflectionVec * knockbackDistance;
 
         // 플레이어 위치 업데이트

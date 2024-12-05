@@ -11,6 +11,7 @@ class DomiScene : public Scene
 	void CreateMicGuage();
 	void CreateTilemaps();
 	void CreateMoveMetal();
+	void CreateBackground();
 
 	virtual void Update() override;
 	virtual void Render(HDC _hdc) override;

@@ -21,6 +21,7 @@
 #include "MoveMetal.h"
 #include "MoveThorn.h"
 #include "ThornTileMap.h"
+#include "ImageLoop.h"
 
 void DomiScene::Init()
 {
@@ -71,6 +72,8 @@ void DomiScene::Init()
 	CreateMicGuage();
 	CreateTilemaps();
 	CreateMoveMetal();
+	CreateBackground();
+
 
 	//Tilemap* testTilemap = new TestTilemap;
 	//testTilemap->AddComponent<Collider>();
@@ -180,6 +183,32 @@ void DomiScene::CreateMoveMetal()
 			moveThorn->SetMoveRange(100);
 			moveThorn->SetDelay(delay);
 		}
+	}
+}
+
+void DomiScene::CreateBackground()
+{
+	vector<std::pair<wstring, float>> list = {
+		//{L"background-1", 0.1f},
+		{L"background-moon-2", 0.2f},
+		{L"background-cloud-3", 0.3f},
+		{L"background-cloud-4", 0.3f},
+		{L"background-cloud-5", 0.4f}
+	};
+
+	for (auto v : list) {
+		wstring path = L"Texture\\";
+		path += v.first;
+		path += L".bmp";
+		
+		Texture* tex = GET_SINGLE(ResourceManager)->TextureLoad(v.first, path);
+		ImageLoop* imageLoop = new ImageLoop();
+		AddObject(imageLoop, LAYER::BACKGROUND);
+
+		imageLoop->SetSize({ SCREEN_WIDTH, SCREEN_HEIGHT });
+		imageLoop->SetPos({ SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f });
+		imageLoop->SetTexture(tex);
+		imageLoop->SetDuration(v.second);
 	}
 }
 

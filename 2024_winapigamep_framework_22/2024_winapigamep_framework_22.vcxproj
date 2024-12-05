@@ -193,6 +193,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MicJumpObserver.h" />
     <ClInclude Include="MicrophoneManager.h" />
+    <ClInclude Include="MoveMetal.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PhysicsManager.h" />
@@ -244,6 +245,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MicJumpObserver.cpp" />
     <ClCompile Include="MicrophoneManager.cpp" />
+    <ClCompile Include="MoveMetal.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="Player.cpp" />

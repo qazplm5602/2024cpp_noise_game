@@ -28,7 +28,9 @@ public:
 		SetPos(GetScreenBottomPos(plus));
 	}
 	void LoadMapLevel(const wstring& fileName, const std::unordered_set<UCHAR>* includes = nullptr, const std::unordered_set<UCHAR>* excludes = nullptr);
-
+	vector<ColliderEventObserver*>& GetColliders() {
+		return m_pColliders;
+	}
 
 	// 콜라이더 관련
 public:

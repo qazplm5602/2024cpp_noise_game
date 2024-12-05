@@ -20,7 +20,7 @@ private:
 
 	byte m_zIndex;
 
-private:
+protected:
 	virtual void Update() override;
 	virtual void Render(HDC _hdc) override;
 

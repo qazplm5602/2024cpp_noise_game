@@ -21,17 +21,18 @@ Rigidbody::~Rigidbody()
 
 void Rigidbody::LateUpdate()
 {
-    float fixedTimeStep = 1.0f / 60.0f; // 60 updates per second
-    accumulatedTime += fDT;
-    while (accumulatedTime >= fixedTimeStep)
-    {
-        LateFixedUpdate(fixedTimeStep);
-        accumulatedTime -= fixedTimeStep;
-    }
+    Simulate(fDT);
+    //float fixedTimeStep = 1.0f / 60.0f; // 60 updates per second
+    //accumulatedTime += fDT;
+    //while (accumulatedTime >= fixedTimeStep)
+    //{
+    //    LateFixedUpdate(fixedTimeStep);
+    //    accumulatedTime -= fixedTimeStep;
+    //}
 }
 
 
-void Rigidbody::LateFixedUpdate(float fixedTimeStep)
+void Rigidbody::Simulate(float fixedTimeStep)
 {
     if (m_bIsKinematic) return;
 
@@ -52,7 +53,7 @@ void Rigidbody::LateFixedUpdate(float fixedTimeStep)
         Owner->SetPos(currPos + Vec2(0.f, 0.f) * (hit.distance - Owner->GetComponent<Collider>()->GetSize().y / 2));
     }
 
-    ApplyForce();
+    ApplyForce(fixedTimeStep);
     Owner->SetPos(currPos + m_vVelocity * fixedTimeStep);
 
 
@@ -136,11 +137,11 @@ void Rigidbody::AddImpulse(Vec2 force)
     m_vImpulse += force;
 }
 
-void Rigidbody::ApplyForce()
+void Rigidbody::ApplyForce(float dt)
 {
     if (m_fMass <= 0) return;
 
-    m_vVelocity += m_vForce * (1.0f / 60.0f) / m_fMass;
+    m_vVelocity += m_vForce * dt / m_fMass;
     m_vForce = Vec2(0, 0);
 
     m_vVelocity += m_vImpulse / m_fMass;

@@ -11,7 +11,7 @@ public:
 public:
     void LateUpdate() override;
     void Render(HDC _hdc) override;
-    void LateFixedUpdate(float fixedTimeStep);
+    void Simulate(float fixedTimeStep);
 public:
     // Gravity ฐüทร
     void SetGravityScale(float fGravity) { m_fGravity = fGravity; }
@@ -46,7 +46,7 @@ public:
     void AddImpulse(Vec2 force);
 
 private:
-    void ApplyForce();
+    void ApplyForce(float dt);
 
 private:
     // Variables //

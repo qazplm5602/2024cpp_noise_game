@@ -37,17 +37,19 @@ void TextRenderer::Render(HDC _hdc)
 
 	int x = rect.left, y = rect.top;
 
-	if (m_align & TA_CENTER) {
+	if (m_align == TA_CENTER) {
 		x = (rect.left + rect.right) / 2.0f;
 	}
-	if (m_align & TA_RIGHT) {
-		x = rect.right;
-	}
-	if (m_align & TA_BOTTOM) {
-		y = rect.bottom;
-	}
-	if (m_align & TA_LEFT) {
-		x = rect.left;
+	else {
+		if (m_align & TA_RIGHT) {
+			x = rect.right;
+		}
+		if (m_align & TA_BOTTOM) {
+			y = rect.bottom;
+		}
+		if (m_align & TA_LEFT) {
+			x = rect.left;
+		}
 	}
 
 

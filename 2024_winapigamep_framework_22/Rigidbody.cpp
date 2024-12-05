@@ -21,6 +21,18 @@ Rigidbody::~Rigidbody()
 
 void Rigidbody::LateUpdate()
 {
+    float fixedTimeStep = 1.0f / 60.0f; // 60 updates per second
+    accumulatedTime += fDT;
+    while (accumulatedTime >= fixedTimeStep)
+    {
+        LateFixedUpdate(fixedTimeStep);
+        accumulatedTime -= fixedTimeStep;
+    }
+}
+
+
+void Rigidbody::LateFixedUpdate(float fixedTimeStep)
+{
     if (m_bIsKinematic) return;
 
     Object* Owner = GetOwner();
@@ -31,7 +43,7 @@ void Rigidbody::LateUpdate()
 
     if (m_bUseGravity && !IsGrounded())
     {
-        AddForce(Vec2(0.f, 100 * m_fGravity * m_fMass));
+        AddForce(Vec2(0.f, 100.f * m_fGravity * m_fMass));
     }
 
     if (IsGrounded())
@@ -41,8 +53,10 @@ void Rigidbody::LateUpdate()
     }
 
     ApplyForce();
-    Owner->SetPos(currPos + m_vVelocity * fDT);
+    Owner->SetPos(currPos + m_vVelocity * fixedTimeStep);
 
+
+    cout << m_vVelocity.y << endl;
     PreventOverlapMove(Owner, LAYER::GROUND);
 }
 
@@ -126,7 +140,7 @@ void Rigidbody::ApplyForce()
 {
     if (m_fMass <= 0) return;
 
-    m_vVelocity += m_vForce * fDT / m_fMass;
+    m_vVelocity += m_vForce * (1.0f / 60.0f) / m_fMass;
     m_vForce = Vec2(0, 0);
 
     m_vVelocity += m_vImpulse / m_fMass;

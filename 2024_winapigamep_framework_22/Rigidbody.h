@@ -1,5 +1,8 @@
 #pragma once
 #include "Component.h"
+
+
+
 class Rigidbody : public Component
 {
 public:
@@ -8,6 +11,7 @@ public:
 public:
     void LateUpdate() override;
     void Render(HDC _hdc) override;
+    void LateFixedUpdate(float fixedTimeStep);
 public:
     // Gravity ฐüทร
     void SetGravityScale(float fGravity) { m_fGravity = fGravity; }
@@ -46,6 +50,8 @@ private:
 
 private:
     // Variables //
+    float accumulatedTime;
+
     float m_fGravity;
     float m_fMass;
     float m_fDrag;

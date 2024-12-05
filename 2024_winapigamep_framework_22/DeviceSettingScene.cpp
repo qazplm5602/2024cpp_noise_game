@@ -9,6 +9,7 @@
 #include "InputManager.h"
 #include "GameMath.h"
 #include "TimeManager.h"
+#include "SceneManager.h"
 
 DeviceSettingScene::DeviceSettingScene()
 	: m_deviceText(nullptr)
@@ -150,10 +151,12 @@ void DeviceSettingScene::Update()
 		}
 
 		// 그냥 다른 씬으로 이동
+		GET_SINGLE(SceneManager)->LoadScene(L"TitleScene");
 	}
 
 	if (GET_KEYDOWN(KEY_TYPE::ENTER) && GET_SINGLE(MicrophoneManager)->IsConnected()) {
 		// 그냥 다른 씬으로 이동
+		GET_SINGLE(SceneManager)->LoadScene(L"TitleScene");
 	}
 }
 

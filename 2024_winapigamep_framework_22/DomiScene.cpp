@@ -75,7 +75,7 @@ void DomiScene::Init()
 	//Tilemap* testTilemap = new TestTilemap;
 	//testTilemap->AddComponent<Collider>();
 	//AddObject(testTilemap, LAYER::GROUND);
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::GROUND);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
 }
 
 
@@ -130,7 +130,7 @@ void DomiScene::CreateTilemaps()
 	thornTilemap->SetTileSize(42);
 	thornTilemap->LoadMapLevel(L"Stage1", &m_thornIds, nullptr);
 	thornTilemap->SetScreenBottomPos({ 0, 2 });
-	thornTilemap->CalculateCollider(LAYER::GROUND);
+	thornTilemap->CalculateCollider(LAYER::ENEMY);
 
 	// �ȷ�Ʈ
 	Texture* groundTex = GET_SINGLE(ResourceManager)->TextureLoad(L"groundTile", L"Texture\\groundTile.bmp");

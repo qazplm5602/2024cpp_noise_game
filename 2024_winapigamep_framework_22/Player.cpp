@@ -31,6 +31,8 @@ Player::Player()
 	AddComponent<MicJumpObserver>();
 	AddComponent<Rigidbody>();
 	AddComponent<PlayerMovement>();
+
+	SetCheckPoint({ 0, 0 });
 }
 Player::~Player()
 {
@@ -53,6 +55,11 @@ void Player::Update()
 	SetPos(vPos);
 	GetComponent<MicJumpObserver>()->Update();
 	GetComponent<PlayerMovement>()->HandleJump();
+
+	if (vPos.y > SCREEN_WIDTH + 1000.f)
+	{
+		GoCheckPoint();
+	}
 }
 
 void Player::Render(HDC _hdc)
@@ -90,6 +97,17 @@ void Player::OnMicJump(const float& power)
 	{
 		//rb->AddImpulse(Vec2(0.f, power * -900.0f));
 	}
+}
+
+void Player::SetCheckPoint(Vec2 pos)
+{
+	v_checkPoint = pos;
+}
+
+void Player::GoCheckPoint()
+{
+	GetOrAddComponent<Rigidbody>()->SetVelocity(Vec2(0,0));
+	SetPos(v_checkPoint);
 }
 
 void Player::CreateProjectile()

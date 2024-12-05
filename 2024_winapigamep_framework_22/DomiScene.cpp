@@ -51,22 +51,21 @@ void DomiScene::Init()
 	//AddObject(testRect2, LAYER::UI);
 
 	pPlayer = new Player;
-	pPlayer->SetPos({ SCREEN_WIDTH / 2.f,500.f });
+	pPlayer->SetPos({ 0.0f ,500.f });
 	pPlayer->SetSize({ 100.f,100.f });
-	pPlayer->AddComponent<Rigidbody>();
 	pPlayer->GetComponent<Collider>()->SetOffSetPos(Vec2(0, 2));
 	AddObject(pPlayer, LAYER::PLAYER);
 
-	Object* pGround = new Enemy;
-	pGround->SetPos({ SCREEN_WIDTH / 2.f,700.f });
-	pGround->SetSize({ (float)SCREEN_WIDTH, 100.f });
-	AddObject(pGround, LAYER::GROUND);
-	pGround->GetComponent<Collider>()->SetSize(pGround->GetSize());
+	//Object* pGround = new Enemy;
+	//pGround->SetPos({ SCREEN_WIDTH / 2.f,700.f });
+	//pGround->SetSize({ (float)SCREEN_WIDTH, 100.f });
+	//AddObject(pGround, LAYER::GROUND);
+	//pGround->GetComponent<Collider>()->SetSize(pGround->GetSize());
 
-	Object* pBox = new BoxObject;
-	pBox->SetPos({ SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f });
-	pBox->SetSize({ 80.f, 80.f });
-	AddObject(pBox, LAYER::DEFAULT);
+	//Object* pBox = new BoxObject;
+	//pBox->SetPos({ SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f });
+	//pBox->SetSize({ 80.f, 80.f });
+	//AddObject(pBox, LAYER::DEFAULT);
 
 	CreateMicGuage();
 	CreateTilemaps();
@@ -190,7 +189,7 @@ void DomiScene::Update()
 
 	// 테스트임
 	if (GET_KEYDOWN(KEY_TYPE::R)) {
-		pPlayer->SetPos({ 5000, 0 });
+		//pPlayer->SetPos({ 5000, 0 });
 
 		groundTilemap->SetMapSize({ 0,0 }); // 일단 다 없앵
 		groundTilemap->ClearCollder(); // 일단 다 없앵

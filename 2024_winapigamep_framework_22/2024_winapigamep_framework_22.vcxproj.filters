@@ -38,6 +38,9 @@
     <Filter Include="Engine\03. Object\UI">
       <UniqueIdentifier>{f197e7a7-8be2-41af-8a9b-6a7835d0718a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\TileMaps">
+      <UniqueIdentifier>{9f3dd9c8-8259-4ec1-b251-49f2a831b5f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2024_winapigamep_framework_22.h">
@@ -170,12 +173,19 @@
     <ClInclude Include="Tilemap.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="TestTilemap.h" />
     <ClInclude Include="ColliderEventObserver.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="PlayerMovement.h" />
-    <ClInclude Include="MoveMetal.h" />
+    <ClInclude Include="TestTilemap.h">
+      <Filter>Engine\03. Object\TileMaps</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveMetal.h">
+      <Filter>Engine\03. Object\TileMaps</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveThorn.h">
+      <Filter>Engine\03. Object\TileMaps</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -302,11 +312,18 @@
     <ClCompile Include="Tilemap.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="TestTilemap.cpp" />
     <ClCompile Include="ColliderEventObserver.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Delegate.cpp" />
     <ClCompile Include="PlayerMovement.cpp" />
-    <ClCompile Include="MoveMetal.cpp" />
+    <ClCompile Include="TestTilemap.cpp">
+      <Filter>Engine\03. Object\TileMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveMetal.cpp">
+      <Filter>Engine\03. Object\TileMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveThorn.cpp">
+      <Filter>Engine\03. Object\TileMaps</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

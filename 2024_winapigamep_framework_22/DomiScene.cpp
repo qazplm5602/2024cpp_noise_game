@@ -19,6 +19,7 @@
 #include "ResourceManager.h"
 #include "InputManager.h"
 #include "MoveMetal.h"
+#include "MoveThorn.h"
 
 void DomiScene::Init()
 {
@@ -141,21 +142,39 @@ void DomiScene::CreateTilemaps()
 void DomiScene::CreateMoveMetal()
 {
 	Vec2 metals[] = {
-		{100, 100},
-		{500, 100},
+		{5400, 150},
+		{5200, 350},
+		{6000, 350},
 	};
+	bool spawnThorn[] = {
+		false,
+		false,
+		true
+	};
+	float delay;
 
 	srand((unsigned int)clock());
 
-	for (Vec2& pos : metals)
+	for (size_t i = 0; i < sizeof(metals) / sizeof(Vec2); i++)
 	{
+		delay = (rand() % 200) / 100.0f;
+
 		// 움직이는 철
 		MoveMetal* metalBlock = new MoveMetal;
 		AddObject(metalBlock, LAYER::GROUND);
 
-		metalBlock->SetPos(pos);
+		metalBlock->SetPos(metals[i]);
 		metalBlock->SetMoveRange(100);
-		metalBlock->SetDelay((rand() % 100) / 100.0f);
+		metalBlock->SetDelay(delay);
+
+		if (spawnThorn[i]) {
+			MoveThorn* moveThorn = new MoveThorn;
+			AddObject(moveThorn, LAYER::GROUND);
+
+			moveThorn->SetPos(metals[i] - Vec2(0.0f, metalBlock->GetTileSize() * 1));
+			moveThorn->SetMoveRange(100);
+			moveThorn->SetDelay(delay);
+		}
 	}
 }
 
@@ -166,6 +185,8 @@ void DomiScene::Update()
 
 	// 테스트임
 	if (GET_KEYDOWN(KEY_TYPE::R)) {
+		pPlayer->SetPos({ 5000, 0 });
+
 		groundTilemap->SetMapSize({ 0,0 }); // 일단 다 없앵
 		groundTilemap->ClearCollder(); // 일단 다 없앵
 

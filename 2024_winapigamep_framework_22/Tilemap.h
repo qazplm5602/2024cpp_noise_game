@@ -24,6 +24,9 @@ public:
 	void SetTileSize(const float& size) {
 		m_tileSize = size;
 	}
+	const float& GetTileSize() {
+		return m_tileSize;
+	}
 	void SetScreenBottomPos(const Vec2& plus) {
 		SetPos(GetScreenBottomPos(plus));
 	}

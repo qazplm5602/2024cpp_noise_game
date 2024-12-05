@@ -68,6 +68,15 @@ void TitleScene::Init()
 				GET_SINGLE(SceneManager)->LoadScene(L"DeviceSettingScene");
 				});
 
+			bSetting->OnHover.Add([text]()
+				{
+					text->SetSize(32);
+				});
+			bSetting->ExitHover.Add([text]()
+				{
+					text->SetSize(28);
+				});
+
 			Button* bExit = new Button();
 			bExit->SetAnchor(RectAnchor::Center);
 			bExit->SetPos({ 0.f, 250.f });
@@ -80,11 +89,22 @@ void TitleScene::Init()
 				text->SetAlign(TA_CENTER);
 				text->SetFont(FONT_TYPE::SPOQA_THIN);
 				AddObject(bExit, LAYER::UI);
+				bExit->OnHover.Add([text]()
+					{
+						text->SetSize(32);
+					});
+				bExit->ExitHover.Add([text]()
+					{
+						text->SetSize(28);
+					});
 			}
 
 			bExit->OnClick.Add([]() {
-				
+				DestroyWindow(GET_SINGLE(Core)->GetHwnd());
 				});
+
+			
+
 		}
 	}
 	// ============= TitleScene SetUp ============='

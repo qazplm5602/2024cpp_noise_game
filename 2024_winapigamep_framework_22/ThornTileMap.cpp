@@ -6,7 +6,7 @@
 
 ThornTileMap::ThornTileMap() {
     // 생성자
-    
+
 }
 
 ThornTileMap::~ThornTileMap() {
@@ -15,7 +15,7 @@ ThornTileMap::~ThornTileMap() {
 
 void ThornTileMap::EnterCollision(Collider* _other) {
     // 충돌한 객체가 플레이어인지 확인
-    if (_other->GetOwner()-> GetName() == L"Player") { // GetName 사용
+  
         // 플레이어와 타일 중심의 위치를 계산
         Vec2 playerPos = _other->GetOwner()->GetPos();   // 플레이어 위치
         Vec2 tileCenterPos = this->GetPos(); // 타일 중심 위치
@@ -47,6 +47,4 @@ void ThornTileMap::EnterCollision(Collider* _other) {
         // 플레이어 위치 업데이트
         _other->GetOwner()->SetPos(knockbackPos);
 
-        // 추가적인 효과나 이벤트 처리 가능
-    }
 }

@@ -20,6 +20,7 @@
 #include "InputManager.h"
 #include "MoveMetal.h"
 #include "MoveThorn.h"
+#include "ThornTileMap.h"
 
 void DomiScene::Init()
 {
@@ -44,7 +45,7 @@ void DomiScene::Init()
 	//TextRenderer* textRender = testRect2->GetComponent<TextRenderer>();
 	//textRender->SetFont(FONT_TYPE::SPOQA_MEDIUM);
 	//textRender->SetSize(100);
-	//textRender->SetText(L"Å×½ºÆ® ¤±¤¤¤·¤©");
+	//textRender->SetText(L"ï¿½×½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 	//textRender->SetColor(RGB(0,0,0));
 	//textRender->SetAlign(TA_BOTTOM);
 
@@ -92,7 +93,7 @@ void DomiScene::CreateMicGuage()
 	ImageRenderer* imageRender = micIcon->GetComponent<ImageRenderer>();
 	imageRender->SetTexture(L"mic-icon", L"Texture\\mic-icon.bmp");
 
-	// ¹Ù
+	// ï¿½ï¿½
 	m_progreeBar = new ProgressBar();
 	AddObject(m_progreeBar, LAYER::UI);
 
@@ -101,19 +102,19 @@ void DomiScene::CreateMicGuage()
 	m_progreeBar->SetAnchor(RectAnchor::CenterBottom);
 	m_progreeBar->SetValue(0.0f);
 
-	// ¸¶ÀÌÅ© ¼³Á¤
+	// ï¿½ï¿½ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½
 	wstring micDeviceId = GET_SINGLE(MicrophoneManager)->GetDefaultDeviceId();
 	GET_SINGLE(MicrophoneManager)->SelectDevice(micDeviceId);
 }
 
 void DomiScene::CreateTilemaps()
 {
-	// ±î½Ã ¸®½ºÆ®
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	UCHAR thornList[] = { 27, 28, 29, 30, 31, 32, 37, 38, 39, 40, 41, 42, 46, 47, 48, 49, 50, 51, 64, 65, 66, 67, 68, 69, 73, 74, 75, 76, 77, 78, 82, 83, 84, 85, 86, 87 };
 	for (UCHAR id : thornList)
 		m_thornIds.insert(id);
 
-	// ¹Ù´Ú Å¸ÀÏ¸Ê
+	// ï¿½Ù´ï¿½ Å¸ï¿½Ï¸ï¿½
 	groundTilemap = new Tilemap;
 	AddObject(groundTilemap, LAYER::GROUND);
 
@@ -122,8 +123,8 @@ void DomiScene::CreateTilemaps()
 	groundTilemap->SetScreenBottomPos({ 0, 2 });
 	groundTilemap->CalculateCollider(LAYER::GROUND);
 
-	// °¡½Ã Å¸ÀÏ¸Ê
-	thornTilemap = new Tilemap;
+	// ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ï¸ï¿½
+	thornTilemap = new ThornTileMap;
 	AddObject(thornTilemap, LAYER::GROUND);
 
 	thornTilemap->SetTileSize(42);
@@ -131,7 +132,7 @@ void DomiScene::CreateTilemaps()
 	thornTilemap->SetScreenBottomPos({ 0, 2 });
 	thornTilemap->CalculateCollider(LAYER::GROUND);
 
-	// ÆÈ·¹Æ®
+	// ï¿½È·ï¿½Æ®
 	Texture* groundTex = GET_SINGLE(ResourceManager)->TextureLoad(L"groundTile", L"Texture\\groundTile.bmp");
 	TilePalette* groundPalette = new TilePalette(groundTex, Vec2{ 64, 64 } / 3.0f);
 	groundTilemap->SetPalette(groundPalette);
@@ -163,7 +164,7 @@ void DomiScene::CreateMoveMetal()
 	{
 		delay = (rand() % 200) / 100.0f;
 
-		// ¿òÁ÷ÀÌ´Â Ã¶
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ Ã¶
 		MoveMetal* metalBlock = new MoveMetal;
 		AddObject(metalBlock, LAYER::GROUND);
 
@@ -187,12 +188,12 @@ void DomiScene::Update()
 	Scene::Update();
 	GET_SINGLE(CameraManager)->SetPos({ pPlayer->GetPos().x - (SCREEN_WIDTH / 2.f), 0.0f});
 
-	// Å×½ºÆ®ÀÓ
+	// ï¿½×½ï¿½Æ®ï¿½ï¿½
 	if (GET_KEYDOWN(KEY_TYPE::R)) {
 		//pPlayer->SetPos({ 5000, 0 });
 
-		groundTilemap->SetMapSize({ 0,0 }); // ÀÏ´Ü ´Ù ¾ø¾Þ
-		groundTilemap->ClearCollder(); // ÀÏ´Ü ´Ù ¾ø¾Þ
+		groundTilemap->SetMapSize({ 0,0 }); // ï¿½Ï´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		groundTilemap->ClearCollder(); // ï¿½Ï´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 		groundTilemap->LoadMapLevel(L"Stage1", nullptr, &m_thornIds);
 		groundTilemap->SetScreenBottomPos({ 0, 2 });
@@ -200,8 +201,8 @@ void DomiScene::Update()
 
 
 		///////////////////
-		thornTilemap->SetMapSize({ 0,0 }); // ÀÏ´Ü ´Ù ¾ø¾Þ
-		thornTilemap->ClearCollder(); // ÀÏ´Ü ´Ù ¾ø¾Þ
+		thornTilemap->SetMapSize({ 0,0 }); // ï¿½Ï´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		thornTilemap->ClearCollder(); // ï¿½Ï´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 		thornTilemap->LoadMapLevel(L"Stage1", &m_thornIds, nullptr);
 		thornTilemap->SetScreenBottomPos({ 0, 2 });

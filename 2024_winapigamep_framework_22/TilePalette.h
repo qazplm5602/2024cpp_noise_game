@@ -27,10 +27,13 @@ public:
 			m_tileSize
 		};
 	}
-
+	void SetUse(bool value);
+	
 private:
 	//map<UCHAR, Texture*> m_textures;
 	Texture* m_tilesTex;
 	Vec2 m_tileSize; // 한 블럭 사이즈
 	Vec2 m_texSize; // 텍스쳐 사이즈 (텍스쳐 첫 로딩 시 불러옴)
+
+	UCHAR m_useCount;
 };

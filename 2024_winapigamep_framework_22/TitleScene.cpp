@@ -57,11 +57,16 @@ void TitleScene::Init()
 			rButton->SetPos({ 0.f, 240.f });
 			rButton->SetSize(Vec2(1000.f, 100.f));
 			rButton->Refresh();
+
 			TextRenderer* text = rButton->GetOrAddComponent<TextRenderer>();
 			text->SetText(L"Setting");
 			text->SetAlign(TA_CENTER);
 			text->SetFont(FONT_TYPE::SPOQA_THIN);
 			AddObject(rButton, LAYER::UI);
+
+			rButton->OnClick.Add([]() {
+				GET_SINGLE(SceneManager)->LoadScene(L"DeviceSettingScene");
+				});
 		}
 	}
 	// ============= TitleScene SetUp ============='
@@ -80,7 +85,7 @@ void TitleScene::Update()
 			GET_SINGLE(SceneManager)->LoadScene(L"bbqScene");
 		}
 		f_lastT += fDT;
-		cout << f_lastT << " " << (f_lastT > 1.f);
+		//cout << f_lastT << " " << (f_lastT > 1.f);
 	}
 	else
 	{

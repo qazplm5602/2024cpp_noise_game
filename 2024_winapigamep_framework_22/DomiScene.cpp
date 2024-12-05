@@ -146,6 +146,11 @@ void DomiScene::CreateMoveMetal()
 		{5200, 350},
 		{6000, 350},
 	};
+	float ranges[] = {
+		400,
+		100,
+		100
+	};
 	bool spawnThorn[] = {
 		false,
 		false,
@@ -164,7 +169,7 @@ void DomiScene::CreateMoveMetal()
 		AddObject(metalBlock, LAYER::GROUND);
 
 		metalBlock->SetPos(metals[i]);
-		metalBlock->SetMoveRange(100);
+		metalBlock->SetMoveRange(ranges[i]);
 		metalBlock->SetDelay(delay);
 
 		if (spawnThorn[i]) {

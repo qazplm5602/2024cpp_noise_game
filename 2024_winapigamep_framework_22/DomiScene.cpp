@@ -18,6 +18,7 @@
 #include "CollisionManager.h"
 #include "ResourceManager.h"
 #include "InputManager.h"
+#include "ThornTileMap.h"
 
 void DomiScene::Init()
 {
@@ -86,7 +87,7 @@ void DomiScene::Init()
 	groundTilemap->CalculateCollider(LAYER::GROUND);
 
 	// °¡½Ã Å¸ÀÏ¸Ê
-	thornTilemap = new Tilemap;
+	thornTilemap = new ThornTileMap;
 	AddObject(thornTilemap, LAYER::GROUND);
 
 	thornTilemap->SetTileSize(42);

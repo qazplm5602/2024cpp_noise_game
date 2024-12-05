@@ -10,6 +10,5 @@ public:
 
 public:
 	virtual void EnterCollision(Collider* _other) override;
-
 };
 

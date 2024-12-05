@@ -33,7 +33,10 @@ Tilemap::Tilemap()
 Tilemap::~Tilemap()
 {
 	if (m_palette != nullptr)
+	{
 		delete m_palette;
+		m_palette = nullptr;
+	}
 }
 
 void Tilemap::Update()

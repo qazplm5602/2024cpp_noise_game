@@ -184,6 +184,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="EventManager.h" />
+    <ClInclude Include="FinishFlag.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameMath.h" />
     <ClInclude Include="GameScene.h" />
@@ -244,6 +245,7 @@
     <ClCompile Include="EndingScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="FinishFlag.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="ImageLoop.cpp" />

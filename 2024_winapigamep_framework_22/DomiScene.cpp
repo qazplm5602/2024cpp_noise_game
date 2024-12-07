@@ -24,6 +24,8 @@
 #include "ImageLoop.h"
 #include "SolidColorRenderer.h"
 #include "StatisticManager.h"
+#include "FinishFlag.h"
+#include "SceneManager.h"
 
 void DomiScene::Init()
 {
@@ -119,15 +121,23 @@ void DomiScene::CreateTilemaps()
 {
 	// ��� ����Ʈ
 	UCHAR thornList[] = { 27, 28, 29, 30, 31, 32, 37, 38, 39, 40, 41, 42, 46, 47, 48, 49, 50, 51, 64, 65, 66, 67, 68, 69, 73, 74, 75, 76, 77, 78, 82, 83, 84, 85, 86, 87 };
-	for (UCHAR id : thornList)
+	UCHAR flagList[] = { 61, 62, 70, 71 };
+	for (UCHAR id : thornList) {
 		m_thornIds.insert(id);
+		m_groundExcludeIds.insert(id);
+	}
+	
+	for (UCHAR id : flagList) {
+		m_flagFinishIds.insert(id);
+		m_groundExcludeIds.insert(id);
+	}
 
 	// �ٴ� Ÿ�ϸ�
 	groundTilemap = new Tilemap;
 	AddObject(groundTilemap, LAYER::GROUND);
 
 	groundTilemap->SetTileSize(42);
-	groundTilemap->LoadMapLevel(L"Stage1", nullptr, &m_thornIds);
+	groundTilemap->LoadMapLevel(L"Stage1", nullptr, &m_groundExcludeIds);
 	groundTilemap->SetScreenBottomPos({ 0, 2 });
 	groundTilemap->CalculateCollider(LAYER::GROUND);
 
@@ -141,13 +151,21 @@ void DomiScene::CreateTilemaps()
 	thornTilemap->CalculateCollider(LAYER::GROUND);
 	thornTilemap->SetTrigger();
 
+	finishFlagTilemap = new FinishFlag;
+	AddObject(finishFlagTilemap, LAYER::GROUND);
 
+	finishFlagTilemap->SetTileSize(42);
+	finishFlagTilemap->LoadMapLevel(L"Stage1", &m_flagFinishIds, nullptr);
+	finishFlagTilemap->SetScreenBottomPos({ 0, 2 });
+	finishFlagTilemap->CalculateCollider(LAYER::GROUND);
+	//finishFlagTilemap->SetTrigger();
 
 	// �ȷ�Ʈ
 	Texture* groundTex = GET_SINGLE(ResourceManager)->TextureLoad(L"groundTile", L"Texture\\groundTile.bmp");
 	TilePalette* groundPalette = new TilePalette(groundTex, Vec2{ 64, 64 } / 3.0f);
 	groundTilemap->SetPalette(groundPalette);
 	thornTilemap->SetPalette(groundPalette);
+	finishFlagTilemap->SetPalette(groundPalette);
 }
 
 void DomiScene::CreateMoveMetal()
@@ -236,6 +254,9 @@ void DomiScene::Update()
 	Scene::Update();
 	GET_SINGLE(CameraManager)->SetPos({ pPlayer->GetPos().x - (SCREEN_WIDTH / 2.f), 0.0f});
 
+	if (finishFlagTilemap->HasFinish())
+		GET_SINGLE(SceneManager)->LoadScene(L"EndingScene");
+
 	// �׽�Ʈ��
 	if (GET_KEYDOWN(KEY_TYPE::R)) {
 		groundTilemap->SetMapSize({ 0,0 }); // �ϴ� �� ����
@@ -253,10 +274,18 @@ void DomiScene::Update()
 		thornTilemap->LoadMapLevel(L"Stage1", &m_thornIds, nullptr);
 		thornTilemap->SetScreenBottomPos({ 0, 2 });
 		thornTilemap->CalculateCollider(LAYER::GROUND);
+
+		///////////////////
+		finishFlagTilemap->SetMapSize({ 0,0 }); // �ϴ� �� ����
+		finishFlagTilemap->ClearCollder(); // �ϴ� �� ����
+
+		finishFlagTilemap->LoadMapLevel(L"Stage1", &m_flagFinishIds, nullptr);
+		finishFlagTilemap->SetScreenBottomPos({ 0, 2 });
+		finishFlagTilemap->CalculateCollider(LAYER::GROUND);
 	}
 
 	if (GET_KEYDOWN(KEY_TYPE::T)) {
-		pPlayer->SetPos({ 7000, 0 });
+		pPlayer->SetPos({ 13000, 0 });
 	}
 }
 

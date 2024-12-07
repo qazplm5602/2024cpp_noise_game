@@ -4,6 +4,7 @@
 class ProgressBar;
 class Player;
 class Tilemap;
+class FinishFlag;
 class DomiScene : public Scene
 {
 	// Scene을(를) 통해 상속됨
@@ -18,6 +19,8 @@ class DomiScene : public Scene
 
 private:
 	std::unordered_set<UCHAR> m_thornIds;
+	std::unordered_set<UCHAR> m_flagFinishIds;
+	std::unordered_set<UCHAR> m_groundExcludeIds;
 
 	ProgressBar* m_progreeBar;
 	float m_nowPeek;
@@ -25,5 +28,6 @@ private:
 	Player* pPlayer;
 	Tilemap* groundTilemap;
 	Tilemap* thornTilemap;
+	FinishFlag* finishFlagTilemap;
 };
 

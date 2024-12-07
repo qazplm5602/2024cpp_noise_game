@@ -197,6 +197,7 @@
     <ClInclude Include="StatisticManager.h">
       <Filter>Engine\02. Manager</Filter>
     </ClInclude>
+    <ClInclude Include="FinishFlag.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -353,5 +354,6 @@
     <ClCompile Include="StatisticManager.cpp">
       <Filter>Engine\02. Manager</Filter>
     </ClCompile>
+    <ClCompile Include="FinishFlag.cpp" />
   </ItemGroup>
 </Project>

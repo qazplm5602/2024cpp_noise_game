@@ -16,6 +16,8 @@ private:
 	void MainUpdate();
 	void MainRender();
 	void CreateGDI();
+	void CreateFonts();
+	void RemoveFonts();
 public:
 	const HWND& GetHwnd() const { return m_hWnd; }
 	// 이름 바꾸기
@@ -37,6 +39,13 @@ private:
 	HBRUSH m_colorBrushs[(UINT)BRUSH_TYPE::END] = {};
 	HPEN m_colorPens[(UINT)PEN_TYPE::END] = {};
 	wstring m_fontNames[(UINT)FONT_TYPE::END] = {};
+	wstring m_fontFiles[(UINT)FONT_TYPE::END] = {
+		L"SpoqaHanSansNeo-Bold",
+		L"SpoqaHanSansNeo-Light",
+		L"SpoqaHanSansNeo-Medium",
+		L"SpoqaHanSansNeo-Regular",
+		L"SpoqaHanSansNeo-Thin",
+	};
 
 	HWND m_hWnd;
 	HDC  m_hDC; // Main DC

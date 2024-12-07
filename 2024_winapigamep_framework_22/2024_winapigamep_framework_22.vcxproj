@@ -187,6 +187,7 @@
     <ClInclude Include="GameMath.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GDISelector.h" />
+    <ClInclude Include="ImageLoop.h" />
     <ClInclude Include="ImageRect.h" />
     <ClInclude Include="ImageRenderer.h" />
     <ClInclude Include="IMicJumpHandler.h" />
@@ -241,6 +242,7 @@
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GDISelector.cpp" />
+    <ClCompile Include="ImageLoop.cpp" />
     <ClCompile Include="ImageRect.cpp" />
     <ClCompile Include="ImageRenderer.cpp" />
     <ClCompile Include="InputManager.cpp" />

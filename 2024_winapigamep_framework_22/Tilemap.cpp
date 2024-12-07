@@ -34,7 +34,8 @@ Tilemap::~Tilemap()
 {
 	if (m_palette != nullptr)
 	{
-		delete m_palette;
+		//delete m_palette;
+		m_palette->SetUse(false);
 		m_palette = nullptr;
 	}
 }

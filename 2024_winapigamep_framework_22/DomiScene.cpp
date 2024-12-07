@@ -151,7 +151,7 @@ void DomiScene::CreateMoveMetal()
 		{5800 + 1500, 350},
 	};
 	float ranges[] = {
-		400,
+		600,
 		100,
 		300
 	};

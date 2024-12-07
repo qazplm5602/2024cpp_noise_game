@@ -23,8 +23,7 @@ void SceneManager::Init()
 	RegisterScene(L"EndingScene",std::make_shared<EndingScene>());
 
 	// �� �ε�
-	//LoadScene(L"TitleScene");
-	LoadScene(L"DomiScene");
+	LoadScene(L"TitleScene");
 }
 
 void SceneManager::Update()

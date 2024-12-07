@@ -72,7 +72,7 @@ void DomiScene::Init()
 	CreateMicGuage();
 	CreateTilemaps();
 	CreateMoveMetal();
-	CreateBackground();
+	//CreateBackground();
 
 
 	//Tilemap* testTilemap = new TestTilemap;

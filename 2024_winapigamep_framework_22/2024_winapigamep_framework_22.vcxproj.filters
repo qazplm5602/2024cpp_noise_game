@@ -186,6 +186,11 @@
     <ClInclude Include="MoveThorn.h">
       <Filter>Engine\03. Object\TileMaps</Filter>
     </ClInclude>
+    <ClInclude Include="ImageLoop.h" />
+    <ClInclude Include="ThornTileMap.h" />
+    <ClInclude Include="SolidColorRenderer.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -324,6 +329,11 @@
     </ClCompile>
     <ClCompile Include="MoveThorn.cpp">
       <Filter>Engine\03. Object\TileMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLoop.cpp" />
+    <ClCompile Include="ThornTileMap.cpp" />
+    <ClCompile Include="SolidColorRenderer.cpp">
+      <Filter>Engine\06. Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

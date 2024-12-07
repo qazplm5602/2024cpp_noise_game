@@ -22,6 +22,7 @@
 #include "MoveThorn.h"
 #include "ThornTileMap.h"
 #include "ImageLoop.h"
+#include "SolidColorRenderer.h"
 
 void DomiScene::Init()
 {
@@ -72,7 +73,7 @@ void DomiScene::Init()
 	CreateMicGuage();
 	CreateTilemaps();
 	CreateMoveMetal();
-	//CreateBackground();
+	CreateBackground();
 
 
 	//Tilemap* testTilemap = new TestTilemap;
@@ -188,27 +189,38 @@ void DomiScene::CreateMoveMetal()
 
 void DomiScene::CreateBackground()
 {
-	vector<std::pair<wstring, float>> list = {
-		//{L"background-1", 0.1f},
-		{L"background-moon-2", 0.2f},
-		{L"background-cloud-3", 0.3f},
-		{L"background-cloud-4", 0.3f},
-		{L"background-cloud-5", 0.4f}
+	// 배경 색상
+	RectObject* background = new RectObject;
+	background->SetSize({ SCREEN_WIDTH, SCREEN_HEIGHT });
+
+	SolidColorRenderer* colorRender = background->GetOrAddComponent<SolidColorRenderer>();
+	colorRender->SetColor(BRUSH_TYPE::WHITE_BLUE);
+
+	AddObject(background, LAYER::BACKGROUND);
+
+	// 움직이는거
+
+	vector<ImageLoopData> list = {
+		//{L"background-1", 0.0f, {SCREEN_WIDTH, SCREEN_HEIGHT}, {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2}},
+		{ L"background-moon-2", 0.2f, { 7, 11 }, { SCREEN_WIDTH - 300, 200 } },
+		{ L"background-cloud-3", 0.3f, { 1274, 281 }, { SCREEN_WIDTH / 2, 200 } },
+		//{ L"background-cloud-4", 0.3f, {1280, 689}, {SCREEN_WIDTH / 2, SCREEN_HEIGHT - (689 / 2)} },
+		//{ L"background-cloud-5", 0.4f, {1280, 562}, {SCREEN_WIDTH / 2, SCREEN_HEIGHT - (562 / 2)} }
 	};
 
-	for (auto v : list) {
+	for (auto& v : list) {
 		wstring path = L"Texture\\";
-		path += v.first;
+		path += v.texFileName;
 		path += L".bmp";
 		
-		Texture* tex = GET_SINGLE(ResourceManager)->TextureLoad(v.first, path);
+		Texture* tex = GET_SINGLE(ResourceManager)->TextureLoad(v.texFileName, path);
 		ImageLoop* imageLoop = new ImageLoop();
 		AddObject(imageLoop, LAYER::BACKGROUND);
 
-		imageLoop->SetSize({ SCREEN_WIDTH, SCREEN_HEIGHT });
-		imageLoop->SetPos({ SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f });
+		imageLoop->SetSize(v.size);
+		imageLoop->SetPos(v.pos);
 		imageLoop->SetTexture(tex);
-		imageLoop->SetDuration(v.second);
+		imageLoop->SetDuration(v.duration);
 	}
 }
 

@@ -113,6 +113,7 @@ void Core::CreateGDI()
 	m_colorBrushs[(UINT)BRUSH_TYPE::YELLOW] = (HBRUSH)CreateSolidBrush(RGB(255, 187, 0));
 	m_colorBrushs[(UINT)BRUSH_TYPE::GRAY] = (HBRUSH)CreateSolidBrush(RGB(100, 100, 100));
 	m_colorBrushs[(UINT)BRUSH_TYPE::WHITE_BLUE] = (HBRUSH)CreateSolidBrush(RGB(157, 194, 246));
+	m_colorBrushs[(UINT)BRUSH_TYPE::BLACK] = (HBRUSH)CreateSolidBrush(RGB(0, 0, 0));
 
 	//RED GREEN BLUE PEN
 	m_colorPens[(UINT)PEN_TYPE::RED] = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));

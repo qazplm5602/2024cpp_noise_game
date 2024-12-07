@@ -12,6 +12,7 @@ private:
 	void CreateCreater();
 	void CreateStatistics();
 	void CreateTeam();
+	wstring NumberToStringComma(int value);
 
 private:
 	float m_speed = 30;

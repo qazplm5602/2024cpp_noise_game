@@ -23,6 +23,7 @@
 #include "ThornTileMap.h"
 #include "ImageLoop.h"
 #include "SolidColorRenderer.h"
+#include "StatisticManager.h"
 
 void DomiScene::Init()
 {
@@ -75,6 +76,7 @@ void DomiScene::Init()
 	CreateMoveMetal();
 	CreateBackground();
 
+	GET_SINGLE(StatisticManager)->Reset();
 
 	//Tilemap* testTilemap = new TestTilemap;
 	//testTilemap->AddComponent<Collider>();

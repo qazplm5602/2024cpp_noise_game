@@ -7,6 +7,7 @@
 #include "TextRenderer.h"
 #include "InputManager.h"
 #include "SceneManager.h"
+#include "StatisticManager.h"
 
 void EndingScene::Init()
 {
@@ -134,11 +135,17 @@ void EndingScene::CreateStatistics()
 	AddObject(titleRect, LAYER::UI);
 	m_rectList.push_back(titleRect);
 
+	StatisticManager* statisticManager = GET_SINGLE(StatisticManager);
+
+	time_t takenTime = time(NULL) - statisticManager->GetStartTime();
+	time_t takenMin = takenTime / 60;
+	time_t takenSec = takenTime % 60;
+
 	wstring nameList[] = {
-		L"Å¬·¯¾î±îÁö °É¸° ½Ã°£: 10ºÐ 10ÃÊ",
-		L"ÃÑ Á¡ÇÁ È½¼ö: 100¹ø",
-		L"¶³¾îÁø È½¼ö: 10¹ø",
-		L"°¡½Ã¿¡ ´êÀº È½¼ö: 500¹ø"
+		L"Å¬·¯¾î±îÁö °É¸° ½Ã°£: " + std::to_wstring(takenMin) + L"ºÐ " + std::to_wstring(takenSec) + L"ÃÊ",
+		L"ÃÑ Á¡ÇÁ È½¼ö: "+ NumberToStringComma(statisticManager->GetJumpCount()) + L"¹ø",
+		L"¶³¾îÁø È½¼ö: " + NumberToStringComma(statisticManager->GetFallCount()) + L"¹ø",
+		L"°¡½Ã¿¡ ´êÀº È½¼ö: "+ NumberToStringComma(statisticManager->GetDetectThorn()) + L"¹ø",
 	};
 
 	for (UCHAR i = 0; i < 4; i++)
@@ -189,4 +196,15 @@ void EndingScene::CreateTeam()
 
 	AddObject(domiRect, LAYER::UI);
 	m_rectList.push_back(domiRect);
+}
+
+wstring EndingScene::NumberToStringComma(int value)
+{
+	wstring domi = std::to_wstring(value);
+	
+	for (int i = domi.size() - 3; i > 0; i -= 3) {
+		domi.insert(i, L",");
+	}
+
+	return domi;
 }

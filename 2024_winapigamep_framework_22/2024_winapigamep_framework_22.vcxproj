@@ -213,6 +213,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SolidColorRenderer.h" />
+    <ClInclude Include="StatisticManager.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestTilemap.h" />
     <ClInclude Include="TextRenderer.h" />
@@ -268,6 +269,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SolidColorRenderer.cpp" />
+    <ClCompile Include="StatisticManager.cpp" />
     <ClCompile Include="TestTilemap.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="Texture.cpp" />

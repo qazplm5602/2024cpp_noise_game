@@ -29,14 +29,16 @@ Player::Player()
 	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\MinsungMove.bmp");
 	this->AddComponent<Collider>();
 	AddComponent<Animator>();
-	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 0.f),
-		Vec2(32.f, 32.f), Vec2(32.f, 0.f), 2, 0.2f);
-	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
+	GetComponent<Animator>()->CreateAnimation(L"Move", m_pTex, Vec2(0.f, 0.f),
+		Vec2(32.f, 32.f), Vec2(32.f, 0.f), 2, 0.08f, true);
+	GetComponent<Animator>()->CreateAnimation(L"Idle", m_pTex, Vec2(0.f, 0.f),
+		Vec2(32.f, 32.f), Vec2(32.f, 0.f), 1, 0.08f, true);
+	GetComponent<Animator>()->PlayAnimation(L"Idle", true);
 	AddComponent<MicJumpObserver>();
 	AddComponent<Rigidbody>();
 	AddComponent<PlayerMovement>();
 
-	SetCheckPoint({ 0.f, 200.f });
+	SetCheckPoint({ 0.f, 500.f });
 }
 Player::~Player()
 {
@@ -46,23 +48,48 @@ Player::~Player()
 void Player::Update()
 {
 	Vec2 vPos = GetPos();
+
+	int buf = 0;
+	bool prev = b_moving;
+
+	b_moving = false;
 	//if(GET_KEY(KEY_TYPE::LEFT))
 	if (GET_KEY(KEY_TYPE::A))
-		vPos.x -= 200.f * fDT;
+	{
+		//vPos.x -= 200.f * fDT;
+		GetComponent<Rigidbody>()->AddForce({ -2700.f,0.f });
+		b_moving = true;
+		buf++;
+	}
 	if (GET_KEY(KEY_TYPE::D))
-		vPos.x += 200.f * fDT;
+	{
+		//vPos.x += 200.f * fDT;
+		GetComponent<Rigidbody>()->AddForce({ 2700.f,0.f });
+		b_moving = true;
+		buf++;
+	}
 	if (GET_KEYDOWN(KEY_TYPE::SPACE))
 	{
 		//CreateProjectile();
-		GetComponent<Rigidbody>()->AddImpulse({ 0, -1500 });
+		//GetComponent<Rigidbody>()->AddImpulse({ 0, -1500 });
 	}
 	SetPos(vPos);
 	GetComponent<MicJumpObserver>()->Update();
 	GetComponent<PlayerMovement>()->HandleJump();
 
-	if (vPos.y > SCREEN_WIDTH + 1000.f)
+	if (vPos.y > SCREEN_WIDTH + 500.f)
 	{
 		GoCheckPoint();
+	}
+
+
+	if (buf == 2) { GetComponent<Animator>()->PlayAnimation(L"Idle", true); b_moving = false; }
+	else if (b_moving != prev)
+	{
+		if (b_moving)
+			GetComponent<Animator>()->PlayAnimation(L"Move", true);
+		else
+			GetComponent<Animator>()->PlayAnimation(L"Idle", true);
 	}
 }
 
@@ -95,7 +122,7 @@ void Player::Render(HDC _hdc)
 
 void Player::OnMicJump(const float& power)
 {
-	cout << power << endl;
+	//cout << power << endl;
 	Rigidbody* rb = GetComponent<Rigidbody>();
 	if (rb != nullptr && rb->IsGrounded())
 	{
@@ -110,6 +137,7 @@ void Player::SetCheckPoint(Vec2 pos)
 
 void Player::GoCheckPoint()
 {
+	GET_SINGLE(ResourceManager)->Play(L"Respawn");
 	GetOrAddComponent<Rigidbody>()->SetVelocity(Vec2(0,0));
 	SetPos(v_checkPoint);
 }

@@ -72,13 +72,13 @@ void DomiScene::Init()
 	CreateMicGuage();
 	CreateTilemaps();
 	CreateMoveMetal();
-	CreateBackground();
+	//CreateBackground();
 
 
 	//Tilemap* testTilemap = new TestTilemap;
 	//testTilemap->AddComponent<Collider>();
 	//AddObject(testTilemap, LAYER::GROUND);
-	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::GROUND);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::GROUND);
 }
 
 

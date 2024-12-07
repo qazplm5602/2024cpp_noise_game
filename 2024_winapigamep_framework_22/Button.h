@@ -8,10 +8,12 @@ public:
     Button();
     ~Button();
 public:
+    virtual void Update() override;
+    virtual void Render(HDC _hdc) override;
+public:
     Delegate<void> OnClick;
     Delegate<void> OnHover;
     Delegate<void> ExitHover;
-    virtual void Update() override;
     void Refresh();
 private:
     bool b_isHover;

@@ -45,7 +45,7 @@ void PlayerMovement::LateUpdate()
 		{
 			GET_SINGLE(MicrophoneManager)->GetMicPeek(&volume);
 		}
-		rb->AddForce({0.f, volume * -1150.f });
+		rb->AddForce({0.f, volume * -5200.f });
 	}
 }
 

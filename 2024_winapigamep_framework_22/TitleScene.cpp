@@ -52,21 +52,59 @@ void TitleScene::Init()
 		}
 
 		{
-			Button* rButton = new Button();
-			rButton->SetAnchor(RectAnchor::Center);
-			rButton->SetPos({ 0.f, 240.f });
-			rButton->SetSize(Vec2(1000.f, 100.f));
-			rButton->Refresh();
+			Button* bSetting = new Button();
+			bSetting->SetAnchor(RectAnchor::Center);
+			bSetting->SetPos({ 0.f, 205.f });
+			bSetting->SetSize(Vec2(700.f, 40.f));
+			bSetting->Refresh();
 
-			TextRenderer* text = rButton->GetOrAddComponent<TextRenderer>();
+			TextRenderer* text = bSetting->GetOrAddComponent<TextRenderer>();
 			text->SetText(L"Setting");
 			text->SetAlign(TA_CENTER);
 			text->SetFont(FONT_TYPE::SPOQA_THIN);
-			AddObject(rButton, LAYER::UI);
+			AddObject(bSetting, LAYER::UI);
 
-			rButton->OnClick.Add([]() {
+			bSetting->OnClick.Add([]() {
 				GET_SINGLE(SceneManager)->LoadScene(L"DeviceSettingScene");
 				});
+
+			bSetting->OnHover.Add([text]()
+				{
+					text->SetSize(32);
+				});
+			bSetting->ExitHover.Add([text]()
+				{
+					text->SetSize(28);
+				});
+
+			Button* bExit = new Button();
+			bExit->SetAnchor(RectAnchor::Center);
+			bExit->SetPos({ 0.f, 250.f });
+			bExit->SetSize(Vec2(700.f, 40.f));
+			bExit->Refresh();
+			{
+
+				TextRenderer* text = bExit->GetOrAddComponent<TextRenderer>();
+				text->SetText(L"Exit");
+				text->SetAlign(TA_CENTER);
+				text->SetFont(FONT_TYPE::SPOQA_THIN);
+				AddObject(bExit, LAYER::UI);
+				bExit->OnHover.Add([text]()
+					{
+						text->SetSize(32);
+					});
+				bExit->ExitHover.Add([text]()
+					{
+						text->SetSize(28);
+					});
+			}
+
+			bExit->OnClick.Add([]() {
+				DestroyWindow(GET_SINGLE(Core)->GetHwnd());
+				});
+
+			
+
 		}
 	}
 	// ============= TitleScene SetUp ============='

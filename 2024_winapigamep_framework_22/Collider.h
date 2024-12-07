@@ -17,6 +17,8 @@ public:
 public:
     void SetSize(Vec2 _vSize) { m_vSize = _vSize; }
     const Vec2& GetSize() const { return m_vSize; }
+    void SetIsTrigger(bool v) { b_isTrigger = v; }
+    const bool& IsTrigger() const { return b_isTrigger; }
     void SetOffSetPos(Vec2 _vOffsetPos)
     {
         m_vOffsetPos = _vOffsetPos;
@@ -37,5 +39,6 @@ private:
     // LateUpdate에서 매 프레임마다 오브젝트로부터 계산되는 위치
     Vec2 m_vLatePos;
 
+    bool b_isTrigger;
 };
 

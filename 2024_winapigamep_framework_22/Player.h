@@ -11,8 +11,11 @@ public:
 	void Update() override;
 	void Render(HDC _hdc) override;
 	virtual void OnMicJump(const float& power) override;
+	void SetCheckPoint(Vec2 pos);
+	void GoCheckPoint();
 private:
 	void CreateProjectile();
 	Texture* m_pTex;
+	Vec2 v_checkPoint;
 };
 

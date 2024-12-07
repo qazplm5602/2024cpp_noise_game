@@ -8,6 +8,7 @@
 #include "bbqScene.h"
 #include "GameScene.h"
 #include "DeviceSettingScene.h"
+#include "EndingScene.h"
 void SceneManager::Init()
 {
 	m_pCurrentScene = nullptr;
@@ -19,6 +20,7 @@ void SceneManager::Init()
 	RegisterScene(L"bbqScene",std::make_shared<bbqScene>());
 	RegisterScene(L"RalScene",std::make_shared<RalScene>());
 	RegisterScene(L"DeviceSettingScene",std::make_shared<DeviceSettingScene>());
+	RegisterScene(L"EndingScene",std::make_shared<EndingScene>());
 
 	// �� �ε�
 	//LoadScene(L"TitleScene");

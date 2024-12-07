@@ -259,35 +259,35 @@ void DomiScene::Update()
 		GET_SINGLE(SceneManager)->LoadScene(L"EndingScene");
 
 	// �׽�Ʈ��
-	if (GET_KEYDOWN(KEY_TYPE::R)) {
-		groundTilemap->SetMapSize({ 0,0 }); // �ϴ� �� ����
-		groundTilemap->ClearCollder(); // �ϴ� �� ����
+	//if (GET_KEYDOWN(KEY_TYPE::R)) {
+	//	groundTilemap->SetMapSize({ 0,0 }); // �ϴ� �� ����
+	//	groundTilemap->ClearCollder(); // �ϴ� �� ����
 
-		groundTilemap->LoadMapLevel(L"Stage1", nullptr, &m_thornIds);
-		groundTilemap->SetScreenBottomPos({ 0, 2 });
-		groundTilemap->CalculateCollider(LAYER::GROUND);
+	//	groundTilemap->LoadMapLevel(L"Stage1", nullptr, &m_thornIds);
+	//	groundTilemap->SetScreenBottomPos({ 0, 2 });
+	//	groundTilemap->CalculateCollider(LAYER::GROUND);
 
 
-		///////////////////
-		thornTilemap->SetMapSize({ 0,0 }); // �ϴ� �� ����
-		thornTilemap->ClearCollder(); // �ϴ� �� ����
+	//	///////////////////
+	//	thornTilemap->SetMapSize({ 0,0 }); // �ϴ� �� ����
+	//	thornTilemap->ClearCollder(); // �ϴ� �� ����
 
-		thornTilemap->LoadMapLevel(L"Stage1", &m_thornIds, nullptr);
-		thornTilemap->SetScreenBottomPos({ 0, 2 });
-		thornTilemap->CalculateCollider(LAYER::GROUND);
+	//	thornTilemap->LoadMapLevel(L"Stage1", &m_thornIds, nullptr);
+	//	thornTilemap->SetScreenBottomPos({ 0, 2 });
+	//	thornTilemap->CalculateCollider(LAYER::GROUND);
 
-		///////////////////
-		finishFlagTilemap->SetMapSize({ 0,0 }); // �ϴ� �� ����
-		finishFlagTilemap->ClearCollder(); // �ϴ� �� ����
+	//	///////////////////
+	//	finishFlagTilemap->SetMapSize({ 0,0 }); // �ϴ� �� ����
+	//	finishFlagTilemap->ClearCollder(); // �ϴ� �� ����
 
-		finishFlagTilemap->LoadMapLevel(L"Stage1", &m_flagFinishIds, nullptr);
-		finishFlagTilemap->SetScreenBottomPos({ 0, 2 });
-		finishFlagTilemap->CalculateCollider(LAYER::GROUND);
-	}
+	//	finishFlagTilemap->LoadMapLevel(L"Stage1", &m_flagFinishIds, nullptr);
+	//	finishFlagTilemap->SetScreenBottomPos({ 0, 2 });
+	//	finishFlagTilemap->CalculateCollider(LAYER::GROUND);
+	//}
 
-	if (GET_KEYDOWN(KEY_TYPE::T)) {
-		pPlayer->SetPos({ 13000, 0 });
-	}
+	//if (GET_KEYDOWN(KEY_TYPE::T)) {
+	//	pPlayer->SetPos({ 13000, 0 });
+	//}
 }
 
 void DomiScene::Render(HDC _hdc)

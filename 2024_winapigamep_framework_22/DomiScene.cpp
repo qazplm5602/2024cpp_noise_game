@@ -146,14 +146,14 @@ void DomiScene::CreateTilemaps()
 void DomiScene::CreateMoveMetal()
 {
 	Vec2 metals[] = {
-		{5400, 150},
-		{5200, 350},
-		{6000, 350},
+		{5400 + 1500, 150},
+		{5200 + 1500, 350},
+		{5800 + 1500, 350},
 	};
 	float ranges[] = {
 		400,
 		100,
-		100
+		300
 	};
 	bool spawnThorn[] = {
 		false,
@@ -181,7 +181,7 @@ void DomiScene::CreateMoveMetal()
 			AddObject(moveThorn, LAYER::GROUND);
 
 			moveThorn->SetPos(metals[i] - Vec2(0.0f, metalBlock->GetTileSize() * 1));
-			moveThorn->SetMoveRange(100);
+			moveThorn->SetMoveRange(300);
 			moveThorn->SetDelay(delay);
 		}
 	}
@@ -231,8 +231,6 @@ void DomiScene::Update()
 
 	// �׽�Ʈ��
 	if (GET_KEYDOWN(KEY_TYPE::R)) {
-		//pPlayer->SetPos({ 5000, 0 });
-
 		groundTilemap->SetMapSize({ 0,0 }); // �ϴ� �� ����
 		groundTilemap->ClearCollder(); // �ϴ� �� ����
 
@@ -248,6 +246,10 @@ void DomiScene::Update()
 		thornTilemap->LoadMapLevel(L"Stage1", &m_thornIds, nullptr);
 		thornTilemap->SetScreenBottomPos({ 0, 2 });
 		thornTilemap->CalculateCollider(LAYER::GROUND);
+	}
+
+	if (GET_KEYDOWN(KEY_TYPE::T)) {
+		pPlayer->SetPos({ 7000, 0 });
 	}
 }
 

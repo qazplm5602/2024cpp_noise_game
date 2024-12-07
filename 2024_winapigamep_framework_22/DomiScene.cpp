@@ -79,7 +79,7 @@ void DomiScene::Init()
 	//Tilemap* testTilemap = new TestTilemap;
 	//testTilemap->AddComponent<Collider>();
 	//AddObject(testTilemap, LAYER::GROUND);
-	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::GROUND);
+	GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
 }
 
 

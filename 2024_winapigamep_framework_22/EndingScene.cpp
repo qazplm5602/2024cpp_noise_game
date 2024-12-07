@@ -6,6 +6,7 @@
 #include "ImageRect.h"
 #include "TextRenderer.h"
 #include "InputManager.h"
+#include "SceneManager.h"
 
 void EndingScene::Init()
 {
@@ -54,7 +55,7 @@ void EndingScene::Init()
 
 void EndingScene::Update()
 {
-	//m_downY += m_speed * fDT;
+	m_downY += m_speed * fDT;
 
 	for (size_t i = 0; i < m_rectList.size(); i++) {
 		m_rectList[i]->SetPos({ m_originPos[i].x, m_originPos[i].y - m_downY });
@@ -65,6 +66,10 @@ void EndingScene::Update()
 		Release();
 		EndingScene::Init();
 		m_downY = 500.0f;
+	}
+	
+	if (m_downY > 1000) {
+		GET_SINGLE(SceneManager)->LoadScene(L"TitleScene");
 	}
 }
 

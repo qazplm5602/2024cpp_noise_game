@@ -161,6 +161,8 @@ void TitleScene::Render(HDC _hdc)
 
 void TitleScene::Release()
 {
+	Scene::Release();
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 	DeleteObject(m_hAlphaBit);
 	DeleteObject(m_hAlphaDC);
 }

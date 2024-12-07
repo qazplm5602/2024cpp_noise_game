@@ -106,9 +106,11 @@ void DomiScene::CreateMicGuage()
 	m_progreeBar->SetAnchor(RectAnchor::CenterBottom);
 	m_progreeBar->SetValue(0.0f);
 
-	// ����ũ ����
-	wstring micDeviceId = GET_SINGLE(MicrophoneManager)->GetDefaultDeviceId();
-	GET_SINGLE(MicrophoneManager)->SelectDevice(micDeviceId);
+	// 연결 안되어있으면 그냥 기본 디바이스로
+	if (!GET_SINGLE(MicrophoneManager)->IsConnected()) {
+		wstring micDeviceId = GET_SINGLE(MicrophoneManager)->GetDefaultDeviceId();
+		GET_SINGLE(MicrophoneManager)->SelectDevice(micDeviceId);
+	}
 }
 
 void DomiScene::CreateTilemaps()

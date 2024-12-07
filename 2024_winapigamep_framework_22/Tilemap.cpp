@@ -264,3 +264,9 @@ bool Tilemap::FindFirstTilePos(vector<vector<UCHAR>>& tiles, Vec2& pos)
 
 	return false;
 }
+
+void Tilemap::SetTrigger()
+{
+	for (ColliderEventObserver* pObserver : m_pColliders)
+		pObserver->GetComponent<Collider>()->SetIsTrigger(true);
+}

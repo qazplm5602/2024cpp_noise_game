@@ -94,6 +94,9 @@ void Rigidbody::PreventOverlapMove(Object* owner, LAYER layerMask)
     {
         if (obj->GetIsDead() || obj->GetComponent<Collider>() == nullptr) continue;
 
+        if (obj->GetComponent<Collider>()->IsTrigger())
+            continue;
+
         if (PhysicsManager::IsBoxIntersecting(cOwner, obj->GetComponent<Collider>()))
         {
             Vec2 ownerPos = owner->GetPos();
@@ -119,6 +122,10 @@ void Rigidbody::PreventOverlapMove(Object* owner, LAYER layerMask)
                 if (overlapX < overlapY)
                 {
                     overlapX = (deltaX > 0) ? overlapX : -overlapX;
+                    if (overlapX > 0)
+                        m_vVelocity.x = max(m_vVelocity.x, 0);
+                    else
+                        m_vVelocity.x = min(m_vVelocity.x, 0);
                     owner->SetPos({ ownerPos.x + overlapX, ownerPos.y });
                 }
                 else

@@ -3,6 +3,8 @@
 #include"Collider.h"
 #include"Object.h"
 #include "Rigidbody.h"
+#include "ColliderEventObserver.h"
+#include "Collider.h"
 #include <cmath>
 
 ThornTileMap::ThornTileMap() {
@@ -48,6 +50,7 @@ void ThornTileMap::EnterCollision(Collider* _other) {
         Vec2 knockbackPos = reflectionVec * knockbackDistance;
 
         // 플레이어 위치 업데이트
-        _other->GetOwner()->GetComponent<Rigidbody>()->AddForce(knockbackPos * 1200.f);
+        _other->GetOwner()->GetComponent<Rigidbody>()->AddImpulse(knockbackPos * 11.f);
 
 }
+

@@ -35,7 +35,8 @@ public:
 	vector<ColliderEventObserver*>& GetColliders() {
 		return m_pColliders;
 	}
-
+public:
+	void SetTrigger();
 	// 콜라이더 관련
 public:
 	void CalculateCollider(LAYER layer);
@@ -51,7 +52,7 @@ protected:
 private:
 	static vector<std::string> Split(std::string str, char Delimiter);
 
-private:
+protected:
 	TilePalette* m_palette;
 	vector<vector<UCHAR>> m_tiles;
 	vector<ColliderEventObserver*> m_pColliders;

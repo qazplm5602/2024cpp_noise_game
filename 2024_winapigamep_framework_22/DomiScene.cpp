@@ -135,6 +135,9 @@ void DomiScene::CreateTilemaps()
 	thornTilemap->LoadMapLevel(L"Stage1", &m_thornIds, nullptr);
 	thornTilemap->SetScreenBottomPos({ 0, 2 });
 	thornTilemap->CalculateCollider(LAYER::GROUND);
+	thornTilemap->SetTrigger();
+
+
 
 	// �ȷ�Ʈ
 	Texture* groundTex = GET_SINGLE(ResourceManager)->TextureLoad(L"groundTile", L"Texture\\groundTile.bmp");

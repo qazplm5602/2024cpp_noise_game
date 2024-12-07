@@ -17,5 +17,6 @@ private:
 	void CreateProjectile();
 	Texture* m_pTex;
 	Vec2 v_checkPoint;
+	bool b_moving;
 };
 

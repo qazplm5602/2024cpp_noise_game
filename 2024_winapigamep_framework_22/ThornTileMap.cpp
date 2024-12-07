@@ -6,39 +6,40 @@
 #include "ColliderEventObserver.h"
 #include "Collider.h"
 #include "StatisticManager.h"
+#include "ResourceManager.h"
 #include <cmath>
 
 ThornTileMap::ThornTileMap() {
-    // »ý¼ºÀÚ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 }
 
 ThornTileMap::~ThornTileMap() {
-    // ¼Ò¸êÀÚ
+    // ï¿½Ò¸ï¿½ï¿½ï¿½
 }
 
 void ThornTileMap::EnterCollision(Collider* _other) {
-    // Ãæµ¹ÇÑ °´Ã¼°¡ ÇÃ·¹ÀÌ¾îÀÎÁö È®ÀÎ
+    
   
-        // ÇÃ·¹ÀÌ¾î¿Í Å¸ÀÏ Áß½ÉÀÇ À§Ä¡¸¦ °è»ê
-        Vec2 playerPos = _other->GetOwner()->GetPos();   // ÇÃ·¹ÀÌ¾î À§Ä¡
-        Vec2 tileCenterPos = this->GetPos(); // Å¸ÀÏ Áß½É À§Ä¡
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ß½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½
+        Vec2 playerPos = _other->GetOwner()->GetPos();   // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡
+        Vec2 tileCenterPos = this->GetPos(); // Å¸ï¿½ï¿½ ï¿½ß½ï¿½ ï¿½ï¿½Ä¡
 
-        // ÀÔ»ç º¤ÅÍ °è»ê
+        // ï¿½Ô»ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         Vec2 incidentVec = playerPos - tileCenterPos;
 
-        // º¤ÅÍ Á¤±ÔÈ­
-            std::cout << "º¤ÅÍ Á¤±ÔÈ­";
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­
+            std::cout << "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­";
         float magnitude = std::sqrt(incidentVec.x * incidentVec.x + incidentVec.y * incidentVec.y);
         if (magnitude != 0) {
             incidentVec.x /= magnitude;
             incidentVec.y /= magnitude;
         }
 
-        // Ç¥¸é ¹ý¼± º¤ÅÍ ¼³Á¤ (¿©±â¼­´Â ¿¹½Ã·Î À§ÂÊ Å¸ÀÏ ¸é)
-        Vec2 normalVec = { 0.0f, 1.0f }; // Ç¥¸é ¹æÇâ¿¡ µû¶ó Á¶Á¤ °¡´É
+        // Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½â¼­ï¿½ï¿½ ï¿½ï¿½ï¿½Ã·ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½)
+        Vec2 normalVec = { 0.0f, 1.0f }; // Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        // ¹Ý»ç º¤ÅÍ °è»ê
+        // ï¿½Ý»ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         float dotProduct = incidentVec.x * normalVec.x + incidentVec.y * normalVec.y;
         Vec2 reflectionVec = {
             -(incidentVec.x - 2 * dotProduct * normalVec.x),
@@ -46,13 +47,13 @@ void ThornTileMap::EnterCollision(Collider* _other) {
             
         };
 
-        // ¹Ý»ç ¹æÇâÀ¸·Î ÇÃ·¹ÀÌ¾î¸¦ ³¯¸®±â À§ÇÑ °Å¸®
-        float knockbackDistance = 200.0f; // ¹Ý»ç ÈÄ ÀÌµ¿ÇÒ °Å¸®
+        // ï¿½Ý»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½
+        float knockbackDistance = 200.0f; // ï¿½Ý»ï¿½ ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½Å¸ï¿½
         Vec2 knockbackPos = reflectionVec * knockbackDistance;
 
-        // ÇÃ·¹ÀÌ¾î À§Ä¡ ¾÷µ¥ÀÌÆ®
-        _other->GetOwner()->GetComponent<Rigidbody>()->AddImpulse(knockbackPos * 11.f);
-
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
         GET_SINGLE(StatisticManager)->AddThorn();
+        _other->GetOwner()->GetComponent<Rigidbody>()->AddImpulse(knockbackPos * 13.f);
+        GET_SINGLE(ResourceManager)->Play(L"Hit");
 }
 

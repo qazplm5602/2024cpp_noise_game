@@ -5,6 +5,7 @@
 #include "MicrophoneManager.h"
 #include "TimeManager.h"
 #include "StatisticManager.h"
+#include "ResourceManager.h"
 
 PlayerMovement::PlayerMovement()
 {
@@ -34,6 +35,8 @@ void PlayerMovement::HandleJump()
 		rb->AddImpulse(Vec2(0.f, volume * -200.f));
 		GET_SINGLE(StatisticManager)->AddJump();
 		fJumpTime = BASEJUMPDURATION;
+
+		GET_SINGLE(ResourceManager)->Play(L"Jump");
 	}
 }
 
@@ -47,7 +50,7 @@ void PlayerMovement::LateUpdate()
 		{
 			GET_SINGLE(MicrophoneManager)->GetMicPeek(&volume);
 		}
-		rb->AddForce({0.f, volume * -6600.f });
+		rb->AddForce({0.f, volume * -6000.f });
 	}
 }
 

@@ -23,7 +23,10 @@ void TitleScene::Init()
 	GET_SINGLE(MicrophoneManager)->SelectDevice(micDeviceId);
 	m_nowPeek = 0.0f;
 	//GET_SINGLE(CollisionManager)->CheckLayer(LAYER::PLAYER, LAYER::ENEMY);
-	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
+	GET_SINGLE(ResourceManager)->LoadSound(L"BGM", L"Sound\\GigaChad.wav", true);
+	GET_SINGLE(ResourceManager)->LoadSound(L"Jump", L"Sound\\jump.wav", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"Hit", L"Sound\\hitHurt.wav", false);
+	GET_SINGLE(ResourceManager)->LoadSound(L"Respawn", L"Sound\\tone.wav", false);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 
 

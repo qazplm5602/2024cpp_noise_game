@@ -5,6 +5,7 @@
 #include "Rigidbody.h"
 #include "ColliderEventObserver.h"
 #include "Collider.h"
+#include "StatisticManager.h"
 #include <cmath>
 
 ThornTileMap::ThornTileMap() {
@@ -52,5 +53,6 @@ void ThornTileMap::EnterCollision(Collider* _other) {
         // 플레이어 위치 업데이트
         _other->GetOwner()->GetComponent<Rigidbody>()->AddImpulse(knockbackPos * 11.f);
 
+        GET_SINGLE(StatisticManager)->AddThorn();
 }
 

@@ -13,6 +13,7 @@
 #include "Rigidbody.h"
 #include "MicJumpObserver.h"
 #include "PlayerMovement.h"
+#include "StatisticManager.h"
 
 Player::Player()
 	: m_pTex(nullptr)
@@ -110,6 +111,7 @@ void Player::SetCheckPoint(Vec2 pos)
 
 void Player::GoCheckPoint()
 {
+	GET_SINGLE(StatisticManager)->AddFall();
 	GetOrAddComponent<Rigidbody>()->SetVelocity(Vec2(0,0));
 	SetPos(v_checkPoint);
 }

@@ -2,6 +2,7 @@
 #include "ThornTileMap.h"
 #include"Collider.h"
 #include"Object.h"
+#include "Rigidbody.h"
 #include <cmath>
 
 ThornTileMap::ThornTileMap() {
@@ -44,9 +45,9 @@ void ThornTileMap::EnterCollision(Collider* _other) {
 
         // 반사 방향으로 플레이어를 날리기 위한 거리
         float knockbackDistance = 200.0f; // 반사 후 이동할 거리
-        Vec2 knockbackPos = playerPos + reflectionVec * knockbackDistance;
+        Vec2 knockbackPos = reflectionVec * knockbackDistance;
 
         // 플레이어 위치 업데이트
-        _other->GetOwner()->SetPos(knockbackPos);
+        _other->GetOwner()->GetComponent<Rigidbody>()->AddForce(knockbackPos * 1200.f);
 
 }

@@ -9,6 +9,7 @@ Collider::Collider()
 	, m_vLatePos(0.f, 0.f)
 	, m_vOffsetPos(0.f, 0.f)
 	, m_ID(m_sNextID++)
+	, b_isTrigger(false)
 {
 }
 

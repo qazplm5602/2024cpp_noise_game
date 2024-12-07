@@ -22,17 +22,21 @@ Player::Player()
 	//path += L"Texture\\planem.bmp";
 	//m_pTex->Load(path);
 	//m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Player", L"Texture\\planem.bmp");
-	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\jiwoo.bmp");
+
+	//GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f),
+	//Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
+
+	m_pTex = GET_SINGLE(ResourceManager)->TextureLoad(L"Jiwoo", L"Texture\\MinsungMove.bmp");
 	this->AddComponent<Collider>();
 	AddComponent<Animator>();
-	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 150.f),
-		Vec2(50.f, 50.f), Vec2(50.f, 0.f), 5, 0.1f);
+	GetComponent<Animator>()->CreateAnimation(L"JiwooFront", m_pTex, Vec2(0.f, 0.f),
+		Vec2(32.f, 32.f), Vec2(32.f, 0.f), 2, 0.2f);
 	GetComponent<Animator>()->PlayAnimation(L"JiwooFront", true);
 	AddComponent<MicJumpObserver>();
 	AddComponent<Rigidbody>();
 	AddComponent<PlayerMovement>();
 
-	SetCheckPoint({ 0, 0 });
+	SetCheckPoint({ 0.f, 200.f });
 }
 Player::~Player()
 {

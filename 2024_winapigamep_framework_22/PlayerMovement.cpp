@@ -30,7 +30,7 @@ void PlayerMovement::HandleJump()
 			GET_SINGLE(MicrophoneManager)->GetMicPeek(&volume);
 		}
 		if (volume < 0.235f) return;
-		rb->AddImpulse(Vec2(0.f, volume * -90.f));
+		rb->AddImpulse(Vec2(0.f, volume * -900.f));
 		fJumpTime = BASEJUMPDURATION;
 	}
 }
@@ -45,7 +45,7 @@ void PlayerMovement::LateUpdate()
 		{
 			GET_SINGLE(MicrophoneManager)->GetMicPeek(&volume);
 		}
-		rb->AddForce({0.f, volume * -5200.f });
+		rb->AddForce({0.f, volume * -5000.f });
 	}
 }
 

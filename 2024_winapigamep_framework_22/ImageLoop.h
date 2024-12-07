@@ -2,6 +2,14 @@
 #include "Object.h"
 
 class Texture;
+
+struct ImageLoopData {
+	wstring texFileName;
+	float duration;
+	Vec2 size;
+	Vec2 pos;
+};
+
 class ImageLoop : public Object
 {
 	virtual void Update() override;

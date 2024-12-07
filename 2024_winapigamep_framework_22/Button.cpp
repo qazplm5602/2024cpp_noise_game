@@ -15,7 +15,7 @@ Button::Button() : b_isHover(false)
 
 Button::~Button()
 {
-	
+	delete rect;
 }
 
 void Button::Update()

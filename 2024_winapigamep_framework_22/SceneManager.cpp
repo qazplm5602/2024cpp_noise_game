@@ -24,7 +24,7 @@ void SceneManager::Init()
 
 	// �� �ε�
 	//LoadScene(L"TitleScene");
-	LoadScene(L"TitleScene");
+	LoadScene(L"DomiScene");
 }
 
 void SceneManager::Update()

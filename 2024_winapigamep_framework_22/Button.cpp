@@ -4,6 +4,8 @@
 #include "Delegate.h"
 #include "InputManager.h"
 #include "Core.h"
+#include "GDISelector.h"
+#include "CameraManager.h"
 
 Button::Button() : b_isHover(false)
 {
@@ -41,6 +43,17 @@ void Button::Update()
 	{
 		OnClick();
 	}
+}
+
+void Button::Render(HDC _hdc)
+{
+	RectObject::Render(_hdc);
+	/*PEN_TYPE ePen = PEN_TYPE::GREEN;
+	GDISelector pen(_hdc, ePen);
+	GDISelector brush(_hdc, BRUSH_TYPE::HOLLOW);
+	const Vec2& camPos = GET_CAM;
+	RECT_RENDER(_hdc, (rect->left + rect->right) / 2, (rect->top + rect->bottom)/2,
+		GetSize().x, GetSize().y);*/
 }
 
 void Button::Refresh()

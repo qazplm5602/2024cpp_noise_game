@@ -20,6 +20,7 @@ public:
 	void SetTile(Vec2 pos, UCHAR tileType);
 	void SetPalette(TilePalette* palette) {
 		m_palette = palette;
+		palette->SetUse(true);
 	}
 	void SetTileSize(const float& size) {
 		m_tileSize = size;

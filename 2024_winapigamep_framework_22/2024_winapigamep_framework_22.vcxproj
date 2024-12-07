@@ -148,7 +148,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Output\build\Resource\Fmod\inc</AdditionalIncludeDirectories>
@@ -180,6 +180,7 @@
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="DeviceSettingScene.h" />
     <ClInclude Include="DomiScene.h" />
+    <ClInclude Include="EndingScene.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="EventManager.h" />
@@ -187,6 +188,7 @@
     <ClInclude Include="GameMath.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GDISelector.h" />
+    <ClInclude Include="ImageLoop.h" />
     <ClInclude Include="ImageRect.h" />
     <ClInclude Include="ImageRenderer.h" />
     <ClInclude Include="IMicJumpHandler.h" />
@@ -210,6 +212,7 @@
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SolidColorRenderer.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestTilemap.h" />
     <ClInclude Include="TextRenderer.h" />
@@ -237,10 +240,12 @@
     <ClCompile Include="Delegate.cpp" />
     <ClCompile Include="DeviceSettingScene.cpp" />
     <ClCompile Include="DomiScene.cpp" />
+    <ClCompile Include="EndingScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GDISelector.cpp" />
+    <ClCompile Include="ImageLoop.cpp" />
     <ClCompile Include="ImageRect.cpp" />
     <ClCompile Include="ImageRenderer.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -262,6 +267,7 @@
     <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SolidColorRenderer.cpp" />
     <ClCompile Include="TestTilemap.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -276,6 +282,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="2024_winapigamep_framework_22.ico" />
+    <Image Include="icon1.ico" />
+    <Image Include="mainicon.ico" />
     <Image Include="small.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

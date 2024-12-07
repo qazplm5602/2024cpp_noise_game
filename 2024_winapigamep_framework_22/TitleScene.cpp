@@ -120,7 +120,7 @@ void TitleScene::Update()
 		b_isHolding = true;
 		if (f_lastT > 1.f)
 		{
-			GET_SINGLE(SceneManager)->LoadScene(L"bbqScene");
+			GET_SINGLE(SceneManager)->LoadScene(L"DomiScene");
 		}
 		f_lastT += fDT;
 		//cout << f_lastT << " " << (f_lastT > 1.f);

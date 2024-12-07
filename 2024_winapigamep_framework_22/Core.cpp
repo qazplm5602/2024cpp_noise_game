@@ -32,6 +32,8 @@ bool Core::Init(HWND _hwnd)
 	GET_SINGLE(MicrophoneManager)->Init();
 	GET_SINGLE(SceneManager)->Init();
 
+	CreateFonts();
+
 	//m_obj.SetPos(Vec2(SCREEN_WIDTH / 2
 	//				,SCREEN_HEIGHT/ 2));
 	//m_obj.SetSize(Vec2(100, 100));
@@ -52,6 +54,7 @@ void Core::CleanUp()
 		// Hollow 제외하고
 		DeleteObject(m_colorBrushs[i]);
 	}
+	RemoveFonts();
 
 	GET_SINGLE(ResourceManager)->Release();
 	GET_SINGLE(MicrophoneManager)->Release();
@@ -109,6 +112,8 @@ void Core::CreateGDI()
 	m_colorBrushs[(UINT)BRUSH_TYPE::BLUE] = (HBRUSH)CreateSolidBrush(RGB(103, 153, 255));
 	m_colorBrushs[(UINT)BRUSH_TYPE::YELLOW] = (HBRUSH)CreateSolidBrush(RGB(255, 187, 0));
 	m_colorBrushs[(UINT)BRUSH_TYPE::GRAY] = (HBRUSH)CreateSolidBrush(RGB(100, 100, 100));
+	m_colorBrushs[(UINT)BRUSH_TYPE::WHITE_BLUE] = (HBRUSH)CreateSolidBrush(RGB(157, 194, 246));
+	m_colorBrushs[(UINT)BRUSH_TYPE::BLACK] = (HBRUSH)CreateSolidBrush(RGB(0, 0, 0));
 
 	//RED GREEN BLUE PEN
 	m_colorPens[(UINT)PEN_TYPE::RED] = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
@@ -119,14 +124,36 @@ void Core::CreateGDI()
 
 	// 폰틍
 	//AddFontResource(TEXT("Spoqa Han Sans Neo"));
-	AddFontResource(TEXT("Spoqa Han Sans Neo Thin"));
-	AddFontResource(TEXT("Spoqa Han Sans Neo Light"));
-	AddFontResource(TEXT("Spoqa Han Sans Neo Medium"));
-	AddFontResource(TEXT("Spoqa Han Sans Neo Regular"));
-	AddFontResource(TEXT("Spoqa Han Sans Neo Bold"));
+	//AddFontResource(TEXT("Spoqa Han Sans Neo Thin"));
+	//AddFontResource(TEXT("Spoqa Han Sans Neo Light"));
+	//AddFontResource(TEXT("Spoqa Han Sans Neo Medium"));
+	//AddFontResource(TEXT("Spoqa Han Sans Neo Regular"));
+	//AddFontResource(TEXT("Spoqa Han Sans Neo Bold"));
 	m_fontNames[(UINT)FONT_TYPE::SPOQA_THIN] = TEXT("Spoqa Han Sans Neo Thin");
 	m_fontNames[(UINT)FONT_TYPE::SPOQA_LIGHT] = TEXT("Spoqa Han Sans Neo Light");
 	m_fontNames[(UINT)FONT_TYPE::SPOQA_MEDIUM] = TEXT("Spoqa Han Sans Neo Medium");
 	m_fontNames[(UINT)FONT_TYPE::SPOQA_REGULAR] = TEXT("Spoqa Han Sans Neo Regular");
 	m_fontNames[(UINT)FONT_TYPE::SPOQA_BOLD] = TEXT("Spoqa Han Sans Neo Bold");
+}
+
+void Core::CreateFonts()
+{
+	for (UINT i = 0; i < (UINT)FONT_TYPE::END; i++)
+	{
+		wstring path = GET_SINGLE(ResourceManager)->GetResPath();
+		path += L"Font\\" + m_fontFiles[i] + L".ttf";
+
+		AddFontResource(path.c_str());
+	}
+}
+
+void Core::RemoveFonts()
+{
+	for (UINT i = 0; i < (UINT)FONT_TYPE::END; i++)
+	{
+		wstring path = GET_SINGLE(ResourceManager)->GetResPath();
+		path += L"Font\\" + m_fontFiles[i] + L".ttf";
+
+		RemoveFontResource(path.c_str());
+	}
 }

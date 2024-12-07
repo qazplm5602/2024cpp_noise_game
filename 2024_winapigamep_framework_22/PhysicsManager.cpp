@@ -12,6 +12,11 @@ BoxCastHit PhysicsManager::BoxCast(const Object* pOriginObj, const Vec2& size, c
     {
         if (obj == pOriginObj || obj->GetIsDead()) continue;
 
+        if (obj->GetComponent<Collider>() == nullptr)
+            continue;
+        if (obj->GetComponent<Collider>()->IsTrigger())
+            continue;
+
         // 충돌 판정
         if (IsBoxIntersecting(origin, size, direction, distance, obj))
         {
@@ -58,8 +63,8 @@ bool PhysicsManager::IsBoxIntersecting(const Collider* owner, const Collider* ot
 
     RECT leftRt = RECT_MAKE(vLeftPos.x, vLeftPos.y, vLeftSize.x, vLeftSize.y);
     RECT rightRt = RECT_MAKE(vRightPos.x, vRightPos.y, vRightSize.x, vRightSize.y);
-    RECT rt;
-    return ::IntersectRect(&rt, &leftRt, &rightRt);
+    RECT buf;
+    return ::IntersectRect(&buf, &leftRt, &rightRt);
 }
 
 bool PhysicsManager::CalculateIntersection(const Vec2& origin, const Vec2& size, const Vec2& direction, float distance, Object* other, Vec2& hitPoint, float& hitDistance)

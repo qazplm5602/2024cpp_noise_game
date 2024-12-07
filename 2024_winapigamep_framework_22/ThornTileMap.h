@@ -8,6 +8,7 @@ public:
 	virtual ~ThornTileMap();
 
 
+
 public:
 	virtual void EnterCollision(Collider* _other) override;
 };

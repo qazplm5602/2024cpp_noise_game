@@ -10,7 +10,7 @@
 // TODO: Make X axis move with boxCast, bug heppens when dt is way to high
 
 Rigidbody::Rigidbody()
-    : m_fGravity(9.81f), m_fMass(1.5f), m_fDrag(0.0f),
+    : m_fGravity(9.81f), m_fMass(1.5f), m_fDrag(1.f),
     m_vVelocity(Vec2(0, 0)), m_bUseGravity(true), m_bIsKinematic(false), m_bIsGrounded(false)
 {
 }
@@ -44,20 +44,36 @@ void Rigidbody::Simulate(float fixedTimeStep)
 
     if (m_bUseGravity && !IsGrounded())
     {
-        AddForce(Vec2(0.f, 100.f * m_fGravity * m_fMass));
+        AddForce(Vec2(0.f, 125.f * m_fGravity * m_fMass));
     }
 
     if (IsGrounded())
     {
         m_vVelocity.y = min(m_vVelocity.y, 0);
         Owner->SetPos(currPos + Vec2(0.f, 0.f) * (hit.distance - Owner->GetComponent<Collider>()->GetSize().y / 2));
+
+        float frictionCoefficient = 8.5f;
+        Vec2 frictionForce = Vec2(-m_vVelocity.x, 0.0f) * frictionCoefficient;
+        AddForce(frictionForce);
+    }
+    else {
+        // 공기저항
+        float airDragCoefficient = 7.f;
+        m_vVelocity.x *= (1.0f - airDragCoefficient * fixedTimeStep);
     }
 
     ApplyForce(fixedTimeStep);
+
+    Vec2 dragForce = m_vVelocity * -1 * m_fDrag;
+    m_vVelocity += (dragForce / m_fMass) * fDT;
+
+    cout << m_vVelocity.x << endl;
+
     Owner->SetPos(currPos + m_vVelocity * fixedTimeStep);
 
 
-    cout << m_vVelocity.y << endl;
+    //cout << m_vVelocity.y << endl;
+    //m_vVelocity.x *= drag
     PreventOverlapMove(Owner, LAYER::GROUND);
 }
 
@@ -77,6 +93,9 @@ void Rigidbody::PreventOverlapMove(Object* owner, LAYER layerMask)
     for (Object* obj : objects)
     {
         if (obj->GetIsDead() || obj->GetComponent<Collider>() == nullptr) continue;
+
+        if (obj->GetComponent<Collider>()->IsTrigger())
+            continue;
 
         if (PhysicsManager::IsBoxIntersecting(cOwner, obj->GetComponent<Collider>()))
         {
@@ -103,6 +122,10 @@ void Rigidbody::PreventOverlapMove(Object* owner, LAYER layerMask)
                 if (overlapX < overlapY)
                 {
                     overlapX = (deltaX > 0) ? overlapX : -overlapX;
+                    if (overlapX > 0)
+                        m_vVelocity.x = max(m_vVelocity.x, 0);
+                    else
+                        m_vVelocity.x = min(m_vVelocity.x, 0);
                     owner->SetPos({ ownerPos.x + overlapX, ownerPos.y });
                 }
                 else

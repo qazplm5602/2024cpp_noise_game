@@ -34,7 +34,8 @@ Tilemap::~Tilemap()
 {
 	if (m_palette != nullptr)
 	{
-		delete m_palette;
+		//delete m_palette;
+		m_palette->SetUse(false);
 		m_palette = nullptr;
 	}
 }
@@ -262,4 +263,10 @@ bool Tilemap::FindFirstTilePos(vector<vector<UCHAR>>& tiles, Vec2& pos)
 	}
 
 	return false;
+}
+
+void Tilemap::SetTrigger()
+{
+	for (ColliderEventObserver* pObserver : m_pColliders)
+		pObserver->GetComponent<Collider>()->SetIsTrigger(true);
 }

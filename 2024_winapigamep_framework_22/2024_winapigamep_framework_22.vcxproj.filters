@@ -186,6 +186,14 @@
     <ClInclude Include="MoveThorn.h">
       <Filter>Engine\03. Object\TileMaps</Filter>
     </ClInclude>
+    <ClInclude Include="ImageLoop.h" />
+    <ClInclude Include="ThornTileMap.h" />
+    <ClInclude Include="SolidColorRenderer.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingScene.h">
+      <Filter>Engine\04. Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2024_winapigamep_framework_22.rc">
@@ -197,6 +205,12 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="2024_winapigamep_framework_22.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="icon1.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="mainicon.ico">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
@@ -324,6 +338,14 @@
     </ClCompile>
     <ClCompile Include="MoveThorn.cpp">
       <Filter>Engine\03. Object\TileMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLoop.cpp" />
+    <ClCompile Include="ThornTileMap.cpp" />
+    <ClCompile Include="SolidColorRenderer.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingScene.cpp">
+      <Filter>Engine\04. Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
